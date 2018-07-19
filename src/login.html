@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
+</head>
+
+<body>
+    <section>
+        <!-- Loggin -->
+        <article id="loggedIn">
+            <p id="user"></p>
+            <input id="logout" type="button" onclick="logoutWithFirebase()" value="LOGOUT">
+        </article>
+        <!-- Autentificacion -->
+        <article id="loggedOut">
+            <h3>LOGIN</h3>
+            <input id="email" type="email" placeholder="Ingrese su email">
+            <input id="password" type="password" placeholder="Ingrese su contraseña">
+            <button id="btnRegister" onclick="registerWithFirebase()">Registrar</button>
+            <button id="btnLogin" onclick="loginWithFirebase()">Iniciar sesion</button>
+        </article>
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCsWWyT_6yQo2aTelsx9GaH8B39VWD98x8",
+            authDomain: "brainyplaylab.firebaseapp.com",
+            databaseURL: "https://brainyplaylab.firebaseio.com",
+            projectId: "brainyplaylab",
+            storageBucket: "brainyplaylab.appspot.com",
+            messagingSenderId: "60588851338"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>

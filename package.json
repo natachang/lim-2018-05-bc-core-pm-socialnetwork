@@ -18,7 +18,6 @@
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "htmlhint": "^0.9.13",
-    "mocha": "^5.1.1",
     "nyc": "^11.7.1",
     "opener": "^1.4.3"
   },
@@ -31,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/jslyne/lim-2018-05-bc-core-pm-socialnetwork/issues"
   },
-  "homepage": "https://github.com/jslyne/lim-2018-05-bc-core-pm-socialnetwork#readme"
+  "homepage": "https://github.com/jslyne/lim-2018-05-bc-core-pm-socialnetwork#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
 }
