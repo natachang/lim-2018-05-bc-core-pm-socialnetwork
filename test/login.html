@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="mocha"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.1.2/chai.min.js"></script>
+    <script src="../src/js/login.js"></script>
+    <script>
+      const { assert } = chai;
+      mocha.setup('bdd');
+    </script>
+    <!-- <script src="./fixtures.js"></script> -->
+    <script src="./login.spec.js"></script>
+    <script>
+      mocha.checkLeaks();
+      mocha.run();
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCsWWyT_6yQo2aTelsx9GaH8B39VWD98x8",
+            authDomain: "brainyplaylab.firebaseapp.com",
+            databaseURL: "https://brainyplaylab.firebaseio.com",
+            projectId: "brainyplaylab",
+            storageBucket: "brainyplaylab.appspot.com",
+            messagingSenderId: "60588851338"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</body>
+
+</html>
