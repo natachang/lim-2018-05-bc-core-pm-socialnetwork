@@ -1,22 +1,12 @@
-window.onload = () => {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            loggedIn.style.display = "block";
-            loggedOut.style.display = "none";
-        } else {
-            loggedIn.style.display = "none";
-            loggedOut.style.display = "block";
-        }
-        console.log("User > " +JSON.stringify(user));
-    })
-};
+const btnRegister = document.getElementById('btnRegister');
 
 const registerWithFirebase = () => {
-    const emailValue = email.value;
-    const passwordValue = password.value;
-    firebase.auth().createUserWithEmailAndPassword(emailValue, passwordValue)
+    const emailReg = document.getElementById('emailRegister').value;
+    const passwordReg = document.getElementById('passwordRegister').value;
+
+    firebase.auth().createUserWithEmailAndPassword(emailReg, passwordReg)
         .then(() => {
-            console.log("Usuario creado con exito");
+            verificationWithFirebase();
         })
         .catch((error) => {
             console.log("Error de firebase > Codigo >" + error.code);
@@ -25,25 +15,86 @@ const registerWithFirebase = () => {
 };
 
 const loginWithFirebase = () => {
-    const emailValue = email.value;
-    const passwordValue = password.value;
-    firebase.auth().signInWithEmailAndPassword(emailValue, passwordValue)
+    const emailLog = document.getElementById('emailLogin').value;
+    const passwordLog = document.getElementById('passwordLogin').value;
+
+    firebase.auth().signInWithEmailAndPassword(emailLog, passwordLog)
         .then(() => {
             console.log("Usuario logeado con exito");
+            showWithFirebase();
         })
-        .catch(() => {
+        .catch((error) => {
             console.log("Error de firebase > Codigo >" + error.code);
             console.log("Error de firebase > Mensaje >" + error.message);
         })
 };
 
+//Observa si existe el usuario
+const observationWithFirebase = () => {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            console.log('existe usuario activo');
+            showWithFirebase(user);
+            // User is signed in.
+            // let displayName = user.displayName;
+            // let email = user.email;
+            // console.log(user.emailVerified);
+            // let emailVerified = user.emailVerified;
+            // let photoURL = user.photoURL;
+            // let isAnonymous = user.isAnonymous;
+            // let uid = user.uid;
+            // let providerData = user.providerData;
+        } else {
+            // User is signed out.
+            contenido.innerHTML = `
+            `;
+            console.log('no existe usuario activo');
+        }
+    });
+};
+observationWithFirebase();
+
+const showWithFirebase = (user) => {
+    const contenido = document.getElementById('contenido');
+    if (user.emailVerified) {
+        mainLogin.style.display = 'none';
+        contenido.innerHTML = `
+        <div class="container mt-5">
+            <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Bienvenido ${user.email}</h4>
+            <p>Ingresaste a la Red Social</p>
+            </div>
+            <button id="btnLogout" class="btn btn-danger" onclick="logoutWithFirebase()">Cerrar Sesion</button>
+        </div>
+        `;
+    }
+    //Caso contrario que me salga un alert
+};
+
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
-    .then(() => {
-        console.log("Usuario finalizo su sesion");
-    })
-    .catch(() => {
-        console.log("Error de firebase > Codigo >" + error.code);
-        console.log("Error de firebase > Mensaje >" + error.message);
-    })
+        .then(() => {
+            mainLogin.style.display = 'block';
+            console.log("Usuario finalizo su sesion");
+        })
+        .catch((error) => {
+            console.log("Error de firebase > Codigo >" + error.code);
+            console.log("Error de firebase > Mensaje >" + error.message);
+        })
 };
+
+const verificationWithFirebase = () => {
+    const user = firebase.auth().currentUser;
+    user.sendEmailVerification().then(function () {
+        // Email sent.
+        console.log('Enviando correo...');
+    }).catch(function (error) {
+        // An error happened.
+        console.log(error);
+    });
+};
+
+btnRegister.addEventListener('click', () => {
+    alert ('El email de validacion se ha enviado a tu correo.');
+    // window.location.href = 'login.html';
+})
