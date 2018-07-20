@@ -21,7 +21,6 @@ const loginWithFirebase = () => {
     firebase.auth().signInWithEmailAndPassword(emailLog, passwordLog)
         .then(() => {
             console.log("Usuario logeado con exito");
-            showWithFirebase();
         })
         .catch((error) => {
             console.log("Error de firebase > Codigo >" + error.code);
@@ -59,13 +58,13 @@ const showWithFirebase = (user) => {
     if (user.emailVerified) {
         mainLogin.style.display = 'none';
         contenido.innerHTML = `
-        <div class="container mt-5">
+        <article class="content mt-5">
             <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">Bienvenido ${user.email}</h4>
             <p>Ingresaste a la Red Social</p>
             </div>
             <button id="btnLogout" class="btn btn-danger" onclick="logoutWithFirebase()">Cerrar Sesion</button>
-        </div>
+        </article>
         `;
     }
     //Caso contrario que me salga un alert
@@ -93,6 +92,7 @@ const verificationWithFirebase = () => {
         console.log(error);
     });
 };
+
 
 btnRegister.addEventListener('click', () => {
     alert ('El email de validacion se ha enviado a tu correo.');
