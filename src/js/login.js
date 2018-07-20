@@ -93,8 +93,22 @@ const verificationWithFirebase = () => {
     });
 };
 
+const logFacebookWithFirebase = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    provider.setCustomParameters({
+        'display': 'popup'
+    });
+    firebase.auth().signInWithPopup(provider)
+        .then(() => {
+            console.log('Tiene que llamar al contenido');
+        })
+        .catch((error) => {
+            console.log('error de firebase > ' + error.code);
+            console.log('error de firebase, mensaje > ' + error.message);
+        });
+};
 
 btnRegister.addEventListener('click', () => {
-    alert ('El email de validacion se ha enviado a tu correo.');
+    alert('El email de validacion se ha enviado a tu correo.');
     // window.location.href = 'login.html';
 })
