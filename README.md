@@ -4,18 +4,6 @@
 
 ![brainyplay-img](https://user-images.githubusercontent.com/38342062/43022725-db00fbca-8c2d-11e8-878f-c4f11a40f6a4.jpg) 
 
-#### Problemática 
-
-Complementar a la educación tradicional en temas que ésta no nos enseña y actualmente
-son tan necesarios y requeridos no solo a nivel profesional sino también a nivel de 
-relaciones interpersonales,etc.
-
-#### Nuestra propuesta de valor como solución
-
-Brindar contenido de calidad y fiable respecto a temas como desarrollo personal,
-soft skills(habilidades blandas), educación financiera, metodologías ágiles,etc.
-Además que pueda crearse una comunidad en la que los usuarios interactuen compartiendo
-también contenido de este tipo, se organizen eventos presenciales y más.
 
 ## Planificación
 
@@ -34,10 +22,37 @@ issue abarca las mini-tareas necesarias para completar la épica.
 
 ![sprint-backlog](https://user-images.githubusercontent.com/38342062/43021785-9536e526-8c2a-11e8-8760-7dfd46e4420f.JPG)
 
-[Link a la agenda diaria](https://docs.google.com/document/d/18CDX8_5IvpuBBWNJftjEajVpKS_uvbjRosYtn015PlQ/edit)
+[Link a la agenda diaria](https://docs.google.com/document/d/18CDX8_5IvpuBBWNJftjEajVpKS_uvbjRosYtn015PlQ/edit){:target = "_blank"}
 
 
 ## UX Design
+
+### Definición del producto
+
+#### Problemática 
+
+Complementar a la educación tradicional en temas que ésta no nos enseña y actualmente
+son tan necesarios y requeridos no solo a nivel profesional sino también a nivel de 
+relaciones interpersonales,etc.
+
+#### Nuestra propuesta de valor como solución
+
+Brindar contenido de calidad y fiable respecto a temas como desarrollo personal,
+soft skills(habilidades blandas), educación financiera, metodologías ágiles,etc.
+Además que pueda crearse una comunidad en la que los usuarios interactuen compartiendo
+también contenido de este tipo, organizando eventos presenciales y más.
+
+#### Público objetivo
+
+La aplicación esta orientada a complementar la educación tradicional, por ende dirigida
+a personas de distintas edades. Ya que actualmente la temática de la aplicación es
+super requerida por todas las personas, sea cual sea su rubro. Esto se debe a que la 
+app funciona como un complemento a lo que las personas ya saben o se encuentran aprendiendo.
+Con esto generan un valor agregado, al adquirir conocimientos técnicos, socioemocionales,
+financieros, sobre distintas metodologías, etc. Además de no solo ser útil para el mundo
+profesional, pues el beneficio que obtienen a nivel personal se ve reflejado en su desarrollo
+personal. 
+
 
 ### Proceso de diseño 
 
@@ -109,7 +124,7 @@ Para este sketch trabajamos con figma
 
 **Sketch de mediana fidelidad de la primera vista**
 
-![social network_medium fidelity](https://user-images.githubusercontent.com/38342062/43023156-70317cc8-8c2f-11e8-8773-48572d2908f1.png)
+![social network_medium fidelity](https://user-images.githubusercontent.com/38342062/43024710-ab1a44e6-8c34-11e8-88da-365f63942996.png)
 
 ## Implementación de la interfaz
 
