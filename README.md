@@ -35,6 +35,7 @@ issue abarca las mini-tareas necesarias para completar la épica.
 ![sprint-backlog](https://user-images.githubusercontent.com/38342062/43021785-9536e526-8c2a-11e8-8760-7dfd46e4420f.JPG)
 
 [Link a la agenda diaria](https://docs.google.com/document/d/18CDX8_5IvpuBBWNJftjEajVpKS_uvbjRosYtn015PlQ/edit)
+{:target = "_blank"}
 
 
 ## UX Design
@@ -109,7 +110,7 @@ Para este sketch trabajamos con figma
 
 **Sketch de mediana fidelidad de la primera vista**
 
-![social network_medium fidelity](https://user-images.githubusercontent.com/38342062/43023156-70317cc8-8c2f-11e8-8773-48572d2908f1.png)
+![social network_medium fidelity](https://user-images.githubusercontent.com/38342062/43024710-ab1a44e6-8c34-11e8-88da-365f63942996.png)
 
 ## Implementación de la interfaz
 
