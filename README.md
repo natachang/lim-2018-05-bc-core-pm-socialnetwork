@@ -99,7 +99,7 @@ en el form respondió que el uso de redes sociales lo hace a través de un dispo
 
 **sketch de baja fidelidad de las 3 vistas**
 
-![vistas-mobile](https://user-images.githubusercontent.com/38342062/43290651-4ec6ecc0-90f4-11e8-8be3-9db3603b498e.jpg)
+![vistas-mobile](https://user-images.githubusercontent.com/38342062/43290821-ea726028-90f4-11e8-813a-81513560dd3e.jpg)
 
 
 ### Versión web
@@ -166,8 +166,8 @@ online. Sin embargo, cuando academia.edu decidió orientar su modelo de negocio 
 empezando a pedir una subscripción de pago si querias acceder a ver ese contendio, que además pertenecia a
 otros usuarios que la habían compartido, la aplicación no proveía los documentos. Por otro lado, las demás
 plataformas mencionadas distan más de nuestra propuesta valor, mostrándonos que existe una demanda del mercado
-hacia que exista algo así, pues retomando el caso de academia.edu, también se encontraron comentarios como
-"Alguien debería empezar una propuesta" o "Pedirle a Mark Zuckerger que cree un 'facebook' gratis para académicos
+hacia que exista algo así, pues retomando el caso de Academia.edu, también se encontraron comentarios como
+"Alguien debería empezar una propuesta" o "Pedirle a Mark Zuckerberg que cree un 'facebook' gratis para académicos
 pobres".
 
 
