@@ -99,8 +99,7 @@ en el form respondió que el uso de redes sociales lo hace a través de un dispo
 
 **sketch de baja fidelidad de las 3 vistas**
 
-![vistas-mobile](https://user-images.githubusercontent.com/38342062/43290487-d2f32208-90f3-11e8-950d-ca84193b0ef0.jpg)
-
+![vistas-mobile](https://user-images.githubusercontent.com/38342062/43290651-4ec6ecc0-90f4-11e8-8be3-9db3603b498e.jpg)
 
 
 ### Versión web
