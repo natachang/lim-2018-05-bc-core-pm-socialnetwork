@@ -16,7 +16,7 @@ issue abarca las mini-tareas necesarias para completar la épica.
 
 **Product Backlog**
 
-![product-backlog](https://user-images.githubusercontent.com/38342062/43021792-98fff0d0-8c2a-11e8-9a5e-cfddbdadc720.JPG)
+![product-backlog](https://user-images.githubusercontent.com/38342062/43287708-71c70970-90eb-11e8-8ef5-0923a36aec1d.JPG)
 
 **Sprint Backlog**
 
@@ -73,7 +73,7 @@ Decidimos crear flujogramas de como funciona el registro y logeo de la aplicaci�
 
 **Mapa de la lógica para iniciar sesión**
 
-![Mapa de la lógica para iniciar sesión](https://user-images.githubusercontent.com/38342062/43021281-ba5db32c-8c28-11e8-94c9-e63593309ae1.JPG)
+![ml-login](https://user-images.githubusercontent.com/38342062/43287266-2a737eec-90ea-11e8-8199-96b343728a6b.JPG)
 
 ### 3) Ideación 
 
@@ -88,7 +88,7 @@ en el form respondió que el uso de redes sociales lo hace a través de un dispo
 
 **sketch de baja fidelidad de las 3 vistas**
 
-![vistas-mobile](https://user-images.githubusercontent.com/38342062/43021847-c23f9068-8c2a-11e8-8ea3-6bf6d6af5f67.JPG)
+![vistas-mobile](https://user-images.githubusercontent.com/38342062/43287487-ca9cf362-90ea-11e8-8290-8fc2b7621cbb.JPG)
 
 **sketch de baja fidelidad de la primera vista**
 
@@ -102,19 +102,20 @@ en el form respondió que el uso de redes sociales lo hace a través de un dispo
 
 ![login-view-mobile](https://user-images.githubusercontent.com/38342062/43021860-d5e9941a-8c2a-11e8-81ba-2b25300e4bab.JPG)
 
-### Versión 
+### Versión web
 
 **sketch de baja fidelidad de la primera vista**
 
-![first-view-web](https://user-images.githubusercontent.com/38342062/43021867-dbcfd204-8c2a-11e8-996e-93b869a8fd28.JPG)
+![first-view-web](https://user-images.githubusercontent.com/38342062/43287184-da270c38-90e9-11e8-9ffd-42b7b99e4aa0.JPG)
 
 **Sketch de baja fidelidad de la vista de registro**
 
-![sign-up-view-web](https://user-images.githubusercontent.com/38342062/43021896-f25b9e86-8c2a-11e8-8006-328b57c64209.JPG)
+![sign-up-view-web](https://user-images.githubusercontent.com/38342062/43287356-722301a4-90ea-11e8-9061-41a3a46ef489.JPG)
+
 
 **Sketch de baja fidelidad de la vista de logeo**
 
-![login-view-web](https://user-images.githubusercontent.com/38342062/43023325-0ecfce52-8c30-11e8-8977-8e84890562a4.JPG)
+![login-view-web](https://user-images.githubusercontent.com/38342062/43287226-fa124dc8-90e9-11e8-9857-cd89bf4cdcff.JPG)
 
 ### 4) Prototipado
 
@@ -124,7 +125,15 @@ Para este sketch trabajamos con figma
 
 **Sketch de mediana fidelidad de la primera vista**
 
-![social network_medium fidelity](https://user-images.githubusercontent.com/38342062/43024710-ab1a44e6-8c34-11e8-88da-365f63942996.png)
+![first-view-mobile](https://user-images.githubusercontent.com/38342062/43104996-f1d1c42a-8e98-11e8-9f57-fcc7c2503e02.png)
+
+**Sketch de mediana fidelidad de la vista de registro**
+
+![sign-up-view-mobile](https://user-images.githubusercontent.com/38342062/43104998-f3a3ddba-8e98-11e8-9e66-0ad97a748261.png)
+
+**Sketch de mediana fidelidad de la vista de logeo**
+
+![login-view-mobile](https://user-images.githubusercontent.com/38342062/43105001-f51d8e52-8e98-11e8-826a-03973b8b30fa.png)
 
 ## Implementación de la interfaz
 
