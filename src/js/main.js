@@ -117,6 +117,9 @@ btnPublicar.addEventListener('click', () => {
 const reload_page = () => {
     window.location.reload();
 };
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 3378e8e0ad0e8d8f71e07e0f3bde2377f4e0b35d
