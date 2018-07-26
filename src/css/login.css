@@ -4,7 +4,6 @@ body {
     width: 100%;
     height: auto;
 }
-
 .container {
     width: 100%;
     margin: 5px;
@@ -14,27 +13,22 @@ body {
     border: 2px solid #CCC;
     text-align: center;
 }
-
 .form-inline {
     height: 100px;
     justify-content: center;
 }
-
 h2 {
     text-align: center;
     margin: 0px;
     padding: 10px;
 }
-
 .parrafo-p {
     margin-top: -20px;
     margin-bottom: 0px;
 }
-
 #btn-regfalse{
     position: absolute;
 }
-
 #btn-facebook,
 #btn-google
 {

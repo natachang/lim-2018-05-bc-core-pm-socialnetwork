@@ -117,6 +117,3 @@ btnPublicar.addEventListener('click', () => {
 const reload_page = () => {
     window.location.reload();
 };
-
-
-
