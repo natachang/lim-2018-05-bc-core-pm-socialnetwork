@@ -171,6 +171,8 @@ hacia que exista algo así, pues retomando el caso de Academia.edu, también se 
 pobres".
 
 
+## Front-End Development
+
 ## Implementación de la interfaz
 
 Tenemos una versión básica en diseño. 
@@ -189,3 +191,14 @@ así saber quién publicó el post.
 
 Todos los usuarios están validados dentro de firebase y los post hechos en general, tanto
 como los post de acuerdo al usuario se registaran en la base de datos en tiempo real de firebase.
+
+Las tecnologías que estamos utilizando son:
+
++ HTML
++ CSS 
+  -bootstrap como framework de css para que sea responsive
+  -sweetAlert como librería para los *alert* 
++ JS
++ Firebase como servidor web de base de datos en tiempo real.
++ Editor de texto *Visual Studio Code*
++ Utilizamos como servidor de prueba *live server*
