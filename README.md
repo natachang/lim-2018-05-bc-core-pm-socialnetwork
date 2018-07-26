@@ -100,7 +100,7 @@ en el form respondió que el uso de redes sociales lo hace a través de un dispo
 
 **Sketch de baja fidelidad de la vista de logeo**
 
-![login-view-mobile](https://user-images.githubusercontent.com/38342062/43288417-5fb55c12-90ed-11e8-9a0a-163bf7732cea.JPG)
+![login-view-mobile](https://user-images.githubusercontent.com/38342062/43288597-03b475dc-90ee-11e8-8817-77bc595d4dc1.JPG)
 
 ### Versión web
 
