@@ -1,106 +1,121 @@
-const btnRegister = document.getElementById('btnRegister');
+expCorreo = /\w+@[a-z]+\.+[a-z]/;
 
-const registerWithFirebase = () => {
-    const emailReg = document.getElementById('emailRegister').value;
-    const passwordReg = document.getElementById('passwordRegister').value;
-
-    firebase.auth().createUserWithEmailAndPassword(emailReg, passwordReg)
-        .then(() => {
-            verificationWithFirebase();
-        })
-        .catch((error) => {
-            console.log("Error de firebase > Codigo >" + error.code);
-            console.log("Error de firebase > Mensaje >" + error.message);
-        });
-};
-
-const loginWithFirebase = () => {
-    const emailLog = document.getElementById('emailLogin').value;
-    const passwordLog = document.getElementById('passwordLogin').value;
-
-    firebase.auth().signInWithEmailAndPassword(emailLog, passwordLog)
-        .then(() => {
-            console.log("Usuario logeado con exito");
-        })
-        .catch((error) => {
-            console.log("Error de firebase > Codigo >" + error.code);
-            console.log("Error de firebase > Mensaje >" + error.message);
-        })
-};
-
-//Observa si existe el usuario
-const observationWithFirebase = () => {
+window.onload = () => {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             console.log('existe usuario activo');
-            showWithFirebase(user);
-            // User is signed in.
-            // let displayName = user.displayName;
-            // let email = user.email;
-            // console.log(user.emailVerified);
-            // let emailVerified = user.emailVerified;
-            // let photoURL = user.photoURL;
+
+            mainWall.style.display = 'block';
+            mainLogin.style.display = 'none';
+
+            let displayName = user.displayName;
+            let email = user.email;
+            let emailVerified = user.emailVerified;
+            let userPhotoURL = user.photoURL
+            userImage.setAttribute('src', userPhotoURL);
             // let isAnonymous = user.isAnonymous;
             // let uid = user.uid;
             // let providerData = user.providerData;
+
+            userName.innerHTML = 'Bienvenidx ' + displayName + 'Email: ' + email + 'Verified: ' + emailVerified;
         } else {
             // User is signed out.
-            contenido.innerHTML = `
-            `;
             console.log('no existe usuario activo');
+            mainWall.style.display = 'none';
+            mainLogin.style.display = 'block';
         }
+        console.log('user > ', user);
     });
 };
-observationWithFirebase();
 
-const showWithFirebase = (user) => {
-    const contenido = document.getElementById('contenido');
-    if (user.emailVerified) {
-        mainLogin.style.display = 'none';
-        contenido.innerHTML = `
-        <article class="content mt-5">
-            <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">Bienvenido ${user.email}</h4>
-            <p>Ingresaste a la Red Social</p>
-            </div>
-            <button id="btnLogout" class="btn btn-danger" onclick="logoutWithFirebase()">Cerrar Sesion</button>
-        </article>
-        `;
-    }
-    //Caso contrario que me salga un alert
-};
-
-const logoutWithFirebase = () => {
-    firebase.auth().signOut()
-        .then(() => {
-            mainLogin.style.display = 'block';
-            console.log("Usuario finalizo su sesion");
-        })
-        .catch((error) => {
-            console.log("Error de firebase > Codigo >" + error.code);
-            console.log("Error de firebase > Mensaje >" + error.message);
-        })
+writeUserData = (userId, name, email, imageUrl) => {
+    firebase.database().ref('users/' + userId).set({
+        username: name,
+        email: email,
+        profile_picture: imageUrl
+    })
 };
 
 const verificationWithFirebase = () => {
     const user = firebase.auth().currentUser;
     user.sendEmailVerification().then(function () {
-        // Email sent.
-        console.log('Enviando correo...');
+        console.log('Enviando correo >>>');
     }).catch(function (error) {
-        // An error happened.
         console.log(error);
     });
 };
 
-const logFacebookWithFirebase = () => {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    provider.setCustomParameters({
-        'display': 'popup'
-    });
-    firebase.auth().signInWithPopup(provider)
+const registerWithFirebase = () => {
+    firebase.auth().createUserWithEmailAndPassword(emailReg.value, passwordReg.value)
+        .then(() => 
+            verificationWithFirebase(),
+            (result) => {
+            console.log('usuario creado con exito');
+            const user = result.user;
+            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+        })
+        .catch((error) => {
+            if (error.code === 'auth/email-already-in-use') {
+                errorEmail.innerText = 'El correo ya esta registrado. Ingrese otro';
+            }
+            else if (error.code === 'auth/invalid-email') {
+                adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
+            }
+            console.log("Error de firebase > Codigo >" + error.code);
+            console.log("Error de firebase > Mensaje >" + error.message);
+        });
+        if (emailReg.value === '' || passwordReg === '') {
+            alert(' Por favor completa tu email y password para registrarte');
+        }
+};
+
+const loginWithFirebase = () => {
+    firebase.auth().signInWithEmailAndPassword(emailLog.value, passwordLog.value)
         .then(() => {
-            console.log('Tiene que llamar al contenido');
+            console.log("Usuario logeado con exito");
+        })
+        .catch((error) => {
+            if (error.code === 'auth/wrong-password') {
+                errorAdvice.innerText = 'Su contraseña es incorrecta';
+            }
+            else if (error.code === 'auth/user-not-found') {
+                errorEmail.innerText = 'No existe un usuario con este correo';
+            }
+            console.log('Error de firebase > Codigo >' + error.code);
+            console.log('Error de firebase > Mensaje >' + error.message);
+        })
+
+        if (emailLog. value === '' || passwordLog.value === '') {
+            alert(' Por favor completa tu email y password para loguearte !!');
+        }
+        else if (!expCorreo.test(emailLog.value)) {
+            alert('El correo no es valido')
+        }
+};
+
+const logoutWithFirebase = () => {
+    firebase.auth().signOut()
+        .then(() => {
+            console.log('Usuario finalizo su sesion');
+            mainWall.style.display = 'none';
+            mainLogin.style.display = 'block';
+        })
+        .catch((error) => {
+            console.log('Error de firebase > Codigo >' + error.code);
+            console.log('Error de firebase > Mensaje >' + error.message);
+        })
+};
+
+const facebookWithFirebase = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('user_birthday');
+
+    firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            console.log('Facebook logueado');
+            const token = result.provider.accessToken;
+            const user = result.user;
+            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
         .catch((error) => {
             console.log('error de firebase > ' + error.code);
@@ -108,7 +123,38 @@ const logFacebookWithFirebase = () => {
         });
 };
 
-btnRegister.addEventListener('click', () => {
-    alert('El email de validacion se ha enviado a tu correo.');
-    // window.location.href = 'login.html';
-})
+const googleWithFirebase = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider)
+        .then(function (result) {
+            console.log('Google logueado')
+            const user = result.user;
+            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+        })
+        .catch((error) => {
+            console.log(error.code);
+            console.log(error.message);;
+            console.log(error.email);
+            console.log(error.credential);
+        });
+};
+
+const writeNewPost = (uid, body) => {
+    let postData = {
+        uid: uid,
+        body : body,
+    };
+
+    const newPostKey = firebase.database().ref().child('posts').push().key;
+
+    let updates ={ };
+
+    updates['/posts/' + newPostKey] = postData;
+
+    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+    firebase.database().ref().update(updates);
+    return newPostKey;
+};
