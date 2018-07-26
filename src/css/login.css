@@ -1,13 +1,42 @@
-.container {
+body {
+    margin: 0px;
+    padding: 10px;
     width: 100%;
     height: auto;
-    margin: 0;
+}
+
+.container {
+    width: 100%;
+    margin: 5px;
+    padding: 50px 0px;
+    left: 50%;
+    top: 50%;
+    border: 2px solid #CCC;
+    text-align: center;
+}
+
+.form-inline {
+    height: 100px;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    margin: 0px;
     padding: 10px;
 }
 
-.content {
-    text-align: center;
+.parrafo-p {
+    margin-top: -20px;
+    margin-bottom: 0px;
+}
+
+#btn-regfalse{
     position: absolute;
-    top: 30%;
-    left: 30%;
-};
+}
+
+#btn-facebook,
+#btn-google
+{
+    display: flex;
+}

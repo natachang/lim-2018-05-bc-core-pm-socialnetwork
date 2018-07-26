@@ -22,8 +22,16 @@ const mainLogin = document.getElementById('main-login'),
 
 
 btnRegister.addEventListener('click', () => {
-    registerWithFirebase();
-    alert('El email de validacion se ha enviado a tu correo.');
+    if (emailReg.value.length === 0) {
+        alert('Ingrese un correo');
+    }
+    else if (passwordReg.value.length <= 6) {
+        alert('Ingresa una contraseña mayor a 6 caracteres');
+    }
+    else {
+        registerWithFirebase();
+        alert('El email de validacion se ha enviado a tu correo.');
+    }
 });
 
 btnLogin.addEventListener('click', () => {
@@ -48,30 +56,27 @@ btnPublicar.addEventListener('click', () => {
     let userNom = firebase.auth().currentUser.displayName;
 
     const newPost = writeNewPost(userId, post.value, userNom);
-
     console.log(post.value);
 
-    var nomUsuario = document.createElement("label");
-    nomUsuario.setAttribute("for", "");
-    nomUsuario.setAttribute("type", "label");
+    let nomUsuario = document.createElement('label');
+    nomUsuario.setAttribute('for', '');
+    nomUsuario.setAttribute('type', 'label');
 
-    var btnUpdate = document.createElement("input");
-    btnUpdate.setAttribute("value", "Update");
-    btnUpdate.setAttribute("type", "button");
+    let btnUpdate = document.createElement('input');
+    btnUpdate.setAttribute('value', 'Update');
+    btnUpdate.setAttribute('type', 'button');
 
-    var btnDelete = document.createElement("input");
-    btnDelete.setAttribute("value", "Delete");
-    btnDelete.setAttribute("type", "button");
+    let btnDelete = document.createElement('input');
+    btnDelete.setAttribute('value', 'Delete');
+    btnDelete.setAttribute('type', 'button');
 
-    var contPost = document.createElement('div');
+    let contPost = document.createElement('div');
+    let textPost = document.createElement('textarea');
 
-    var textPost = document.createElement('textarea');
-
-    textPost.setAttribute("id", newPost);
-
+    textPost.setAttribute('id', newPost);
     textPost.innerHTML = post.value; // esto se actualiza
 
-    nomUsuario.innerHTML = userNom + "  publicacion";
+    nomUsuario.innerHTML = userNom + '  Publicacion';
     textPost.disabled = true;
 
     btnDelete.addEventListener('click', () => {
@@ -79,25 +84,24 @@ btnPublicar.addEventListener('click', () => {
         firebase.database().ref().child('posts/' + newPost).remove();
 
         while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
-        alert ('El usuario elimino su post');
+        alert('El usuario elimino su post');
     });
 
     btnUpdate.addEventListener('click', () => {
         const newUpdate = document.getElementById(newPost);
-
         const nuevoPost = {
             body: newUpdate.value,
         };
 
         textPost.disabled = false;
-        btnUpdate.setAttribute("value", "Guardar");
+        btnUpdate.setAttribute('value', 'Guardar');
 
-        var updatesUser = {};
-        var updatesPost = {};
+        let updatesUser = {};
+        let updatesPost = {};
 
         updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
         updatesPost['/posts/' + newPost] = nuevoPost;
-        
+
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
     });
@@ -110,6 +114,6 @@ btnPublicar.addEventListener('click', () => {
 
 });
 
-const reload_page =() => {
+const reload_page = () => {
     window.location.reload();
 };

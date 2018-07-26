@@ -21,8 +21,13 @@
                 <input id="password-login" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
                 <button id="btn-login" class="btn btn-outline-success my-2 my-sm-0 btn-sm">Iniciar sesion</button>
             </div>
-            <div>
+            <hr>
+            <div class="form-inline">
+                <p class="parrafo-p">¿Aun no tienes una cuenta?</p>
                 <button id="btn-regfalse" class="btn btn-outline-secondary mt-3 btn-sm" data-toggle="modal" data-target="#exampleModal">Crear una Cuenta</button>
+            </div>
+            <hr>
+            <div class="form-inline">
                 <button id="btn-facebook" class="btn btn-outline-primary mt-3 btn-sm">Facebook</button>
                 <button id="btn-google" class="btn btn-outline-danger mt-3 btn-sm">Google</button>
             </div>
@@ -52,11 +57,13 @@
                 </div>
             </div>
         </div>
-
+      
+        <!-- Muro -->
         <section id="main-wall" class="content mt-5" style="display: none;">
+            <h5>BrainyPlay Muro</h3>
             <div class="alert alert-success" role="alert">
                 <div id="user-name"></div>
-                <img id="user-image">
+                <img id="user-image" height="100px">
             </div>
             <button id="btn-logout" class="btn btn-danger">Cerrar Sesion</button>
             <section id="data-base">
