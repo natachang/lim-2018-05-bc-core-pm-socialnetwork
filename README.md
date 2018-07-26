@@ -196,9 +196,12 @@ Las tecnologías que estamos utilizando son:
 
 + HTML
 + CSS 
-  -bootstrap como framework de css para que sea responsive
-  -sweetAlert como librería para los *alert* 
+
+  * bootstrap como framework de css para que sea responsive
+
+  * sweetAlert como librería para los ***alert***
+
 + JS
 + Firebase como servidor web de base de datos en tiempo real.
-+ Editor de texto *Visual Studio Code*
-+ Utilizamos como servidor de prueba *live server*
++ Editor de texto ***Visual Studio Code***
++ Utilizamos como servidor de prueba ***live server***
