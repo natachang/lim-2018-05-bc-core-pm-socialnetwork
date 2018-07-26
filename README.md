@@ -173,4 +173,19 @@ pobres".
 
 ## Implementación de la interfaz
 
-Tenemos una versión básica en diseño. En funcionalidad logea y válida con un correo electrónico. 
+Tenemos una versión básica en diseño. 
+
+**En funcionalidad**
+
+Logea y válida con:
+
++ Correo electrónico
++ Facebook 
++ Google
+
+Además permite publicar post y eliminarlo.
+Cuando publica toma los datos que valida de google o facebook permitiendo
+así saber quién publicó el post. 
+
+Todos los usuarios están validados dentro de firebase y los post hechos en general, tanto
+como los post de acuerdo al usuario se registaran en la base de datos en tiempo real de firebase.
