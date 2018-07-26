@@ -22,7 +22,7 @@ issue abarca las mini-tareas necesarias para completar la épica.
 
 ![sprint-backlog](https://user-images.githubusercontent.com/38342062/43021785-9536e526-8c2a-11e8-8760-7dfd46e4420f.JPG)
 
-[Link a la agenda diaria](https://docs.google.com/document/d/18CDX8_5IvpuBBWNJftjEajVpKS_uvbjRosYtn015PlQ/edit){:target = "_blank"}
+[Link a la agenda diaria](https://docs.google.com/document/d/18CDX8_5IvpuBBWNJftjEajVpKS_uvbjRosYtn015PlQ/edit)
 
 
 ## UX Design
@@ -134,6 +134,22 @@ Para este sketch trabajamos con figma
 **Sketch de mediana fidelidad de la vista de logeo**
 
 ![login-view-mobile](https://user-images.githubusercontent.com/38342062/43105001-f51d8e52-8e98-11e8-826a-03973b8b30fa.png)
+
+#### Versión web
+
+**Sketch de mediana fidelidad de la primera vista**
+
+![first-view-web](https://user-images.githubusercontent.com/38342062/43289202-dce61f6c-90ef-11e8-9420-602607d92ead.png)
+
+
+**Sketch de mediana fidelidad de la vista de registro**
+
+![sign-up-view-web](https://user-images.githubusercontent.com/38342062/43289204-df480734-90ef-11e8-9960-4f9d7af18f3b.png)
+
+**Sketch de mediana fidelidad de la vista de logeo**
+
+![login-view-web](https://user-images.githubusercontent.com/38342062/43289206-e2f4fb6c-90ef-11e8-9f5d-e05d4b1b2430.png)
+
 
 ## Implementación de la interfaz
 
