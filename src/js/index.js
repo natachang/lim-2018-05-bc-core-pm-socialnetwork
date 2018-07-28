@@ -45,7 +45,7 @@ const verificationWithFirebase = () => {
     });
 };
 
-const registerWithFirebase = () => {
+window.registerWithFirebase = () => {
     firebase.auth().createUserWithEmailAndPassword(emailReg.value, passwordReg.value)
         .then(() => 
             verificationWithFirebase(),
