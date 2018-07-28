@@ -4,9 +4,8 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             console.log('existe usuario activo');
-
-            mainWall.style.display = 'block';
-            mainLogin.style.display = 'none';
+            // mainWall.style.display = 'block';
+            // mainLogin.style.display = 'none';
 
             let displayName = user.displayName;
             let email = user.email;
@@ -21,8 +20,8 @@ window.onload = () => {
         } else {
             // User is signed out.
             console.log('no existe usuario activo');
-            mainWall.style.display = 'none';
-            mainLogin.style.display = 'block';
+            // mainWall.style.display = 'none';
+            // mainLogin.style.display = 'block';
         }
         console.log('user > ', user);
     });
@@ -36,7 +35,7 @@ writeUserData = (userId, name, email, imageUrl) => {
     })
 };
 
-const verificationWithFirebase = () => {
+window.verificationWithFirebase = () => {
     const user = firebase.auth().currentUser;
     user.sendEmailVerification().then(function () {
         console.log('Enviando correo >>>');
@@ -45,7 +44,7 @@ const verificationWithFirebase = () => {
     });
 };
 
-const registerWithFirebase = () => {
+window.registerWithFirebase = () => {
     firebase.auth().createUserWithEmailAndPassword(emailReg.value, passwordReg.value)
         .then(() => 
             verificationWithFirebase(),
@@ -69,10 +68,11 @@ const registerWithFirebase = () => {
         }
 };
 
-const loginWithFirebase = () => {
+window.loginWithFirebase = () => {
     firebase.auth().signInWithEmailAndPassword(emailLog.value, passwordLog.value)
         .then(() => {
             console.log("Usuario logeado con exito");
+            location.assign('wall.html');
         })
         .catch((error) => {
             if (error.code === 'auth/wrong-password') {
@@ -93,12 +93,11 @@ const loginWithFirebase = () => {
         }
 };
 
-const logoutWithFirebase = () => {
+window.logoutWithFirebase = () => {
     firebase.auth().signOut()
         .then(() => {
             console.log('Usuario finalizo su sesion');
-            mainWall.style.display = 'none';
-            mainLogin.style.display = 'block';
+            location.assign('index.html');
         })
         .catch((error) => {
             console.log('Error de firebase > Codigo >' + error.code);
@@ -106,7 +105,7 @@ const logoutWithFirebase = () => {
         })
 };
 
-const facebookWithFirebase = () => {
+window.facebookWithFirebase = () => {
     const provider = new firebase.auth.FacebookAuthProvider();
     provider.addScope('user_birthday');
 
@@ -123,7 +122,7 @@ const facebookWithFirebase = () => {
         });
 };
 
-const googleWithFirebase = () => {
+window.googleWithFirebase = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
