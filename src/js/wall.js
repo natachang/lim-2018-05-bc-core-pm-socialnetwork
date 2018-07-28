@@ -1,18 +1,4 @@
-const btnRegister = document.getElementById('btn-register'),
-    btnLogin = document.getElementById('btn-login'),
-    btnLogout = document.getElementById('btn-logout'),
-    btnFacebook = document.getElementById('btn-facebook'),
-    btnGoogle = document.getElementById('btn-google');
-
-const nameReg = document.getElementById('name-register'),
-    emailReg = document.getElementById('email-register'),
-    passwordReg = document.getElementById('password-register');
-
-const emailLog = document.getElementById('email-login'),
-    passwordLog = document.getElementById('password-login');
-
-const mainLogin = document.getElementById('main-login'),
-    mainWall = document.getElementById('main-wall'),
+const btnLogout = document.getElementById('btn-logout'),
     userName = document.getElementById('user-name'),
     userImage = document.getElementById('user-image'),
     btnPublicar = document.getElementById('btn-publicar'),
@@ -20,34 +6,8 @@ const mainLogin = document.getElementById('main-login'),
     dataBase = document.getElementById('data-base'),
     postArea = document.getElementById('posts-area');
 
-
-btnRegister.addEventListener('click', () => {
-    if (emailReg.value.length === 0) {
-        alert('Ingrese un correo');
-    }
-    else if (passwordReg.value.length <= 6) {
-        alert('Ingresa una contraseña mayor a 6 caracteres');
-    }
-    else {
-        registerWithFirebase();
-        alert('El email de validacion se ha enviado a tu correo.');
-    }
-});
-
-btnLogin.addEventListener('click', () => {
-    loginWithFirebase();
-});
-
 btnLogout.addEventListener('click', () => {
     logoutWithFirebase();
-});
-
-btnFacebook.addEventListener('click', () => {
-    facebookWithFirebase();
-});
-
-btnGoogle.addEventListener('click', () => {
-    googleWithFirebase();
 });
 
 btnPublicar.addEventListener('click', () => {
@@ -117,6 +77,3 @@ btnPublicar.addEventListener('click', () => {
 const reload_page = () => {
     window.location.reload();
 };
-
-
-

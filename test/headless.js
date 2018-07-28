@@ -2,5 +2,5 @@
 global.window = global;
 global.assert = require('chai').assert;
 
-require('../src/js/index');
-require('./login.spec.js');
+require('./src/js/index');
+require('./index.spec.js');
