@@ -4,38 +4,45 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             console.log('existe usuario activo');
-            // mainWall.style.display = 'block';
-            // mainLogin.style.display = 'none';
-
+         
+            let uid = user.uid;
             let userNom = firebase.auth().currentUser.displayName;;
             let email = user.email;
             let emailVerified = user.emailVerified;
-            let userPhotoURL = user.photoURL;
+            let userPhoto = user.photoURL;
 
-
-            userImage.setAttribute('src', userPhotoURL);
             userName.innerHTML = userNom + '<br>';
             userEmail.innerHTML = email + '<br>' + emailVerified;
+
+            if (userPhoto != null) {
+                userImage.setAttribute('src', userPhoto);
+            }
+            else {
+                userImage.setAttribute('src', 'img/user.png');
+            };
+
+
             // let isAnonymous = user.isAnonymous;
             // let uid = user.uid;
             // let providerData = user.providerData;
         } else {
             // User is signed out.
             console.log('no existe usuario activo');
-            // mainWall.style.display = 'none';
-            // mainLogin.style.display = 'block';
         }
         console.log('user > ', user);
     });
 };
 
-writeUserData = (userId, name, email, imageUrl) => {
+
+writeUserData = (userId, username, email, imageUrl) => {
     firebase.database().ref('users/' + userId).set({
-        username: name,
+        id: userId,
+        username: username,
         email: email,
         profile_picture: imageUrl
     })
 };
+
 
 window.verificationWithFirebase = () => {
     const user = firebase.auth().currentUser;
@@ -52,7 +59,7 @@ window.registerWithFirebase = () => {
             verificationWithFirebase(),
             (result) => {
                 console.log('usuario creado con exito');
-                const user = result.user;
+                const user = firebase.auth().currentUser;
                 writeUserData(user.uid, user.displayName, user.email, user.photoURL);
             })
         .catch((error) => {
@@ -69,6 +76,8 @@ window.registerWithFirebase = () => {
         alert(' Por favor completa tu email y password para registrarte');
     }
 };
+
+
 
 window.loginWithFirebase = () => {
     firebase.auth().signInWithEmailAndPassword(emailLog.value, passwordLog.value)
@@ -114,6 +123,7 @@ window.facebookWithFirebase = () => {
     firebase.auth().signInWithPopup(provider)
         .then((result) => {
             console.log('Facebook logueado');
+            location.assign('wall.html');
             const token = result.provider.accessToken;
             const user = result.user;
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
@@ -131,7 +141,7 @@ window.googleWithFirebase = () => {
     firebase.auth().signInWithPopup(provider)
         .then(function (result) {
             console.log('Google logueado');
-            window.location.href = 'wall.html';
+            location.assign('wall.html');
             const user = result.user;
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
@@ -143,25 +153,24 @@ window.googleWithFirebase = () => {
         });
 };
 
-const writeNewPost = (uid, body) => {
+const writeNewPost = (uid, body, username) => {
     let postData = {
         uid: uid,
         body: body,
+        username: username,
     };
 
     const newPostKey = firebase.database().ref().child('posts').push().key;
 
     let updates = {};
-
     updates['/posts/' + newPostKey] = postData;
-
     updates['/user-posts/' + uid + '/' + newPostKey] = postData;
 
     firebase.database().ref().update(updates);
     return newPostKey;
 };
 
-const createPublicar = () => {
+const createNewPost = () => {
     let userId = firebase.auth().currentUser.uid;
     let userNom = firebase.auth().currentUser.displayName;
 
@@ -173,11 +182,11 @@ const createPublicar = () => {
     nomUsuario.setAttribute('type', 'label');
 
     let btnUpdate = document.createElement('input');
-    btnUpdate.setAttribute('value', 'Update');
+    btnUpdate.setAttribute('value', 'Editar');
     btnUpdate.setAttribute('type', 'button');
 
     let btnDelete = document.createElement('input');
-    btnDelete.setAttribute('value', 'Delete');
+    btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
 
     let contPost = document.createElement('div');
@@ -187,9 +196,10 @@ const createPublicar = () => {
     textPost.innerHTML = post.value; // esto se actualiza
 
     nomUsuario.innerHTML = userNom;
-    textPost.disabled = true;
+     textPost.disabled = true; 
 
     btnDelete.addEventListener('click', () => {
+        let userId = firebase.auth().currentUser.uid;
         firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
         firebase.database().ref().child('posts/' + newPost).remove();
 
@@ -198,13 +208,22 @@ const createPublicar = () => {
     });
 
     btnUpdate.addEventListener('click', () => {
+        let userId = firebase.auth().currentUser.uid;
         const newUpdate = document.getElementById(newPost);
-        const nuevoPost = {
-            body: newUpdate.value,
-        };
+        const nuevoPost = writeNewPost(userId, newUpdate.value, userNom);
 
         textPost.disabled = false;
-        btnUpdate.setAttribute('value', 'Guardar');
+        btnUpdate.setAttribute('value', 'Guardar'); 
+        btnUpdate.addEventListener('click', () => {
+                 if(textPost.disabled === true){
+                    textPost.disabled = false;
+                    btnUpdate.setAttribute('value', 'Guardar');
+                 }
+            else{
+                textPost.disabled = true;
+                btnUpdate.setAttribute('value', 'Editar');
+            }
+        })
 
         let updatesUser = {};
         let updatesPost = {};
