@@ -7,16 +7,18 @@ window.onload = () => {
             // mainWall.style.display = 'block';
             // mainLogin.style.display = 'none';
 
-            let displayName = user.displayName;
+            let userNom = firebase.auth().currentUser.displayName;;
             let email = user.email;
             let emailVerified = user.emailVerified;
-            let userPhotoURL = user.photoURL
+            let userPhotoURL = user.photoURL;
+
+
             userImage.setAttribute('src', userPhotoURL);
+            userName.innerHTML = userNom + '<br>';
+            userEmail.innerHTML = email + '<br>' + emailVerified;
             // let isAnonymous = user.isAnonymous;
             // let uid = user.uid;
             // let providerData = user.providerData;
-
-            userName.innerHTML = 'Bienvenidx ' + displayName + 'Email: ' + email + 'Verified: ' + emailVerified;
         } else {
             // User is signed out.
             console.log('no existe usuario activo');
@@ -46,13 +48,13 @@ window.verificationWithFirebase = () => {
 
 window.registerWithFirebase = () => {
     firebase.auth().createUserWithEmailAndPassword(emailReg.value, passwordReg.value)
-        .then(() => 
+        .then(() =>
             verificationWithFirebase(),
             (result) => {
-            console.log('usuario creado con exito');
-            const user = result.user;
-            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-        })
+                console.log('usuario creado con exito');
+                const user = result.user;
+                writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+            })
         .catch((error) => {
             if (error.code === 'auth/email-already-in-use') {
                 errorEmail.innerText = 'El correo ya esta registrado. Ingrese otro';
@@ -63,9 +65,9 @@ window.registerWithFirebase = () => {
             console.log("Error de firebase > Codigo >" + error.code);
             console.log("Error de firebase > Mensaje >" + error.message);
         });
-        if (emailReg.value === '' || passwordReg === '') {
-            alert(' Por favor completa tu email y password para registrarte');
-        }
+    if (emailReg.value === '' || passwordReg === '') {
+        alert(' Por favor completa tu email y password para registrarte');
+    }
 };
 
 window.loginWithFirebase = () => {
@@ -85,12 +87,12 @@ window.loginWithFirebase = () => {
             console.log('Error de firebase > Mensaje >' + error.message);
         })
 
-        if (emailLog. value === '' || passwordLog.value === '') {
-            alert(' Por favor completa tu email y password para loguearte !!');
-        }
-        else if (!expCorreo.test(emailLog.value)) {
-            alert('El correo no es valido')
-        }
+    if (emailLog.value === '' || passwordLog.value === '') {
+        alert(' Por favor completa tu email y password para loguearte !!');
+    }
+    else if (!expCorreo.test(emailLog.value)) {
+        alert('El correo no es valido')
+    }
 };
 
 window.logoutWithFirebase = () => {
@@ -128,7 +130,8 @@ window.googleWithFirebase = () => {
     provider.addScope('email');
     firebase.auth().signInWithPopup(provider)
         .then(function (result) {
-            console.log('Google logueado')
+            console.log('Google logueado');
+            window.location.href = 'wall.html';
             const user = result.user;
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
@@ -143,12 +146,12 @@ window.googleWithFirebase = () => {
 const writeNewPost = (uid, body) => {
     let postData = {
         uid: uid,
-        body : body,
+        body: body,
     };
 
     const newPostKey = firebase.database().ref().child('posts').push().key;
 
-    let updates ={ };
+    let updates = {};
 
     updates['/posts/' + newPostKey] = postData;
 
@@ -156,4 +159,66 @@ const writeNewPost = (uid, body) => {
 
     firebase.database().ref().update(updates);
     return newPostKey;
+};
+
+const createPublicar = () => {
+    let userId = firebase.auth().currentUser.uid;
+    let userNom = firebase.auth().currentUser.displayName;
+
+    const newPost = writeNewPost(userId, post.value, userNom);
+    console.log(post.value);
+
+    let nomUsuario = document.createElement('label');
+    nomUsuario.setAttribute('for', '');
+    nomUsuario.setAttribute('type', 'label');
+
+    let btnUpdate = document.createElement('input');
+    btnUpdate.setAttribute('value', 'Update');
+    btnUpdate.setAttribute('type', 'button');
+
+    let btnDelete = document.createElement('input');
+    btnDelete.setAttribute('value', 'Delete');
+    btnDelete.setAttribute('type', 'button');
+
+    let contPost = document.createElement('div');
+    let textPost = document.createElement('textarea');
+
+    textPost.setAttribute('id', newPost);
+    textPost.innerHTML = post.value; // esto se actualiza
+
+    nomUsuario.innerHTML = userNom;
+    textPost.disabled = true;
+
+    btnDelete.addEventListener('click', () => {
+        firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+        firebase.database().ref().child('posts/' + newPost).remove();
+
+        while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+        alert('El usuario elimino su post');
+    });
+
+    btnUpdate.addEventListener('click', () => {
+        const newUpdate = document.getElementById(newPost);
+        const nuevoPost = {
+            body: newUpdate.value,
+        };
+
+        textPost.disabled = false;
+        btnUpdate.setAttribute('value', 'Guardar');
+
+        let updatesUser = {};
+        let updatesPost = {};
+
+        updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
+        updatesPost['/posts/' + newPost] = nuevoPost;
+
+        firebase.database().ref().update(updatesUser);
+        firebase.database().ref().update(updatesPost);
+    });
+
+    contPost.appendChild(nomUsuario);
+    contPost.appendChild(textPost);
+    contPost.appendChild(btnUpdate);
+    contPost.appendChild(btnDelete);
+    postArea.appendChild(contPost);
 };

@@ -5,14 +5,172 @@
     <meta charset="utf-8" />
     <title>BRAINY PLAY!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
 </head>
 
 <body>
-    <main>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">BrainyPlay</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Messages</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group input-group">
+                        <input type="text" class="form-control" placeholder="Search..">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a id="btn-logout">
+                            <span class="glyphicon glyphicon-user"></span> Cerrar Sesion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container text-center">
+        <div class="row">
+            <div class="col-sm-3 well">
+                <div class="well">
+                    <p>
+                        <a href="#">My Profile</a>
+                    </p>
+                    <img id="user-image" class="img-circle" height="65" width="65" alt="Avatar">
+                    <p id="user-email"></p>
+                </div>
+                <div class="well">
+                    <p>
+                        <a href="#">Interests</a>
+                    </p>
+                    <p>
+                        <span class="label label-default">News</span>
+                        <span class="label label-success">Labels</span>
+                        <span class="label label-info">Education</span>
+                        <span class="label label-danger">Friends</span>
+                    </p>
+                </div>
+                <div class="alert alert-success fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <p>
+                        <strong>Ey!</strong>
+                    </p>
+                    People are looking at your profile. Find out who.
+                </div>
+                <p>
+                    <a href="#">Link</a>
+                </p>
+            </div>
+
+            <div class="col-sm-7">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default text-left">
+                            <div id="data-base" class="panel-body">
+                                <textarea id="post" name="Publicacion" cols="85" rows="5" placeholder="¿Que desea compartir?"></textarea>
+                                <div>
+                                    <button id="btn-publicar" type="button" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-thumbs-up"></span> Publicar
+                                    </button>
+                                    <select id="select-world" name="Selecciona">
+                                        <option value="Público" selected>Público</option>
+                                        <option value="Amigos">Amigos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <p id="user-name"></p>
+                            <img id="user-image" class="img-circle" height="65" width="65" alt="Avatar">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-9">
+                        <div id="posts-area" class="well">
+                        </div>
+                    </div>
+                    
+                </div>
+<!-- 
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <p>Bo</p>
+                            <img id="user-image" class="img-circle" height="55" width="55" alt="Avatar">
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="well">
+                            <p>Just Forgot that I had to mention something about someone to someone about how I forgot something,
+                                but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+
+            <div class="col-sm-2 well">
+                <div class="thumbnail">
+                    <p>Proximos Eventos</p>
+                    <img src="img/meetup.png" alt="Paris" width="400" height="300">
+                    <p>
+                        <strong>Lima</strong>
+                    </p>
+                    <p>Lunes 30 Julio</p>
+                    <button class="btn btn-primary">Info</button>
+                </div>
+                <div class="well">
+                    <p>ADS</p>
+                </div>
+                <div class="well">
+                    <p>ADS</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Firebase -->
+    <script src="js/firebase.js"></script>
+    <!-- Funcionalidad -->
+    <script src="js/app.js"></script>
+    <!-- Elementos del dom -->
+    <script src="js/wall.js"></script>
+</body>
+
+</html>
+
+<!-- <main>
         <section id="main-wall" class="content mt-5">
             <h5>BrainyPlay Muro</h5>
             <div class="alert alert-success" role="alert">
@@ -30,21 +188,8 @@
                     <option value="Amigos">Amigos</option>
                 </select>
             </section>
-            <hr>
             <section id="posts-area">
                 <h3>Publicaciones compartidas</h3>
             </section>
         </section>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
-    <!-- Firebase -->
-    <script src="js/firebase.js"></script>
-    <!-- Funcionalidad -->
-    <script src="js/app.js"></script>
-    <!-- Elementos del dom -->
-    <script src="js/wall.js"></script>
-</body>
-
-</html>
+    </main> -->
