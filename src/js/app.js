@@ -1,39 +1,44 @@
 expCorreo = /\w+@[a-z]+\.+[a-z]/;
 
 window.onload = () => {
-    firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             console.log('existe usuario activo');
-            // mainWall.style.display = 'block';
-            // mainLogin.style.display = 'none';
 
             let userNom = firebase.auth().currentUser.displayName;;
             let email = user.email;
             let emailVerified = user.emailVerified;
-            let userPhotoURL = user.photoURL;
+            let userPhoto = user.photoURL;
+            // let uid = user.uid;
+            // let isAnonymous = user.isAnonymous;
+            // let providerData = user.providerData;
 
-
-            userImage.setAttribute('src', userPhotoURL);
             userName.innerHTML = userNom + '<br>';
             userEmail.innerHTML = email + '<br>' + emailVerified;
-            // let isAnonymous = user.isAnonymous;
-            // let uid = user.uid;
-            // let providerData = user.providerData;
+
+            if (userPhoto != null) {
+                userImage.setAttribute('src', userPhoto);
+            }
+            else {
+                userImage.setAttribute('src', 'img/user.png');
+            };
+
+
         } else {
             // User is signed out.
             console.log('no existe usuario activo');
-            // mainWall.style.display = 'none';
-            // mainLogin.style.display = 'block';
         }
         console.log('user > ', user);
     });
 };
 
+//Guardar Datos de Usuario de Login
 writeUserData = (userId, name, email, imageUrl) => {
     firebase.database().ref('users/' + userId).set({
+        id: userId,
         username: name,
         email: email,
-        profile_picture: imageUrl
+        photo: imageUrl,
     })
 };
 
@@ -51,13 +56,19 @@ window.registerWithFirebase = () => {
         .then(() =>
             verificationWithFirebase(),
             (result) => {
-                console.log('usuario creado con exito');
                 const user = result.user;
+                // if (userNom === null) {
+                //     userNom = nameReg.value
+                // }
+                // else {
+                //     userNom = user.displayName;
+                // }
+                console.log('usuario creado con exito');
                 writeUserData(user.uid, user.displayName, user.email, user.photoURL);
             })
         .catch((error) => {
             if (error.code === 'auth/email-already-in-use') {
-                errorEmail.innerText = 'El correo ya esta registrado. Ingrese otro';
+                errorEmail.innerText = 'El correo ya esta en uso. Ingrese otro';
             }
             else if (error.code === 'auth/invalid-email') {
                 adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
@@ -93,18 +104,6 @@ window.loginWithFirebase = () => {
     else if (!expCorreo.test(emailLog.value)) {
         alert('El correo no es valido')
     }
-};
-
-window.logoutWithFirebase = () => {
-    firebase.auth().signOut()
-        .then(() => {
-            console.log('Usuario finalizo su sesion');
-            location.assign('index.html');
-        })
-        .catch((error) => {
-            console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
-        })
 };
 
 window.facebookWithFirebase = () => {
@@ -143,6 +142,28 @@ window.googleWithFirebase = () => {
         });
 };
 
+//Cambio de Contraseña
+const resetPassword = (email) => {
+    firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+        })
+        .catch((error) => {
+        })
+};
+
+window.logoutWithFirebase = () => {
+    firebase.auth().signOut()
+        .then(() => {
+            console.log('Usuario finalizo su sesion');
+            location.assign('index.html');
+        })
+        .catch((error) => {
+            console.log('Error de firebase > Codigo >' + error.code);
+            console.log('Error de firebase > Mensaje >' + error.message);
+        })
+};
+
+//Escribir nuevo Post
 const writeNewPost = (uid, body) => {
     let postData = {
         uid: uid,
@@ -161,43 +182,83 @@ const writeNewPost = (uid, body) => {
     return newPostKey;
 };
 
-const createPublicar = () => {
+const createPost = () => {
     let userId = firebase.auth().currentUser.uid;
     let userNom = firebase.auth().currentUser.displayName;
 
     const newPost = writeNewPost(userId, post.value, userNom);
-    console.log(post.value);
+    console.log(userNom);
 
-    let nomUsuario = document.createElement('label');
-    nomUsuario.setAttribute('for', '');
-    nomUsuario.setAttribute('type', 'label');
+    let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
+    allPost.setAttribute('class', 'row');
 
-    let btnUpdate = document.createElement('input');
+    let infoPost = document.createElement('div'); //Div que guarda img y nombre
+    infoPost.setAttribute('class', 'col-sm-3');
+
+    let contPost = document.createElement('div'); //Div que guarda a publicacion
+    contPost.setAttribute('class', 'col-sm-9');
+
+    let divPostOne = document.createElement('div');
+    divPostOne.setAttribute('class', 'well');
+
+    let divPostTwo = document.createElement('div');
+    divPostTwo.setAttribute('class', 'well');
+
+    let userName = document.createElement('label'); //Label de nombre
+    userName.setAttribute('type', 'label');
+
+    // let imgUsuario = document.createElement('img'); //Etiqueta img
+    // imgUsuario.setAttribute('id', 'userImage');
+
+    let textPost = document.createElement('textarea'); // txt area de contPost
+    textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
+
+    let btnUpdate = document.createElement('input'); //Boton dentro de contPost
     btnUpdate.setAttribute('value', 'Update');
     btnUpdate.setAttribute('type', 'button');
 
-    let btnDelete = document.createElement('input');
+    let btnDelete = document.createElement('input'); //Boton dentro de contPost
     btnDelete.setAttribute('value', 'Delete');
     btnDelete.setAttribute('type', 'button');
 
-    let contPost = document.createElement('div');
-    let textPost = document.createElement('textarea');
-
-    textPost.setAttribute('id', newPost);
-    textPost.innerHTML = post.value; // esto se actualiza
-
-    nomUsuario.innerHTML = userNom;
+    userName.innerHTML = userNom; //Nombre usuario del post
+    // imgUsuario.innerHTML = userPhoto; //Imagen usuario del post
+    textPost.innerHTML = post.value; //Contenido del post
     textPost.disabled = true;
 
     btnDelete.addEventListener('click', () => {
-        firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-        firebase.database().ref().child('posts/' + newPost).remove();
-
-        while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
-        alert('El usuario elimino su post');
+        deletePost();
     });
 
     btnUpdate.addEventListener('click', () => {
+        updatePost();
+    });
+
+    //Aqui va los appendchild
+    postArea.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
+    allPost.appendChild(infoPost);
+    allPost.appendChild(contPost);
+    infoPost.appendChild(divPostOne);
+    contPost.appendChild(divPostTwo);
+    divPostOne.appendChild(userName);
+    // divPostOne.appendChild(imgUsuario);
+    divPostTwo.appendChild(textPost); //Antes contenia a ContPost
+    divPostTwo.appendChild(btnUpdate);
+    divPostTwo.appendChild(btnDelete);
+
+    const deletePost = () => {
+        let userId = firebase.auth().currentUser.uid;
+
+        firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+        firebase.database().ref().child('posts/' + newPost).remove();
+
+        //Hacer el remove al div que tiene info-post y cont-post
+        //Aqui solo hace al cont post ya que era un solo div dentro de post area
+        while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
+        alert('El usuario elimino su post');
+    };
+
+    const updatePost = () => {
         const newUpdate = document.getElementById(newPost);
         const nuevoPost = {
             body: newUpdate.value,
@@ -214,11 +275,5 @@ const createPublicar = () => {
 
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
-    });
-
-    contPost.appendChild(nomUsuario);
-    contPost.appendChild(textPost);
-    contPost.appendChild(btnUpdate);
-    contPost.appendChild(btnDelete);
-    postArea.appendChild(contPost);
+    };
 };

@@ -7,3 +7,4 @@ const config = {
     messagingSenderId: "60588851338"
 };
 firebase.initializeApp(config);
+firebase.auth().languageCode = 'es';
