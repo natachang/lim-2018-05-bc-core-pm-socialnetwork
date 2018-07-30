@@ -4,6 +4,7 @@ const btnLogin = document.getElementById('btn-login'),
     btnNext = document.getElementById('btn-next'),
     emailLog = document.getElementById('email-login'),
     passwordLog = document.getElementById('password-login');
+    
 btnNext.addEventListener('click', () => {
     location.assign('register.html');
 })
