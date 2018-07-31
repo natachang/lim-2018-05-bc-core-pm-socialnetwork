@@ -7,14 +7,14 @@ const btnSignup = document.getElementById('btn-signup'),
 
 btnSignup.addEventListener('click', () => {
     if (emailReg.value.length === 0) {
-        alert('Ingrese un correo');
+        alert('Ingrese bien su correo');
     }
-    else if (passwordReg.value.length <= 6) {
-        alert('Ingresa una contraseña mayor a 6 caracteres');
-    }
-    else {
+    else if (passwordReg.value.length >=8 && passwordReg.value === passwordVer.value) {
         registerWithFirebase();
         alert('El email de validacion se ha enviado a tu correo.');
+    }
+    else {
+        alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres.')
     }
 });
 
