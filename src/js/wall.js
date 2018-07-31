@@ -12,11 +12,7 @@ btnLogout.addEventListener('click', () => {
 });
 
 btnPublicar.addEventListener('click', () => {
-<<<<<<< HEAD
     createNewPost ();
-=======
-    createNewPost();
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
 });
 
 const reload_page = () => {

@@ -4,21 +4,14 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             console.log('existe usuario activo');
-<<<<<<< HEAD
-         
-=======
 
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
             let uid = user.uid;
             let userNom = firebase.auth().currentUser.displayName;;
             let email = user.email;
             let emailVerified = user.emailVerified;
             let userPhoto = user.photoURL;
-<<<<<<< HEAD
-=======
             // let isAnonymous = user.isAnonymous;
             // let providerData = user.providerData;
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
 
             userName.innerHTML = userNom + '<br>';
             userEmail.innerHTML = email + '<br>' + emailVerified;
@@ -30,13 +23,6 @@ window.onload = () => {
                 userImage.setAttribute('src', 'img/user.png');
             };
 
-<<<<<<< HEAD
-
-            // let isAnonymous = user.isAnonymous;
-            // let uid = user.uid;
-            // let providerData = user.providerData;
-=======
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
         } else {
             // User is signed out.
             console.log('no existe usuario activo');
@@ -45,11 +31,7 @@ window.onload = () => {
     });
 };
 
-<<<<<<< HEAD
-
-=======
 //Guardar Datos de Usuario de Login
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
 writeUserData = (userId, username, email, imageUrl) => {
     firebase.database().ref('users/' + userId).set({
         id: userId,
@@ -58,7 +40,6 @@ writeUserData = (userId, username, email, imageUrl) => {
         profile_picture: imageUrl
     })
 };
-
 
 window.verificationWithFirebase = () => {
     const user = firebase.auth().currentUser;
@@ -76,10 +57,6 @@ window.registerWithFirebase = () => {
             (result) => {
                 const user = firebase.auth().currentUser;
                 console.log('usuario creado con exito');
-<<<<<<< HEAD
-                const user = firebase.auth().currentUser;
-=======
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
                 writeUserData(user.uid, user.displayName, user.email, user.photoURL);
                 // if (user.displayName === null) {
                 //     userName = nameReg.value
@@ -102,8 +79,6 @@ window.registerWithFirebase = () => {
         alert(' Por favor completa tu email y password para registrarte');
     }
 };
-
-
 
 window.loginWithFirebase = () => {
     firebase.auth().signInWithEmailAndPassword(emailLog.value, passwordLog.value)
@@ -179,8 +154,6 @@ window.googleWithFirebase = () => {
         });
 };
 
-<<<<<<< HEAD
-=======
 // //Cambio de Contraseña
 // const resetPassword = (email) => {
 //     firebase.auth().sendPasswordResetEmail(email)
@@ -191,7 +164,6 @@ window.googleWithFirebase = () => {
 // };
 
 //Escribir nuevo Post
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
 const writeNewPost = (uid, body, username) => {
     let postData = {
         uid: uid,
@@ -209,10 +181,7 @@ const writeNewPost = (uid, body, username) => {
     return newPostKey;
 };
 
-<<<<<<< HEAD
-=======
 //Crear nuevo Post
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
 const createNewPost = () => {
     let userId = firebase.auth().currentUser.uid;
     let userNom = firebase.auth().currentUser.displayName;
@@ -224,15 +193,6 @@ const createNewPost = () => {
     let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
     allPost.setAttribute('class', 'row');
 
-<<<<<<< HEAD
-    let btnUpdate = document.createElement('input');
-    btnUpdate.setAttribute('value', 'Editar');
-    btnUpdate.setAttribute('type', 'button');
-
-    let btnDelete = document.createElement('input');
-    btnDelete.setAttribute('value', 'Eliminar');
-    btnDelete.setAttribute('type', 'button');
-=======
     let infoPost = document.createElement('div'); //Div que guarda img y nombre
     infoPost.setAttribute('class', 'col-sm-3');
 
@@ -241,20 +201,12 @@ const createNewPost = () => {
 
     let divPostOne = document.createElement('div');
     divPostOne.setAttribute('class', 'well');
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
 
     let divPostTwo = document.createElement('div');
     divPostTwo.setAttribute('class', 'well');
 
     let nameUser = document.createElement('label'); //Label de nombre
 
-<<<<<<< HEAD
-    nomUsuario.innerHTML = userNom;
-     textPost.disabled = true; 
-
-    btnDelete.addEventListener('click', () => {
-        let userId = firebase.auth().currentUser.uid;
-=======
     // let imgUser = document.createElement('img'); //Etiqueta img
 
     let textPost = document.createElement('textarea'); // txt area de contPost
@@ -273,10 +225,16 @@ const createNewPost = () => {
     textPost.innerHTML = post.value; //Contenido del post
     textPost.disabled = true;
 
+
+ firebase.database().ref().child('posts')
+.on('value', function(snapshot) {
+
+    //createNewPost();
+}); 
+
     const deletePost = () => {
         let userId = firebase.auth().currentUser.uid;
 
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
         firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
         firebase.database().ref().child('posts/' + newPost).remove();
 
@@ -286,36 +244,13 @@ const createNewPost = () => {
         alert('El usuario elimino su post');
     };
 
-<<<<<<< HEAD
-    btnUpdate.addEventListener('click', () => {
-        let userId = firebase.auth().currentUser.uid;
-        const newUpdate = document.getElementById(newPost);
-        const nuevoPost = writeNewPost(userId, newUpdate.value, userNom);
-=======
     const updatePost = () => {
         let userId = firebase.auth().currentUser.uid;
         const newUpdate = document.getElementById(newPost);
-
         const nuevoPost = writeNewPost(userId, newUpdate.value, userNom);
-        // const nuevoPost = {
-        //     uid: uid,
-        //     username: username,
-        //     body: newUpdate.value,
-        // };
->>>>>>> ea40a280716f30e16dcc2d8e7304c31b012e18d2
-
+        
         textPost.disabled = false;
-        btnUpdate.setAttribute('value', 'Guardar'); 
-        btnUpdate.addEventListener('click', () => {
-                 if(textPost.disabled === true){
-                    textPost.disabled = false;
-                    btnUpdate.setAttribute('value', 'Guardar');
-                 }
-            else{
-                textPost.disabled = true;
-                btnUpdate.setAttribute('value', 'Editar');
-            }
-        })
+        btnUpdate.setAttribute('value', 'Guardar');
 
         btnUpdate.addEventListener('click', () => {
             if (textPost.disabled === true) {
