@@ -4,16 +4,24 @@ const btnLogin = document.getElementById('btn-login'),
     btnNext = document.getElementById('btn-next'),
     emailLog = document.getElementById('email-login'),
     passwordLog = document.getElementById('password-login');
-    
+
 btnNext.addEventListener('click', () => {
     location.assign('register.html');
-})
-btnLogin.addEventListener('click', () => {
-    loginWithFirebase();
 });
+
+btnLogin.addEventListener('click', () => {
+    if (emailLog.value === '' || passwordLog.value === '') {
+        swal(' Por favor completa tu email y password para loguearte !!');
+    }
+    else {
+        loginWithFirebase(emailLog.value, passwordLog.value);
+    }
+});
+
 btnFacebook.addEventListener('click', () => {
     facebookWithFirebase();
 });
+
 btnGoogle.addEventListener('click', () => {
     googleWithFirebase();
 });

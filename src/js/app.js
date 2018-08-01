@@ -1,38 +1,40 @@
-expCorreo = /\w+@[a-z]+\.+[a-z]/;
+// expCorreo = /\w+@[a-z]+\.+[a-z]/;
 
 let database = firebase.database();
 
 window.onload = () => {
     firebase.auth().onAuthStateChanged(() => {
         const user = firebase.auth().currentUser;
-        if (user !== null) {
+        if (user) {
             console.log('user > ', user);
             console.log('existe usuario activo');
-            showUserWithFirebase();
+            showUserWithFirebase(user);
         } else {
             console.log('no existe usuario activo');
         }
     });
 };
 
-const showUserWithFirebase = () => {
-    const user = firebase.auth().currentUser;
+//Muestra el usuario activo
+const showUserWithFirebase = (user) => {
+    
     // let uid = firebase.auth().currentUser.uid;
-    let username = firebase.auth().currentUser.displayName;
+    // let username = firebase.auth().currentUser.displayName;
     // let usermail = firebase.auth().currentUser.email;
     // let userphoto = firebase.auth().currentUser.photoURL;
+    // console.log(username);
 
-    console.log(username);
-
-    // if (username !== null && userphoto !== null) {
+    // if (username === null && userphoto === null) {
+    //     username += nameReg.value;
+    // };
+    // else {
+    //     nomUser.innerHTML = nameReg.value;
+    //     imgUser.setAttribute('src', 'img/user.png');
     //     nomUser.innerHTML = username;
     //     imgUser.setAttribute('src', userphoto);
-    // }
-    // else {
-    //     nomUser.innerHTML = usermail;
-    //     imgUser.setAttribute('src', 'img/user.png');
     // };
 
+    //Para que el post se mantenga en el muro
     // const divt = document.createElement('div');
     // const pintarObj = (obj) => {
     //     console.log(obj)
@@ -56,26 +58,28 @@ const showUserWithFirebase = () => {
     // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
 };
 
-window.verificationWithFirebase = () => {
+const verificationWithFirebase = () => {
     const user = firebase.auth().currentUser;
-
-    user.sendEmailVerification().then(function () {
-        console.log('Enviando correo >>>');
-    }).catch(function (error) {
-        console.log(error);
-    });
+    user.sendEmailVerification()
+        .then(() => {
+            console.log('>>Enviando correo<<');
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };
 
-window.registerWithFirebase = () => {
-    firebase.auth().createUserWithEmailAndPassword(emailReg.value, passwordReg.value)
-        .then((result) => {
-            verificationWithFirebase();
-            const user = result.user;
+//Creando usuario con email y contraseña
+window.registerWithFirebase = (name, email, password, valpassword) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(result => {
+            const user = firebase.auth().currentUser;
             console.log('usuario creado con exito');
-
+            verificationWithFirebase();
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
-        .catch((error) => {
+        .catch(error => {
+            //Mostrar error en consola
             if (error.code === 'auth/email-already-in-use') {
                 errorEmail.innerText = 'El correo ya esta en uso. Ingrese otro';
             }
@@ -85,38 +89,20 @@ window.registerWithFirebase = () => {
             console.log("Error de firebase > Codigo >" + error.code);
             console.log("Error de firebase > Mensaje >" + error.message);
         });
-    if (emailReg.value === '' || passwordReg === '') {
-        alert(' Por favor completa tu email y password para registrarte');
-    }
 };
 
-window.loginWithFirebase = () => {
-    firebase.auth().signInWithEmailAndPassword(emailLog.value, passwordLog.value)
-        .then((result) => {
-            const user = result.user;
+window.loginWithFirebase = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(result => {
+            const user = firebase.auth().currentUser;
             console.log('Usuario logeado con exito');
             location.assign('wall.html');
-
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
-
-        .catch((error) => {
-            if (error.code === 'auth/wrong-password') {
-                errorAdvice.innerText = 'Su contraseña es incorrecta';
-            }
-            else if (error.code === 'auth/user-not-found') {
-                errorEmail.innerText = 'No existe un usuario con este correo';
-            };
+        .catch(error => {
             console.log('Error de firebase > Codigo >' + error.code);
             console.log('Error de firebase > Mensaje >' + error.message);
         })
-
-    if (emailLog.value === '' || passwordLog.value === '') {
-        alert(' Por favor completa tu email y password para loguearte !!');
-    }
-    else if (!expCorreo.test(emailLog.value)) {
-        alert('El correo no es valido')
-    }
 };
 
 window.logoutWithFirebase = () => {
@@ -132,14 +118,14 @@ window.logoutWithFirebase = () => {
 };
 
 window.facebookWithFirebase = () => {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    provider.addScope('email');
-    provider.addScope('user_friends');
-    provider.setCustomParameters({
+    const providerFb = new firebase.auth.FacebookAuthProvider();
+    providerFb.addScope('email');
+    providerFb.addScope('user_friends');
+    providerFb.setCustomParameters({
         'display': 'popup'
     });
-    firebase.auth().signInWithPopup(provider)
-        .then((result) => {
+    firebase.auth().signInWithPopup(providerFb)
+        .then(result => {
             var user = result.user;
             var credential = result.credential;
             var operationType = result.operationType;
@@ -147,7 +133,7 @@ window.facebookWithFirebase = () => {
             location.assign('wall.html');
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
-        .catch((error) => {
+        .catch(error => {
             console.log('error de firebase > ' + error.code);
             console.log('error de firebase, mensaje > ' + error.message);
         });
@@ -162,11 +148,10 @@ window.googleWithFirebase = () => {
     });
 
     firebase.auth().signInWithPopup(provider)
-        .then((result) => {
+        .then(result => {
             console.log('Google logueado');
-            console.log(result);
-            var token = result.credential.accessToken;
             const user = result.user;
+            const token = result.credential.accessToken;
             console.log(user);
             location.assign('wall.html');
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
@@ -183,12 +168,13 @@ window.googleWithFirebase = () => {
 // const resetPassword = (email) => {
 //     firebase.auth().sendPasswordResetEmail(email)
 //         .then(() => {
+//                  alert('Se ha enviado un correo a su cuenta. Por favor, sigue los pasos indicados.');
 //         })
 //         .catch((error) => {
 //         })
 // };
 
-//Guardar Datos de Usuario de Login
+//Guardar Datos de Usuario de Login en DB
 const writeUserData = (uid, username, email, imageUrl) => {
     firebase.database().ref('users/' + uid).set({
         uid: uid,
