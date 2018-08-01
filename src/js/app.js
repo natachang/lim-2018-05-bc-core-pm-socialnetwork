@@ -17,10 +17,10 @@ window.onload = () => {
 
 const showUserWithFirebase = () => {
     const user = firebase.auth().currentUser;
-    let uid = firebase.auth().currentUser.uid;
+    // let uid = firebase.auth().currentUser.uid;
     let username = firebase.auth().currentUser.displayName;
-    let usermail = firebase.auth().currentUser.email;
-    let userphoto = firebase.auth().currentUser.photoURL;
+    // let usermail = firebase.auth().currentUser.email;
+    // let userphoto = firebase.auth().currentUser.photoURL;
 
     console.log(username);
 
@@ -33,7 +33,27 @@ const showUserWithFirebase = () => {
     //     imgUser.setAttribute('src', 'img/user.png');
     // };
 
-    writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+    // const divt = document.createElement('div');
+    // const pintarObj = (obj) => {
+    //     console.log(obj)
+    //     const postis = Object.keys(obj);
+    //     postis.map(item => {
+    //         console.log(obj[item].body)
+    //         const p = document.createElement('p');
+    //         p.innerHTML = obj[item].body;
+    //         divt.appendChild(p);
+    //     })
+    // }
+
+    // var post = firebase.database().ref('/posts').once('value')
+    //     .then(function (snapshot) {
+    //         pintarObj(snapshot.val())
+    //     }).catch(error => {
+    //         console.error(`Esto fue un dirty Error ${error}`)
+    //     })
+    // postArea.appendChild(divt);
+
+    // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
 };
 
 window.verificationWithFirebase = () => {
@@ -245,9 +265,9 @@ const createNewPost = () => {
     btnDelete.setAttribute('type', 'button');
 
     console.log(nombreUser);
-    
+
     if (username !== null && userphoto !== null) {
-        nombreUser.innerHTML= username;
+        nombreUser.innerHTML = username;
         imageUser.setAttribute('src', userphoto);
     }
     else {
@@ -263,13 +283,29 @@ const createNewPost = () => {
 
     const deletePost = () => {
 
-        firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+        firebase.database().ref().child('/user-posts/' + uid + '/' + newPost).remove();
         firebase.database().ref().child('posts/' + newPost).remove();
 
         //Hacer el remove al div que tiene info-post y cont-post
-        //Aqui solo hace al cont post ya que era un solo div dentro de post area
-        while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
-        alert('El usuario elimino su post');
+        //Aqui solo hace al cont post ya que era un solo div dentro de post area.
+        swal({
+            title: "Estas seguro?",
+            text: "Una vez eliminado el post, no se recuperará!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
+                    swal("Eliminaste tu post!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Tu post no se elimino!");
+                }
+            });
+
     };
 
     const updatePost = () => {
