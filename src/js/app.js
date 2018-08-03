@@ -17,22 +17,23 @@ window.onload = () => {
 
 //Muestra el usuario activo
 const showUserWithFirebase = (user) => {
-    
-    // let uid = firebase.auth().currentUser.uid;
-    // let username = firebase.auth().currentUser.displayName;
-    // let usermail = firebase.auth().currentUser.email;
-    // let userphoto = firebase.auth().currentUser.photoURL;
-    // console.log(username);
 
-    // if (username === null && userphoto === null) {
-    //     username += nameReg.value;
-    // };
-    // else {
-    //     nomUser.innerHTML = nameReg.value;
-    //     imgUser.setAttribute('src', 'img/user.png');
-    //     nomUser.innerHTML = username;
-    //     imgUser.setAttribute('src', userphoto);
-    // };
+    let uid = firebase.auth().currentUser.uid;
+    let username = firebase.auth().currentUser.displayName;
+    let usermail = firebase.auth().currentUser.email;
+    let userphoto = firebase.auth().currentUser.photoURL;
+    console.log(username);
+
+    if (username === null && userphoto === null) {
+        nomUser.innerHTML = 'Usuarix';
+        imgUser.setAttribute('src', 'img/user.png');
+        emailUser.innerHTML = usermail;
+    }
+    else {
+        nomUser.innerHTML = username;
+        imgUser.setAttribute('src', userphoto);
+        emailUser.innerHTML = usermail;
+    };
 
     //Para que el post se mantenga en el muro
     // const divt = document.createElement('div');
@@ -55,7 +56,6 @@ const showUserWithFirebase = (user) => {
     //     })
     // postArea.appendChild(divt);
 
-    // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
 };
 
 const verificationWithFirebase = () => {
@@ -163,16 +163,6 @@ window.googleWithFirebase = () => {
             console.log(error.credential);
         });
 };
-
-// //Cambio de Contraseña
-// const resetPassword = (email) => {
-//     firebase.auth().sendPasswordResetEmail(email)
-//         .then(() => {
-//                  alert('Se ha enviado un correo a su cuenta. Por favor, sigue los pasos indicados.');
-//         })
-//         .catch((error) => {
-//         })
-// };
 
 //Guardar Datos de Usuario de Login en DB
 const writeUserData = (uid, username, email, imageUrl) => {
