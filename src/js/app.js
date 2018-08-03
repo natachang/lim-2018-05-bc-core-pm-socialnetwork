@@ -1,7 +1,3 @@
-// expCorreo = /\w+@[a-z]+\.+[a-z]/;
-
-let database = firebase.database();
-
 window.onload = () => {
     firebase.auth().onAuthStateChanged(() => {
         const user = firebase.auth().currentUser;
@@ -206,7 +202,7 @@ const createNewPost = () => {
     console.log(post.value);
 
     let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
-    allPost.setAttribute('class', 'row');
+    allPost.setAttribute('class', 'w3-container w3-card w3-white w3-round w3-margin');
 
     let infoPost = document.createElement('div'); //Div que guarda img y nombre
     infoPost.setAttribute('class', 'col-sm-3');
@@ -220,14 +216,13 @@ const createNewPost = () => {
     let divPostTwo = document.createElement('div');
     divPostTwo.setAttribute('class', 'well');
 
-    let nombreUser = document.createElement('p'); //Label de nombre
-    nombreUser.setAttribute('id', 'nombreUser');
-
     let imageUser = document.createElement('img'); //Etiqueta img
-    imageUser.setAttribute('class', 'img-circle');
-    imageUser.setAttribute('height', '35');
-    imageUser.setAttribute('width', '35');
+    imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
+    imageUser.setAttribute('width', '30');
     imageUser.setAttribute('src', userphoto);
+
+    let nombreUser = document.createElement('h4'); //Label de nombre
+    nombreUser.setAttribute('id', 'nombreUser');
 
     let textPost = document.createElement('textarea'); // txt area de contPost
     textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
@@ -235,10 +230,12 @@ const createNewPost = () => {
     let btnUpdate = document.createElement('input'); //Boton dentro de contPost
     btnUpdate.setAttribute('value', 'Editar');
     btnUpdate.setAttribute('type', 'button');
+    btnUpdate.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
 
     let btnDelete = document.createElement('input'); //Boton dentro de contPost
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
+    btnDelete.setAttribute('class', 'w3-button w3-theme-d2 w3-margin-bottom');
 
     console.log(nombreUser);
 
@@ -320,8 +317,8 @@ const createNewPost = () => {
     allPost.appendChild(contPost);
     infoPost.appendChild(divPostOne);
     contPost.appendChild(divPostTwo);
-    divPostOne.appendChild(nombreUser);
     divPostOne.appendChild(imageUser);
+    divPostOne.appendChild(nombreUser);
     divPostTwo.appendChild(textPost); //Antes contenia a ContPost
     divPostTwo.appendChild(btnUpdate);
     divPostTwo.appendChild(btnDelete);
