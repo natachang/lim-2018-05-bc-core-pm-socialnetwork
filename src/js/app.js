@@ -96,7 +96,7 @@ window.loginWithFirebase = (email, password) => {
         .then(result => {
             const user = firebase.auth().currentUser;
             console.log('Usuario logeado con exito');
-            location.assign('wall.html');
+            location.assign('home.html');
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
         .catch(error => {
@@ -130,7 +130,7 @@ window.facebookWithFirebase = () => {
             var credential = result.credential;
             var operationType = result.operationType;
             console.log('Facebook logueado');
-            location.assign('wall.html');
+            location.assign('home.html');
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
         .catch(error => {
@@ -153,7 +153,7 @@ window.googleWithFirebase = () => {
             const user = result.user;
             const token = result.credential.accessToken;
             console.log(user);
-            location.assign('wall.html');
+            location.assign('home.html');
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         })
         .catch((error) => {
