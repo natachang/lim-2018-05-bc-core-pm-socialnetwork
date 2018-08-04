@@ -1,10 +1,16 @@
 window.onload = () => {
+    initApp();
+};
+
+
+const initApp = () => {
     firebase.auth().onAuthStateChanged(() => {
         const user = firebase.auth().currentUser;
         if (user) {
             console.log('user > ', user);
             console.log('existe usuario activo');
             showUserWithFirebase(user);
+            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         } else {
             console.log('no existe usuario activo');
         }
@@ -13,23 +19,14 @@ window.onload = () => {
 
 //Muestra el usuario activo
 const showUserWithFirebase = (user) => {
-
-    let uid = firebase.auth().currentUser.uid;
-    let username = firebase.auth().currentUser.displayName;
-    let usermail = firebase.auth().currentUser.email;
-    let userphoto = firebase.auth().currentUser.photoURL;
+    let username = user.displayName;
+    let usermail = user.email;
+    let userphoto = user.photoURL;
     console.log(username);
 
-    if (username === null && userphoto === null) {
-        nomUser.innerHTML = 'Usuarix';
-        imgUser.setAttribute('src', 'img/user.png');
-        emailUser.innerHTML = usermail;
-    }
-    else {
-        nomUser.innerHTML = username;
-        imgUser.setAttribute('src', userphoto);
-        emailUser.innerHTML = usermail;
-    };
+    // nomUser.innerHTML = username;
+    // imgUser.setAttribute('src', userphoto);
+    // emailUser.innerHTML = usermail;
 
     //Para que el post se mantenga en el muro
     // const divt = document.createElement('div');
@@ -69,10 +66,22 @@ const verificationWithFirebase = () => {
 window.registerWithFirebase = (name, email, password, valpassword) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(result => {
-            const user = firebase.auth().currentUser;
-            console.log('usuario creado con exito');
             verificationWithFirebase();
+            result.updateProfile({ displayName: document.getElementById('name-register').value });
+
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+            console.log('usuario creado con exito');
+            
+
+            console.log(user.id);
+            firebase.ref().child('users/' + user.uid).push({
+                displayName: writeUserData[user.displayName],
+                id: writeUserData[user.id],
+                email: writeUserData[user.email]
+            });
+
+
+            location.assign('index.html');
         })
         .catch(error => {
             //Mostrar error en consola
