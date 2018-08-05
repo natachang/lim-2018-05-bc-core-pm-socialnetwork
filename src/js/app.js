@@ -2,6 +2,7 @@ expCorreo = /\w+@[a-z]+\.+[a-z]/;
 
 let database = firebase.database();
 
+// const userNameRegister = nameReg.value;
 window.onload = () => {
     firebase.auth().onAuthStateChanged(() => {
         const user = firebase.auth().currentUser;
@@ -9,11 +10,44 @@ window.onload = () => {
             console.log('user > ', user);
             console.log('existe usuario activo');
             showUserWithFirebase();
+            //userNameRegister: userNameRegister
         } else {
             console.log('no existe usuario activo');
         }
     });
 };
+
+
+
+
+/* firebase.database().ref('posts').once('value', (postsSnap) => {
+    const posts1 = postsSnap.val()// array de los post
+    Object.keys(posts1).forEach(pid => { no es necesario object.keys, va defrente p porq
+    vienes a ser cada elemento para el array 
+       const p = posts1[pid]
+      const elem = document.createElement('textarea');
+      console.log(p)
+      elem.innerHTML = p.body 
+      postArea.appendChild(elem) para esta parte crear funcion 'imprimir un post' donde van 
+      elementos de html y el contenido a imprimir etc
+    })
+  });  */
+
+const createNewPost = () => {
+  firebase.database().ref('posts').once('value', (postsSnap) => {
+    const posts1 = postsSnap.val()// array de los post
+    Object.keys(posts1).forEach(pid => {
+       const p = posts1[pid]
+      const elem = document.createElement('textarea');
+      console.log(p)
+      elem.innerHTML = p.body 
+      postArea.appendChild(elem) 
+    })
+  }); 
+};
+ 
+
+
 
 const showUserWithFirebase = () => {
     const user = firebase.auth().currentUser;
@@ -49,11 +83,28 @@ window.verificationWithFirebase = () => {
 window.registerWithFirebase = () => {
     firebase.auth().createUserWithEmailAndPassword(emailReg.value, passwordReg.value)
         .then((result) => {
+
+            result.updateProfile({ displayName: document.getElementById('name-register').value });
+
+            var user_info = { id: result.uid, email: result.email, display_name: result.displayName };
+            console.log('user_info', user_info);
+            // Storing user info into database.
+            var database = firebase.database();
+
+            console.log('user id', user_info.id);
+            database.ref().child('users/' + user_info.id).push({
+                displayName: user_info.display_name,
+                id: user_info.id,
+                email: user_info.email
+            });
+
+
+
             verificationWithFirebase();
             const user = result.user;
             console.log('usuario creado con exito');
-
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+
         })
         .catch((error) => {
             if (error.code === 'auth/email-already-in-use') {
@@ -169,6 +220,8 @@ window.googleWithFirebase = () => {
 // };
 
 //Guardar Datos de Usuario de Login
+
+
 const writeUserData = (uid, username, email, imageUrl) => {
     firebase.database().ref('users/' + uid).set({
         uid: uid,
@@ -177,6 +230,8 @@ const writeUserData = (uid, username, email, imageUrl) => {
         profile_picture: imageUrl
     })
 };
+
+//const writeUserProfile = (name, lastName, photoURL) // Funcion para capturar datos del formulario(plataforma)
 
 //Escribir nuevo Post
 const writeNewPost = (uid, body, username) => {
@@ -200,143 +255,156 @@ const writeNewPost = (uid, body, username) => {
 };
 
 //Crear nuevo Post
-const createNewPost = () => {
+/* const createNewPost = () => {
+    //llamar
     let uid = firebase.auth().currentUser.uid;
     let username = firebase.auth().currentUser.displayName;
     let usermail = firebase.auth().currentUser.email;
     let userphoto = firebase.auth().currentUser.photoURL;
 
     const newPost = writeNewPost(uid, post.value, username);
-    console.log(post.value);
+    console.log(post.value); */
 
-    let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
-    allPost.setAttribute('class', 'row');
-
-    let infoPost = document.createElement('div'); //Div que guarda img y nombre
-    infoPost.setAttribute('class', 'col-sm-3');
-
-    let contPost = document.createElement('div'); //Div que guarda a publicacion
-    contPost.setAttribute('class', 'col-sm-9');
-
-    let divPostOne = document.createElement('div');
-    divPostOne.setAttribute('class', 'well');
-
-    let divPostTwo = document.createElement('div');
-    divPostTwo.setAttribute('class', 'well');
-
-    let nombreUser = document.createElement('p'); //Label de nombre
-    nombreUser.setAttribute('id', 'nombreUser');
-
-    let imageUser = document.createElement('img'); //Etiqueta img
-    imageUser.setAttribute('class', 'img-circle');
-    imageUser.setAttribute('height', '35');
-    imageUser.setAttribute('width', '35');
-    imageUser.setAttribute('src', userphoto);
-
-    let textPost = document.createElement('textarea'); // txt area de contPost
-    textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
-
-    let btnUpdate = document.createElement('input'); //Boton dentro de contPost
-    btnUpdate.setAttribute('value', 'Editar');
-    btnUpdate.setAttribute('type', 'button');
-
-    let btnDelete = document.createElement('input'); //Boton dentro de contPost
-    btnDelete.setAttribute('value', 'Eliminar');
-    btnDelete.setAttribute('type', 'button');
-
-    console.log(nombreUser);
-    
-    if (username !== null && userphoto !== null) {
-        nombreUser.innerHTML= username;
-        imageUser.setAttribute('src', userphoto);
-    }
-    else {
-        nombreUser.innerHTML = usermail;
-        imageUser.setAttribute('src', 'img/user.png');
-    }
-
-    nombreUser.innerHTML = username; //Nombre usuario del post
-    console.log(imageUser);
-
-    textPost.innerHTML = post.value; //Contenido del post
-    textPost.disabled = true;
-
-
- firebase.database().ref().child('posts')
-.on('value', function(snapshot) {
-
-    //createNewPost();
-}); 
-
-    const deletePost = () => {
-
-        firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-        firebase.database().ref().child('posts/' + newPost).remove();
-
-        //Hacer el remove al div que tiene info-post y cont-post
-        //Aqui solo hace al cont post ya que era un solo div dentro de post area
-        while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
-        alert('El usuario elimino su post');
-    };
-
-    const updatePost = () => {
-        const newUpdate = document.getElementById(newPost);
-<<<<<<< HEAD
-        const nuevoPost = writeNewPost(userId, newUpdate.value, userNom);
-        
-        textPost.disabled = false;
-        btnUpdate.setAttribute('value', 'Guardar');
-
-        btnUpdate.addEventListener('click', () => {
-            if (textPost.disabled === true) {
-                textPost.disabled = false;
-                btnUpdate.setAttribute('value', 'Guardar');
-            }
-            else {
-                textPost.disabled = true;
-                btnUpdate.setAttribute('value', 'Editar');
-            }
+/*     firebase.database().ref('posts').once('value', (postsSnap) => {
+        const posts1 = postsSnap.val()// array de los post
+        Object.keys(posts1).forEach(pid => {
+            const p = posts1[pid]
+            const elem = document.createElement('textarea');
+            console.log(p)
+            elem.innerHTML = p.body
+            postArea.appendChild(elem)
         })
+    }); */
 
-=======
-        const nuevoPost = writeNewPost(uid, newUpdate.value, username);
-
-        if (textPost.disabled === true) {
-            textPost.disabled = false;
-            btnUpdate.setAttribute('value', 'Guardar');
-        }
-        else {
-            textPost.disabled = true;
-            btnUpdate.setAttribute('value', 'Editar');
-        }
->>>>>>> 741a1f1a7e41fab9da41a217f70bb0ab384d3c3c
-
-        let updatesUser = {};
-        let updatesPost = {};
-        updatesUser['/user-posts/' + uid + '/' + newPost] = nuevoPost;
-        updatesPost['/posts/' + newPost] = nuevoPost;
-
-        firebase.database().ref().update(updatesUser);
-        firebase.database().ref().update(updatesPost);
-    };
-
-    btnDelete.addEventListener('click', () => {
-        deletePost();
-    });
-
-    btnUpdate.addEventListener('click', () => {
-        updatePost();
-    });
-
-    //Aqui va los appendchild
-    postArea.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
-    allPost.appendChild(infoPost);
-    allPost.appendChild(contPost);
-    infoPost.appendChild(divPostOne);
-    contPost.appendChild(divPostTwo);
-    divPostOne.appendChild(nombreUser);
-    divPostOne.appendChild(imageUser);
-    divPostTwo.appendChild(textPost); //Antes contenia a ContPost
-    divPostTwo.appendChild(btnUpdate);
-    divPostTwo.appendChild(btnDelete);
-};
+    /*  firebase.database().ref('posts').once('value', (postsSnap) => {
+         const posts1 = postsSnap.val()
+         Object.keys(posts1).forEach(post => {
+ 
+ 
+ 
+             let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
+             allPost.setAttribute('class', 'row');
+ 
+             let infoPost = document.createElement('div'); //Div que guarda img y nombre
+             infoPost.setAttribute('class', 'col-sm-3');
+ 
+             let contPost = document.createElement('div'); //Div que guarda a publicacion
+             contPost.setAttribute('class', 'col-sm-9');
+ 
+             let divPostOne = document.createElement('div');
+             divPostOne.setAttribute('class', 'well');
+ 
+             let divPostTwo = document.createElement('div');
+             divPostTwo.setAttribute('class', 'well');
+ 
+             let nombreUser = document.createElement('p'); //Label de nombre
+             nombreUser.setAttribute('id', 'nombreUser');
+ 
+             let imageUser = document.createElement('img'); //Etiqueta img
+             imageUser.setAttribute('class', 'img-circle');
+             imageUser.setAttribute('height', '35');
+             imageUser.setAttribute('width', '35');
+             imageUser.setAttribute('src', userphoto);
+ 
+             let textPost = document.createElement('textarea'); // txt area de contPost
+             textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
+             textPost.setAttribute('class', "areaPost");
+ 
+             let btnUpdate = document.createElement('input'); //Boton dentro de contPost
+             btnUpdate.setAttribute('value', 'Editar');
+             btnUpdate.setAttribute('type', 'button');
+ 
+             let btnDelete = document.createElement('input'); //Boton dentro de contPost
+             btnDelete.setAttribute('value', 'Eliminar');
+             btnDelete.setAttribute('type', 'button');
+ 
+             console.log(nombreUser);
+ 
+             if (username !== null && userphoto !== null) {
+                 nombreUser.innerHTML = username;
+                 imageUser.setAttribute('src', userphoto);
+             }
+             else {
+                 nombreUser.innerHTML = usermail;
+                 imageUser.setAttribute('src', 'img/user.png');
+             }
+ 
+             nombreUser.innerHTML = username; //Nombre usuario del post
+             console.log(imageUser);
+ 
+             textPost.innerHTML = post.value; //Contenido del post
+             textPost.disabled = true;
+ 
+             const deletePost = () => {
+ 
+                 firebase.database().ref().child('/user-posts/' + uid + '/' + newPost).remove();
+                 firebase.database().ref().child('posts/' + newPost).remove();
+ 
+                 //Hacer el remove al div que tiene info-post y cont-post
+                 //Aqui solo hace al cont post ya que era un solo div dentro de post area.
+                 swal({
+                     title: "Estas seguro?",
+                     text: "Una vez eliminado el post, no se recuperará!",
+                     icon: "warning",
+                     buttons: true,
+                     dangerMode: true,
+                 })
+                     .then((willDelete) => {
+                         if (willDelete) {
+                             while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
+                             swal("Eliminaste tu post!", {
+                                 icon: "success",
+                             });
+                         } else {
+                             swal("Tu post no se elimino!");
+                         }
+                     });
+ 
+             };
+ 
+             const updatePost = () => {
+                 const newUpdate = document.getElementById(newPost);
+                 const nuevoPost = writeNewPost(uid, newUpdate.value, username);
+ 
+                 if (textPost.disabled === true) {
+                     textPost.disabled = false;
+                     btnUpdate.setAttribute('value', 'Guardar');
+                     textPost.setAttribute('class', "areaPostt");
+                 }
+                 else {
+                     textPost.disabled = true;
+                     btnUpdate.setAttribute('value', 'Editar');
+                     textPost.setAttribute('class', "areaPost");
+                 }
+ 
+                 let updatesUser = {};
+                 let updatesPost = {};
+                 updatesUser['/user-posts/' + uid + '/' + newPost] = nuevoPost;
+                 updatesPost['/posts/' + newPost] = nuevoPost;
+ 
+                 firebase.database().ref().update(updatesUser);
+                 firebase.database().ref().update(updatesPost);
+             };
+ 
+             btnDelete.addEventListener('click', () => {
+                 deletePost();
+             });
+ 
+             btnUpdate.addEventListener('click', () => {
+                 updatePost();
+             });
+ 
+             //Aqui va los appendchild
+             postArea.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
+             allPost.appendChild(infoPost);
+             allPost.appendChild(contPost);
+             infoPost.appendChild(divPostOne);
+             contPost.appendChild(divPostTwo);
+             divPostOne.appendChild(nombreUser);
+             divPostOne.appendChild(imageUser);
+             divPostTwo.appendChild(textPost); //Antes contenia a ContPost
+             divPostTwo.appendChild(btnUpdate);
+             divPostTwo.appendChild(btnDelete);
+         });
+     }); */
+/* };  */

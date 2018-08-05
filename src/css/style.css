@@ -8,3 +8,31 @@ footer {
 
     resize: none;
   }
+
+  .btn-primary {
+
+    width: 50px;
+    height: 25px;
+    background:blue;
+    border-radius: 4px;
+    
+  }
+
+
+  .btn-primary a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .areaPost {
+
+    background: lightsteelblue;
+    resize: none;
+    border-radius: 3px;
+  }
+
+  .areaPostt {
+
+    background: #fff;
+    border-radius: 3px;
+  }
