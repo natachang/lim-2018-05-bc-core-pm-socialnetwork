@@ -1,8 +1,10 @@
 const btnLogout = document.getElementById('btn-logout'),
     btnPublicar = document.getElementById('btn-publicar'),
+    selectOptionPublicate = document.getElementById('select-option'),
     post = document.getElementById('post'),
     dataBase = document.getElementById('data-base'),
-    postArea = document.getElementById('posts-area'),
+    postPrivate = document.getElementById('publication-profile'),
+    postPublic = document.getElementById('publication-home'),
     nomUser = document.getElementById('user-name'),
     imgUser = document.getElementById('user-image'),
     emailUser = document.getElementById('user-email');
@@ -12,14 +14,23 @@ btnLogout.addEventListener('click', () => {
 });
 
 btnPublicar.addEventListener('click', () => {
-    if (post.value.length !== 0 && post.value.trim() !== '') {
-        createNewPost();
+    const contenidoPost = post.value;
+    const selectOption = selectOptionPublicate.value;
+    const blankSpace = contenidoPost.trim();
+    if (contenidoPost.length !== 0 && blankSpace !== '') {
+        if (selectOption === 'publico') {
+            writeNewPost();
+        }
+        else if (selectOption === 'privado') {
+            writeNewPostPrivate();
+        }
     }
     else {
         alert('Escribe un comentario');
     }
 });
 
+btnPublicar.addEventListener('click', cleanTextarea);
 // const reload_page = () => {
 //     window.location.reload();
 // };

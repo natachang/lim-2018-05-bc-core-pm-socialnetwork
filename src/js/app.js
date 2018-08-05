@@ -10,11 +10,16 @@ const initApp = () => {
             console.log('existe usuario activo');
             showUserWithFirebase(user);
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+            //Funcion que pinta los post en el muro
+            callPostFirebase(user.uid);
+
         } else {
             console.log('no existe usuario activo');
         }
     });
 };
+
+// firebase.database().ref('user-posts').remove();
 
 //Muestra el usuario activo
 const showUserWithFirebase = (user) => {
@@ -26,144 +31,11 @@ const showUserWithFirebase = (user) => {
     // nomUser.innerHTML = username;
     // imgUser.setAttribute('src', userphoto);
     // emailUser.innerHTML = usermail;
-
-    //Para que el post se mantenga en el muro
-    // const divt = document.createElement('div');
-    // const pintarObj = (obj) => {
-    //     console.log(obj)
-    //     const postis = Object.keys(obj);
-    //     postis.map(item => {
-    //         console.log(obj[item].body)
-    //         const p = document.createElement('p');
-    //         p.innerHTML = obj[item].body;
-    //         divt.appendChild(p);
-    //     })
-    // }
-
-    // var post = firebase.database().ref('/posts').once('value')
-    //     .then(function (snapshot) {
-    //         pintarObj(snapshot.val())
-    //     }).catch(error => {
-    //         console.error(`Esto fue un dirty Error ${error}`)
-    //     })
-    // postArea.appendChild(divt);
-
-};
-
-const verificationWithFirebase = () => {
-    const user = firebase.auth().currentUser;
-    user.sendEmailVerification()
-        .then(() => {
-            console.log('>>Enviando correo<<');
-        })
-        .catch(error => {
-            console.log(error);
-        });
-};
-
-//Creando usuario con email y contraseña
-window.registerWithFirebase = (name, email, password, valpassword) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(result => {
-            verificationWithFirebase();
-            // Hasta aqui sale el usuario registrado sin ningun error
-            result.updateProfile({ displayName: nameReg.value });
-            // document.getElementById('name-register')
-
-            writeUserData(result.uid, result.displayName, result.email, result.photoURL);
-            console.log('usuario creado con exito');
-        
-            firebase.database().ref().child('users/' + writeUserData[result.uid]).push({
-                id: writeUserData[uid],
-                displayName: writeUserData[displayName],
-                email: writeUserData[email]
-            });
-
-            // location.assign('index.html');
-        })
-        .catch(error => {
-            //Mostrar error en consola
-            console.log("Error de firebase > Codigo >" + error.code);
-            console.log("Error de firebase > Mensaje >" + error.message);
-        });
-};
-
-window.loginWithFirebase = (email, password) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(result => {
-            const user = firebase.auth().currentUser;
-            console.log('Usuario logeado con exito');
-            location.assign('home.html');
-            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-        })
-        .catch(error => {
-            console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
-        })
-};
-
-window.logoutWithFirebase = () => {
-    firebase.auth().signOut()
-        .then(() => {
-            console.log('Usuario finalizo su sesion');
-            location.assign('index.html');
-        })
-        .catch((error) => {
-            console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
-        })
-};
-
-window.facebookWithFirebase = () => {
-    const providerFb = new firebase.auth.FacebookAuthProvider();
-    providerFb.addScope('email');
-    providerFb.addScope('user_friends');
-    providerFb.setCustomParameters({
-        'display': 'popup'
-    });
-    firebase.auth().signInWithPopup(providerFb)
-        .then(result => {
-            var user = result.user;
-            var credential = result.credential;
-            var operationType = result.operationType;
-            console.log('Facebook logueado');
-            location.assign('home.html');
-            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-        })
-        .catch(error => {
-            console.log('error de firebase > ' + error.code);
-            console.log('error de firebase, mensaje > ' + error.message);
-        });
-};
-
-window.googleWithFirebase = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    provider.setCustomParameters({
-        'login_hint': 'user@example.com'
-    });
-
-    firebase.auth().signInWithPopup(provider)
-        .then(result => {
-            console.log('Google logueado');
-            const user = result.user;
-            const token = result.credential.accessToken;
-            console.log(user);
-            location.assign('home.html');
-            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-        })
-        .catch((error) => {
-            console.log(error.code);
-            console.log(error.message);;
-            console.log(error.email);
-            console.log(error.credential);
-        });
 };
 
 //Guardar Datos de Usuario de Login en DB
 const writeUserData = (uid, username, email, imageUrl) => {
-    firebase.database().ref('users/' + uid).set({
+    firebase.database().ref('/users/' + uid).set({
         uid: uid,
         username: username,
         email: email,
@@ -171,36 +43,73 @@ const writeUserData = (uid, username, email, imageUrl) => {
     })
 };
 
-//Escribir nuevo Post
-const writeNewPost = (uid, body, username) => {
+//Escribir nuevo Post Publico
+const writeNewPost = () => {
+    const currentUser = firebase.auth().currentUser;
+    //Area de Post
+    const contenidoPost = post.value;
+    const newPostKey = firebase.database().ref().child('posts').push().key;
 
     let postData = {
-        uid: uid,
-        body: body,
-        username: username,
-        // startCount: 0,
+        uid: currentUser.uid,
+        username: currentUser.displayName,
+        email: currentUser.email,
+        profile_picture: currentUser.photoURL,
+        body: contenidoPost,
+        key: newPostKey,
+        startCount: 0,
     };
-
-    const newPostKey = firebase.database().ref().child('posts').push().key;
 
     let updates = {};
     updates['/posts/' + newPostKey] = postData;
-    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+    updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
 
-    firebase.database().ref().update(updates);
-    return newPostKey;
-    console.log(newPostKey);
+    return firebase.database().ref().update(updates);
 };
 
-//Crear nuevo Post
-const createNewPost = () => {
-    let uid = firebase.auth().currentUser.uid;
-    let username = firebase.auth().currentUser.displayName;
-    let usermail = firebase.auth().currentUser.email;
-    let userphoto = firebase.auth().currentUser.photoURL;
+//Escribir nuevo Post Privado
+const writeNewPostPrivate = () => {
+    const currentUser = firebase.auth().currentUser;
+    //Area de Post
+    const contenidoPost = post.value;
+    const newPostKey = firebase.database().ref().child('posts').push().key;
 
-    const newPost = writeNewPost(uid, post.value, username);
-    console.log(post.value);
+    let postData = {
+        uid: currentUser.uid,
+        username: currentUser.displayName,
+        email: currentUser.email,
+        profile_picture: currentUser.photoURL,
+        body: contenidoPost,
+        key: newPostKey,
+        startCount: 0,
+    };
+
+    let updates = {};
+
+    updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+    return firebase.database().ref().update(updates);
+}
+
+//Llamando a Firebase con los Posts
+const callPostFirebase = (uid) => {
+    const userPosts = firebase.database().ref('user-posts').child(uid);
+    userPosts.on("child_added", newUserPosts => {
+        //Posts solo usuario - Profile
+        userPostsProfile(newUserPosts);
+    });
+
+    const allPost = firebase.database().ref('posts');
+    allPost.on("child_added", newPosts => {
+        //Posts todos los usuarios - Home
+        allPostsHome(newPosts);
+    });
+};
+
+//Mostrando Post en Home
+const allPostsHome = (newPosts) => {
+
+    //Si no me sale es porque el newPost es postsKey igual que abajo
+    const newPost = newPosts.key;
 
     let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
     allPost.setAttribute('class', 'w3-container w3-card w3-white w3-round w3-margin');
@@ -220,75 +129,168 @@ const createNewPost = () => {
     let imageUser = document.createElement('img'); //Etiqueta img
     imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
     imageUser.setAttribute('width', '30');
-    imageUser.setAttribute('src', userphoto);
+    // imageUser.setAttribute('src', userphoto);
 
     let nombreUser = document.createElement('h4'); //Label de nombre
     nombreUser.setAttribute('id', 'nombreUser');
 
     let textPost = document.createElement('textarea'); // txt area de contPost
     textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
+    textPost.innerHTML = `${newPosts.val().body}`; //Contenido del post
+
+    //Si no me sale es porque el newPost es postsKey igual que arriba
+    let btnLiked = document.createElement('input');
+    btnLiked.setAttribute('id', newPost);
+    btnLiked.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
+    btnLiked.setAttribute('type', 'button');
+    btnLiked.setAttribute('value', 'Me gusta ♥');
+
+    //Igual que arriba
+    let countLiked = document.createElement('a');
+    countLiked.setAttribute('id', newPost);
+    countLiked.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
+    countLiked.innerHTML = `${newPosts.val().startCount}`;
+
+    let countClick = 0;
+    const countLikePost = () => {
+        countClick += 1;
+        countLiked.innerHTML = countClick;
+
+        const newUpdate = textPost.innerText;
+        const nuevoPost = {
+            uid: `${newPosts.val().uid}`,
+            username: `${newPosts.val().username}`,
+            email: `${newPosts.val().email}`,
+            profile_picture: `${newPosts.val().profile_picture}`,
+            body: newUpdate,
+            key: newPost,
+            startCount: countClick,
+        };
+
+        let updatesUser = {};
+        let updatesPost = {};
+
+        updatesUser[`/posts/${newPosts.key}`] = nuevoPost;
+        firebase.database().ref().update(updatesUser);
+        firebase.database().ref().update(updatesPost);
+    };
+
+    btnLiked.addEventListener('click', () => {
+        countLikePost();
+    });
+
+    //Aqui va los appendchild
+    postPublic.appendChild(allPost);
+    allPost.appendChild(infoPost);
+    allPost.appendChild(contPost);
+    infoPost.appendChild(divPostOne);
+    contPost.appendChild(divPostTwo);
+    divPostOne.appendChild(imageUser);
+    divPostOne.appendChild(nombreUser);
+    divPostTwo.appendChild(textPost); //Antes contenia a ContPost
+    divPostTwo.appendChild(btnLiked);
+    divPostTwo.appendChild(countLiked);
+
+
+};
+
+//Mostrando Post en Profile
+const userPostsProfile = (newUserPosts) => {
+    const newPost = newUserPosts.key;
+
+    let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
+    allPost.setAttribute('class', 'w3-container w3-card w3-white w3-round w3-margin');
+
+    let infoPost = document.createElement('div'); //Div que guarda img y nombre
+    infoPost.setAttribute('class', 'col-sm-3');
+
+    let contPost = document.createElement('div'); //Div que guarda a publicacion
+    contPost.setAttribute('class', 'col-sm-9');
+
+    let divPostOne = document.createElement('div');
+    divPostOne.setAttribute('class', 'well');
+
+    let divPostTwo = document.createElement('div');
+    divPostTwo.setAttribute('class', 'well');
+
+    let imageUser = document.createElement('img'); //Etiqueta img
+    imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
+    imageUser.setAttribute('width', '30');
+    // imageUser.setAttribute('src', userphoto);
+
+    let nombreUser = document.createElement('h4'); //Label de nombre
+    nombreUser.setAttribute('id', 'nombreUser');
+
+    let textPost = document.createElement('textarea'); // txt area de contPost
+    textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
+    textPost.innerHTML = `${newUserPosts.val().body}`; //Contenido del post
 
     let btnUpdate = document.createElement('input'); //Boton dentro de contPost
+    btnUpdate.setAttribute('id', newPost);
+    btnUpdate.setAttribute('class', 'w3-pink w3-button w3-theme-d1 w3-margin-bottom');
     btnUpdate.setAttribute('value', 'Editar');
     btnUpdate.setAttribute('type', 'button');
-    btnUpdate.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
 
     let btnDelete = document.createElement('input'); //Boton dentro de contPost
+    btnDelete.setAttribute('id', newPost);
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
     btnDelete.setAttribute('class', 'w3-button w3-theme-d2 w3-margin-bottom');
 
-    console.log(nombreUser);
-
-    if (username !== null && userphoto !== null) {
-        nombreUser.innerHTML = username;
-        imageUser.setAttribute('src', userphoto);
-    }
-    else {
-        nombreUser.innerHTML = usermail;
-        imageUser.setAttribute('src', 'img/user.png');
-    }
-
-    nombreUser.innerHTML = username; //Nombre usuario del post
-    console.log(imageUser);
-
-    textPost.innerHTML = post.value; //Contenido del post
-    textPost.disabled = true;
-
+    // if (username !== null && userphoto !== null) {
+    //     nombreUser.innerHTML = username;
+    //     imageUser.setAttribute('src', userphoto);
+    // }
+    // else {
+    //     nombreUser.innerHTML = usermail;
+    //     imageUser.setAttribute('src', 'img/user.png');
+    // }
     const deletePost = () => {
+        firebase.database().ref().child(`/posts/${newUserPosts.key}`).remove();
+        firebase.database().ref().child(`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`).remove();
+        if (newPostsUser.key === evt.target.id) {
+            swal({
+                title: "Estas seguro?",
+                text: "Una vez eliminado el post, no se recuperará!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
+                        swal("Eliminaste tu post!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Tu post no se elimino!");
+                    }
+                });
 
-        firebase.database().ref().child('/user-posts/' + uid + '/' + newPost).remove();
-        firebase.database().ref().child('posts/' + newPost).remove();
-
-        //Hacer el remove al div que tiene info-post y cont-post
-        //Aqui solo hace al cont post ya que era un solo div dentro de post area.
-        swal({
-            title: "Estas seguro?",
-            text: "Una vez eliminado el post, no se recuperará!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
-                    swal("Eliminaste tu post!", {
-                        icon: "success",
-                    });
-                } else {
-                    swal("Tu post no se elimino!");
-                }
-            });
+        }
 
     };
 
+    btnDelete.addEventListener('click', () => {
+        deletePost();
+    });
+
     const updatePost = () => {
-        const newUpdate = document.getElementById(newPost);
-        const nuevoPost = writeNewPost(uid, newUpdate.value, username);
+        const newUpdate = textPost.innerText;
+        const nuevoPost = {
+            uid: currentUser.uid,
+            username: currentUser.displayName,
+            email: currentUser.email,
+            profile_picture: currentUser.photoURL,
+            body: newUpdate,
+            key: newPost,
+            startCount: countClick,
+        };
 
         if (textPost.disabled === true) {
             textPost.disabled = false;
             btnUpdate.setAttribute('value', 'Guardar');
+            btnUpdate.setAttribute('id', postskey);
         }
         else {
             textPost.disabled = true;
@@ -297,23 +299,19 @@ const createNewPost = () => {
 
         let updatesUser = {};
         let updatesPost = {};
-        updatesUser['/user-posts/' + uid + '/' + newPost] = nuevoPost;
-        updatesPost['/posts/' + newPost] = nuevoPost;
+        updatesUser[`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`] = nuevoPost;
+        updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
 
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
     };
-
-    btnDelete.addEventListener('click', () => {
-        deletePost();
-    });
 
     btnUpdate.addEventListener('click', () => {
         updatePost();
     });
 
     //Aqui va los appendchild
-    postArea.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
+    postPrivate.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
     allPost.appendChild(infoPost);
     allPost.appendChild(contPost);
     infoPost.appendChild(divPostOne);
@@ -323,4 +321,120 @@ const createNewPost = () => {
     divPostTwo.appendChild(textPost); //Antes contenia a ContPost
     divPostTwo.appendChild(btnUpdate);
     divPostTwo.appendChild(btnDelete);
+};
+
+//Verificando usuario
+const verificationWithFirebase = () => {
+    const user = firebase.auth().currentUser;
+    user.sendEmailVerification()
+        .then(() => {
+            console.log('>>Enviando correo<<');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+//Creando usuario con email y contraseña
+const registerWithFirebase = (name, email, password, valpassword) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(result => {
+            verificationWithFirebase();
+            // Hasta aqui sale el usuario registrado sin ningun error
+            result.updateProfile({ displayName: nameReg.value });
+
+            writeUserData(result.uid, result.displayName, result.email, result.photoURL);
+            console.log('usuario creado con exito');
+
+            firebase.database().ref().child('users/' + writeUserData.uid).push({
+                id: writeUserData.uid,
+                displayName: writeUserData.displayName,
+                email: writeUserData.email
+            });
+
+            // location.assign('index.html');
+        })
+        .catch(error => {
+            //Mostrar error en consola
+            console.log("Error de firebase > Codigo >" + error.code);
+            console.log("Error de firebase > Mensaje >" + error.message);
+        });
+};
+
+//Iniciando Sesion con Firebase
+const loginWithFirebase = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(result => {
+            const user = firebase.auth().currentUser;
+            console.log('Usuario logeado con exito');
+            location.assign('profile.html');
+        })
+        .catch(error => {
+            console.log('Error de firebase > Codigo >' + error.code);
+            console.log('Error de firebase > Mensaje >' + error.message);
+        })
+};
+
+//Cerrando Sesion con Firebase
+const logoutWithFirebase = () => {
+    firebase.auth().signOut()
+        .then(() => {
+            console.log('Usuario finalizo su sesion');
+            location.assign('index.html');
+        })
+        .catch((error) => {
+            console.log('Error de firebase > Codigo >' + error.code);
+            console.log('Error de firebase > Mensaje >' + error.message);
+        })
+};
+
+//Iniciando con Facebook
+const facebookWithFirebase = () => {
+    const providerFb = new firebase.auth.FacebookAuthProvider();
+    providerFb.addScope('email');
+    providerFb.addScope('user_friends');
+    providerFb.setCustomParameters({
+        'display': 'popup'
+    });
+    firebase.auth().signInWithPopup(providerFb)
+        .then(result => {
+            var user = result.user;
+            var credential = result.credential;
+            var operationType = result.operationType;
+            console.log('Facebook logueado');
+            location.assign('profile.html');
+        })
+        .catch(error => {
+            console.log('error de firebase > ' + error.code);
+            console.log('error de firebase, mensaje > ' + error.message);
+        });
+};
+
+//Iniciando con Google
+const googleWithFirebase = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    provider.setCustomParameters({
+        'login_hint': 'user@example.com'
+    });
+
+    firebase.auth().signInWithPopup(provider)
+        .then(result => {
+            console.log('Google logueado');
+            const user = result.user;
+            const token = result.credential.accessToken;
+            console.log(user);
+            location.assign('profile.html');
+        })
+        .catch((error) => {
+            console.log(error.code);
+            console.log(error.message);;
+            console.log(error.email);
+            console.log(error.credential);
+        });
+};
+
+const cleanTextarea = () => {
+    post.value = '';
 };

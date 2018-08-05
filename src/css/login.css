@@ -1,12 +1,20 @@
+/* Esta propiedad es responsive todo */
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
 body {
-    margin: 0px;
-    padding: 10px;
-    width: 100%;
-    height: auto;
+    background: url('../img/background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
 }
+
 .logo-index {
     width: 100px;
 }
+
 .container {
     width: 100%;
     margin: 0px;
@@ -17,28 +25,38 @@ body {
     text-align: center;
 }
 
-.content {
-
-}
-
 .form-inline {
     height: 100px;
     justify-content: center;
 }
+
 h2 {
     text-align: center;
     margin: 0px;
     padding: 10px;
 }
-.parrafo-p {
-    margin-top: -20px;
-    margin-bottom: 0px;
-}
+
 #btn-regfalse{
     position: absolute;
 }
-#btn-facebook,
-#btn-google
-{
-    display: flex;
+
+[class^="icon-btn"] /*.icon-btn*/ {
+	height: 75px;
+	width: 75px;
+	border: 0;
+	color: #fff;
+	cursor: pointer;
+	font-size: 40px;
+	line-height: 75px;
+	transition: ease-in-out .3s;
+	border-radius: 50px;
+	margin-left: 10px;
+	background-color: #fff;
+}
+
+.facebook {
+	color: #3B5998;
+}
+.google-plus {
+	color: #DB5A3C;
 }
