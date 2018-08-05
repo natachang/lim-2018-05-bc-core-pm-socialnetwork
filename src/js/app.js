@@ -2,7 +2,6 @@ window.onload = () => {
     initApp();
 };
 
-
 const initApp = () => {
     firebase.auth().onAuthStateChanged(() => {
         const user = firebase.auth().currentUser;
@@ -67,30 +66,23 @@ window.registerWithFirebase = (name, email, password, valpassword) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(result => {
             verificationWithFirebase();
-            result.updateProfile({ displayName: document.getElementById('name-register').value });
+            // Hasta aqui sale el usuario registrado sin ningun error
+            result.updateProfile({ displayName: nameReg.value });
+            // document.getElementById('name-register')
 
-            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+            writeUserData(result.uid, result.displayName, result.email, result.photoURL);
             console.log('usuario creado con exito');
-            
-
-            console.log(user.id);
-            firebase.ref().child('users/' + user.uid).push({
-                displayName: writeUserData[user.displayName],
-                id: writeUserData[user.id],
-                email: writeUserData[user.email]
+        
+            firebase.database().ref().child('users/' + writeUserData[result.uid]).push({
+                id: writeUserData[uid],
+                displayName: writeUserData[displayName],
+                email: writeUserData[email]
             });
 
-
-            location.assign('index.html');
+            // location.assign('index.html');
         })
         .catch(error => {
             //Mostrar error en consola
-            if (error.code === 'auth/email-already-in-use') {
-                errorEmail.innerText = 'El correo ya esta en uso. Ingrese otro';
-            }
-            else if (error.code === 'auth/invalid-email') {
-                adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
-            }
             console.log("Error de firebase > Codigo >" + error.code);
             console.log("Error de firebase > Mensaje >" + error.message);
         });
