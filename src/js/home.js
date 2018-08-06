@@ -7,15 +7,31 @@ const btnLogout = document.getElementById('btn-logout'),
     imgUser = document.getElementById('user-image'),
     emailUser = document.getElementById('user-email');
 
+
+
 btnLogout.addEventListener('click', () => {
     logoutWithFirebase();
 });
 
 btnPublicar.addEventListener('click', () => {
-    createNewPost ();
+    if (post.value.length !== 0) {
+        createNewPost();
+    }
+    else {
+        alert('Escribe un comentario');
+    }
 });
 
-const reload_page = () => {
-    window.location.reload();
-};
+btnPublicar.addEventListener('click', cleanTextarea);
 
+
+
+
+ 
+
+
+
+
+// const reload_page = () => {
+//     window.location.reload();
+// };

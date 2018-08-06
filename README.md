@@ -59,10 +59,43 @@ personal.
 
 #### 1) Descubrimiento e Investigación
 
-En esta etapa empezamos con un form para conocer la opinión de los usuarios respecto a una 
+En esta etapa empezamos con un formulario de google para conocer la opinión de los usuarios respecto a una 
 posible red social de este tipo.
 
 [Enlace a la encuesta](https://goo.gl/forms/KqaNnnzkPNGkRrPd2)
+
+#### Estadísticas principales de las respuestas en el formulario
+
+![dispositivo-mayor-uso](https://user-images.githubusercontent.com/38342062/43727432-970b1fd0-9967-11e8-9ec9-6f19dcb7cd38.PNG)
+
+![otra-red-social-educativa](https://user-images.githubusercontent.com/38342062/43727480-b66eb3c8-9967-11e8-8cbe-f17ad8d2ca57.PNG)
+
+![cuales-son-esas-redes](https://user-images.githubusercontent.com/38342062/43727487-bcbbbcda-9967-11e8-870a-68fa23a41d11.PNG)
+
+![interes-en-nuestra-red](https://user-images.githubusercontent.com/38342062/43727505-c6eb919e-9967-11e8-8927-59f43ef63a18.PNG)
+
+![cuales-son-esas-redes](https://user-images.githubusercontent.com/38342062/43727518-d20c77a0-9967-11e8-9a1f-db4e18f9f84e.PNG)
+
+![medios-de-interaccion-1](https://user-images.githubusercontent.com/38342062/43727521-d5fca3a8-9967-11e8-8e7e-2d4c19c89cbb.PNG)
+
+![medios-de-interaccion-2](https://user-images.githubusercontent.com/38342062/43727535-e04bcd7a-9967-11e8-82b1-1665066de49c.PNG)
+
+
+#### Conclusiones de las respuestas obtenidas a través del formulario de google
+
+Para empezar concluimos que el dispositivo de mayor uso de nuestros posibles usuarios era el celular,por
+ende las primeras vistas a desarrollar serían en versión mobile. También les consultamos si conocían alguna
+red social de educación y si sabían de alguna, ¿Cuál era?. Respecto a esto la gran mayoría, es decir, más del 
+60% respondió que no y de los que si conocían mencionaron plataformas con objetivos diferentes a los nuestros.
+Dándonos así una visualización clara en relación a la cercanía o conocimiento previo de las personas sobre
+redes sociales del tipo educativas. Es así que también nos interesaba conocer que opinaban de ser parte de una 
+posible red social educativa donde podrían complementar sus conocimientos con temas que no enseña la educación tradicional, además de aprender interactuando con más personas. Y si les gustaría tomar cursos en soft skills o metodologías ágiles, todo esto para conocer cuál era el grado de interés del los posibles usuarios respecto a los 
+temas planteados para la red social. La respuesta obtenida al ser un 94% de **sí** a ser parte y más de 30% para 
+tomar cursos en estos temas, nos permitió ver y analizar que hay un gran mercado necesitando una plataforma de este
+tipo. Por último les preguntamos de que manera les gustaría interactuar con los demás, para así saber que implementaciones son las más asertivas en la aplicación. Llegando a la conclusión de que las principales vías serían
+mediante un chat, la opción de videollamadas y que se puedan organizar eventos presenciales. Otros también mencionaron
+las opciones de like y notificaciones de contacto como interacción más directa. 
+
 
 #### Guía de entrevista
 
@@ -72,7 +105,30 @@ posible red social de este tipo.
 
 3) ¿Qué rescatas de la experiencia de haber aprendido de esa manera, cómo te sentiste?
 
-4) ¿Qué tan importante es para ti poder complementar tus conocimientos en temas como inteligencia emocional o educación financiera?   
+4) ¿Qué tan importante es para ti poder complementar tus conocimientos en temas como inteligencia emocional o educación financiera(aprender a manejar tu economía)?   
+
+5) ¿Cómo te gustaría que se organize el contenido de la aplicación?
+
+
+#### Conclusiones de la entrevistas
+
+1) A las personas entrevistadas les pareció que saber sobre estos temas era muy importante, pues opinan que ayuda
+a llevar la vida de mejor manera, además de enseñarte como interactuar con las personas.
+
+2) En promedio aprendieron a través de internet, mediante videos, lecturas de artículos, blogs, etc. Pero también
+por medio de los ejemplos de los demás.
+
+3) Rescatan el poder haber obtenido una variedad de explicaciones, ya sea por ser distintas personas al ver dos
+videos de diferentes creadores o la forma de explicación, la metodología que utilizaba cada uno. Por otro lado
+aprender de esa forma les permitió ver la funcionalidad de las cosas en las que estaban interesados en aprender.
+
+4) Consideran que es necesario para tener conocimientos integrales, saber relacionarse con los demás, poder afrontar
+cosas que suceden en la vida y claro administrar mejor sus ingresos,etc. Mencionaron que lo positivo de es que sienten
+que pueden aprenderlo en cualquier momento.
+
+5) Que todos los temas a tratar se organizen en categorías para tener más clara la ubicación al momento de buscar algo en especifíco y tener un orden que abarque las publicaciones, videos, etc; según su categoría. Es decir que el contenido
+respecto a algo en especial este en su rama y no que haya una mezcla de contenido. 
+
 
 ### 2) Síntesis y definición
 
@@ -88,12 +144,9 @@ Decidimos crear flujogramas de como funciona el registro y logeo de la aplicaci�
 
 ### 3) Ideación 
 
-Primero hicimos los sketch de baja fidelidad, empezando por la vista mobile. El 100% de usuarios
-en el form respondió que el uso de redes sociales lo hace a través de un dispositivo móvil.
+Primero hicimos los sketch de baja fidelidad, empezando por la vista mobile de acuerdo a las estadísticas
+obtenidas en el formulario previo.
 
-**Estadísticas del form respecto al uso de dispositivo**
-
-![cifras de uso de dispositivo](https://user-images.githubusercontent.com/38342062/43022985-dc13e134-8c2e-11e8-9c60-8f24e186da77.PNG)
 
 ### Mobile
 

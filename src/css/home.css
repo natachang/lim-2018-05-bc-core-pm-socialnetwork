@@ -10,6 +10,7 @@ h5 {
 #data-base {
     width: auto;
 }
+
 textarea {
     resize: none;
     height: 100%;
@@ -17,4 +18,8 @@ textarea {
    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;
+    border-radius: 3px;
 }
+
+
+
