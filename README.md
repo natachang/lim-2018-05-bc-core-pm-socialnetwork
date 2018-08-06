@@ -206,7 +206,7 @@ Para este sketch trabajamos con figma
 
 ![login-view-web](https://user-images.githubusercontent.com/38342062/43289206-e2f4fb6c-90ef-11e8-9f5d-e05d4b1b2430.png)
 
-[Link al prototipo de alta fidelidad](https://www.figma.com/file/FEpfeD3WW0CpGTcI1BiF3m/Social-Network%2FHigh-Fidelity-(Login%2FRegister)?node-id=3%3A1&viewport=158%2C386%2C0.994003)
+[Link al prototipo de alta fidelidad](https://www.figma.com/file/FEpfeD3WW0CpGTcI1BiF3m/Social-Network-High-Fidelity-Login-Register)
 
 ### Benchmarking
 
