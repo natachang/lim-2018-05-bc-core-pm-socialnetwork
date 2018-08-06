@@ -178,7 +178,8 @@ Para este sketch trabajamos con figma
 
 **Sketch de mediana fidelidad de la primera vista**
 
-![first-view-mobile](https://user-images.githubusercontent.com/38342062/43104996-f1d1c42a-8e98-11e8-9f57-fcc7c2503e02.png)
+![first-view-mobile](https://user-images.githubusercontent.com/38342062/43736356-ea2c17e4-9982-11e8-940b-7e892d6e6c60.png)
+
 
 **Sketch de mediana fidelidad de la vista de registro**
 
