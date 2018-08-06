@@ -41,7 +41,9 @@ relaciones interpersonales,etc.
 Brindar contenido de calidad y fiable respecto a temas como desarrollo personal,
 soft skills(habilidades blandas), educación financiera, metodologías ágiles,etc.
 Además que pueda crearse una comunidad en la que los usuarios interactuen compartiendo
-también contenido de este tipo, organizando eventos presenciales y más.
+también contenido de este tipo, organizando eventos presenciales y más. De esta forma
+reuniendo y organizando gran cantidad de información que se encuentra en internet, así
+como los aportes que se den entre los usuarios. 
 
 #### Público objetivo
 
@@ -83,7 +85,7 @@ posible red social de este tipo.
 
 #### Conclusiones de las respuestas obtenidas a través del formulario de google
 
-Para empezar concluimos que el dispositivo de mayor uso de nuestros posibles usuarios era el celular,por
+Para empezar concluimos que el dispositivo de mayor uso de nuestros posibles usuarios era el celular, por
 ende las primeras vistas a desarrollar serían en versión mobile. También les consultamos si conocían alguna
 red social de educación y si sabían de alguna, ¿Cuál era?. Respecto a esto la gran mayoría, es decir, más del 
 60% respondió que no y de los que si conocían mencionaron plataformas con objetivos diferentes a los nuestros.
@@ -119,15 +121,13 @@ a llevar la vida de mejor manera, además de enseñarte como interactuar con las
 por medio de los ejemplos de los demás.
 
 3) Rescatan el poder haber obtenido una variedad de explicaciones, ya sea por ser distintas personas al ver dos
-videos de diferentes creadores o la forma de explicación, la metodología que utilizaba cada uno. Por otro lado
+videos de diferentes creadores o la forma de explicación y la metodología que utilizaba cada uno. Por otro lado
 aprender de esa forma les permitió ver la funcionalidad de las cosas en las que estaban interesados en aprender.
 
 4) Consideran que es necesario para tener conocimientos integrales, saber relacionarse con los demás, poder afrontar
-cosas que suceden en la vida y claro administrar mejor sus ingresos,etc. Mencionaron que lo positivo de es que sienten
-que pueden aprenderlo en cualquier momento.
+cosas que suceden en la vida y claro administrar mejor sus ingresos. Mencionaron que lo positivo de estos temas es que sienten que pueden aprenderlos en cualquier momento.
 
-5) Que todos los temas a tratar se organizen en categorías para tener más clara la ubicación al momento de buscar algo en especifíco y tener un orden que abarque las publicaciones, videos, etc; según su categoría. Es decir que el contenido
-respecto a algo en especial este en su rama y no que haya una mezcla de contenido. 
+5) Que todos los temas a tratar se organizen en categorías para tener más clara la ubicación al momento de buscar algo en especifíco y tener un orden que abarque las publicaciones, videos, etc. Según su categoría, es decir, que el contenido respecto a algo en especial este en su rama y no que haya una mezcla de contenido. 
 
 
 ### 2) Síntesis y definición
@@ -188,7 +188,9 @@ Para este sketch trabajamos con figma
 
 ![login-view-mobile](https://user-images.githubusercontent.com/38342062/43105001-f51d8e52-8e98-11e8-826a-03973b8b30fa.png)
 
+
 #### Versión web
+
 
 **Sketch de mediana fidelidad de la primera vista**
 
@@ -223,7 +225,19 @@ hacia que exista algo así, pues retomando el caso de Academia.edu, también se 
 "Alguien debería empezar una propuesta" o "Pedirle a Mark Zuckerberg que cree un 'facebook' gratis para académicos
 pobres".
 
+### Conclusiones generales
 
+Al encontrar una problemática vigente en la educación tradicional actualmente, decidimos plantaear una propuesta
+de valor para responder ante esta necesidad. Empezamos nuestra investigación con un formulario de Google para 
+validar que efectivamente no existe ya sea una plataforma o medio que este respondiendo ante esto, por lo menos
+no con los objetivos que planteabamos con BrainyPlay, ni tampoco de manera masiva, pues de las respuestas obtenidas
+un promedio de 36 personas no conocían una red social de este tipo. Complementando al benchmarking realizado, las 
+conclusiones obtenidas son que hay un gran mercado necesitando un medio donde poder aprender acerca de temas como
+inteligencia emocional o educación financiera para mejorar su economía. Esto también podemos observarlo en gran 
+magnitud en el caso del curso que enseña la Universidad de Harvard sobre la felicidad, siendo uno de los cursos más
+populares y con gran éxito. Si bien no millones de personas en el mundo pueden llevar el curso en Harvard, si poseen
+el interés en aspectos relacionados, pues los consideran necesarios en el camino al éxito integral. Es así que decidimos desarrollar BrainyPlay donde podrán aprender sobre estos temas y muchos más para complementar a la educación tradicional. Respondiendo ante esta necesidad y pensado para el alcanze de la gran mayoría en el mundo a través de
+un dispositivo de su preferencia(en gran % un celular, siendo bastante asequible) e internet. 
 ## Front-End Development
 
 ## Implementación de la interfaz
