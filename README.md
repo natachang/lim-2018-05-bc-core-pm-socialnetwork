@@ -172,6 +172,10 @@ obtenidas en el formulario previo.
 
 ### 4) Prototipado
 
+### LOGIN 
+
+#### Sketch de mediana fidelidad
+
 #### Mobile
 
 Para este sketch trabajamos con figma
@@ -206,7 +210,42 @@ Para este sketch trabajamos con figma
 
 ![login-view-web](https://user-images.githubusercontent.com/38342062/43289206-e2f4fb6c-90ef-11e8-9f5d-e05d4b1b2430.png)
 
-[Link al prototipo de alta fidelidad](https://www.figma.com/file/FEpfeD3WW0CpGTcI1BiF3m/Social-Network-High-Fidelity-Login-Register?node-id=3%3A1)
+### Skecth de alta fidelidad
+
+#### Mobile
+
+Para este sketch trabajamos con figma
+
+**Sketch de alta fidelidad de la primera vista**
+
+![first-view-mobile](https://user-images.githubusercontent.com/38342062/43744430-a4a6954c-999f-11e8-8501-aa4a47ee4262.png)
+
+
+**Sketch de alta fidelidad de la vista de registro**
+
+![sign-up-view-mobile](https://user-images.githubusercontent.com/38342062/43744436-a9f158ac-999f-11e8-96f5-dd83ab5c56d4.png)
+
+**Sketch de alta fidelidad de la vista de logeo**
+
+![login-view-mobile](https://user-images.githubusercontent.com/38342062/43744441-ac566b96-999f-11e8-94ef-66c52ef2e07f.png)
+
+
+#### Versión web
+
+
+**Sketch de alta fidelidad de la primera vista**
+
+![first-view-web](https://user-images.githubusercontent.com/38342062/43744444-afacb9ee-999f-11e8-8aef-e67a5fcfb9eb.png)
+
+
+**Sketch de alta fidelidad de la vista de registro**
+
+![sign-up-view-web](https://user-images.githubusercontent.com/38342062/43744451-b576b96a-999f-11e8-9fa6-c376792561a5.png)
+
+**Sketch de alta fidelidad de la vista de logeo**
+
+![login-view-web](https://user-images.githubusercontent.com/38342062/43744455-bc69ec6a-999f-11e8-83d7-005f1d68dafa.png)
+
 
 ### Benchmarking
 

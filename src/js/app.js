@@ -237,12 +237,13 @@ const createNewPost = () => {
 
     let textPost = document.createElement('textarea'); // txt area de contPost
     textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
+    textPost.setAttribute('class', 'content-post');
 
     let btnUpdate = document.createElement('input'); //Boton dentro de contPost
     btnUpdate.setAttribute('value', 'Editar');
     btnUpdate.setAttribute('type', 'button');
     btnUpdate.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
-
+    
     let btnDelete = document.createElement('input'); //Boton dentro de contPost
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
