@@ -327,7 +327,7 @@ const userPostsProfile = (newUserPosts) => {
     let imageUser = document.createElement('img'); //Etiqueta img
     imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
     imageUser.setAttribute('width', '30');
-    // imageUser.setAttribute('src', userphoto);
+    imageUser.setAttribute('src', userphoto);
 
     let nombreUser = document.createElement('h4'); //Label de nombre
     nombreUser.setAttribute('id', 'nombreUser');
@@ -356,6 +356,7 @@ const userPostsProfile = (newUserPosts) => {
     //     nombreUser.innerHTML = usermail;
     //     imageUser.setAttribute('src', 'img/user.png');
     // }
+
     const deletePost = () => {
         firebase.database().ref().child(`/posts/${newUserPosts.key}`).remove();
         firebase.database().ref().child(`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`).remove();

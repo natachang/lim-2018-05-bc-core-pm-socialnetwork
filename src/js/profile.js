@@ -7,7 +7,6 @@ const btnLogout = document.getElementById('btn-logout'),
     pEmail = document.getElementById('user-email'),
     selectOption = document.getElementById('select-option'),
     postPrivate = document.getElementById('publication-profile');
-;
 
 btnLogout.addEventListener('click', () => {
     logoutWithFirebase();
