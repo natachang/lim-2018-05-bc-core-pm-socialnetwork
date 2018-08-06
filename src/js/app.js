@@ -33,296 +33,6 @@ const showUserWithFirebase = (user) => {
     // emailUser.innerHTML = usermail;
 };
 
-//Guardar Datos de Usuario de Login en DB
-const writeUserData = (uid, username, email, imageUrl) => {
-    firebase.database().ref('/users/' + uid).set({
-        uid: uid,
-        username: username,
-        email: email,
-        profile_picture: imageUrl
-    })
-};
-
-//Escribir nuevo Post Publico
-const writeNewPost = () => {
-    const currentUser = firebase.auth().currentUser;
-    //Area de Post
-    const contenidoPost = post.value;
-    const newPostKey = firebase.database().ref().child('posts').push().key;
-
-    let postData = {
-        uid: currentUser.uid,
-        username: currentUser.displayName,
-        email: currentUser.email,
-        profile_picture: currentUser.photoURL,
-        body: contenidoPost,
-        key: newPostKey,
-        startCount: 0,
-    };
-
-    let updates = {};
-    updates['/posts/' + newPostKey] = postData;
-    updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
-
-    return firebase.database().ref().update(updates);
-};
-
-//Escribir nuevo Post Privado
-const writeNewPostPrivate = () => {
-    const currentUser = firebase.auth().currentUser;
-    //Area de Post
-    const contenidoPost = post.value;
-    const newPostKey = firebase.database().ref().child('posts').push().key;
-
-    let postData = {
-        uid: currentUser.uid,
-        username: currentUser.displayName,
-        email: currentUser.email,
-        profile_picture: currentUser.photoURL,
-        body: contenidoPost,
-        key: newPostKey,
-        startCount: 0,
-    };
-
-    let updates = {};
-
-    updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
-    return firebase.database().ref().update(updates);
-}
-
-//Llamando a Firebase con los Posts
-const callPostFirebase = (uid) => {
-    const userPosts = firebase.database().ref('user-posts').child(uid);
-    userPosts.on("child_added", newUserPosts => {
-        //Posts solo usuario - Profile
-        userPostsProfile(newUserPosts);
-    });
-
-    const allPost = firebase.database().ref('posts');
-    allPost.on("child_added", newPosts => {
-        //Posts todos los usuarios - Home
-        allPostsHome(newPosts);
-    });
-};
-
-//Mostrando Post en Home
-const allPostsHome = (newPosts) => {
-
-    //Si no me sale es porque el newPost es postsKey igual que abajo
-    const newPost = newPosts.key;
-
-    let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
-    allPost.setAttribute('class', 'w3-container w3-card w3-white w3-round w3-margin');
-
-    let infoPost = document.createElement('div'); //Div que guarda img y nombre
-    infoPost.setAttribute('class', 'col-sm-3');
-
-    let contPost = document.createElement('div'); //Div que guarda a publicacion
-    contPost.setAttribute('class', 'col-sm-9');
-
-    let divPostOne = document.createElement('div');
-    divPostOne.setAttribute('class', 'well');
-
-    let divPostTwo = document.createElement('div');
-    divPostTwo.setAttribute('class', 'well');
-
-    let imageUser = document.createElement('img'); //Etiqueta img
-    imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
-    imageUser.setAttribute('width', '30');
-    // imageUser.setAttribute('src', userphoto);
-
-    let nombreUser = document.createElement('h4'); //Label de nombre
-    nombreUser.setAttribute('id', 'nombreUser');
-
-    let textPost = document.createElement('textarea'); // txt area de contPost
-    textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
-    textPost.innerHTML = `${newPosts.val().body}`; //Contenido del post
-
-    //Si no me sale es porque el newPost es postsKey igual que arriba
-    let btnLiked = document.createElement('input');
-    btnLiked.setAttribute('id', newPost);
-    btnLiked.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
-    btnLiked.setAttribute('type', 'button');
-    btnLiked.setAttribute('value', 'Me gusta ♥');
-
-    //Igual que arriba
-    let countLiked = document.createElement('a');
-    countLiked.setAttribute('id', newPost);
-    countLiked.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
-    countLiked.innerHTML = `${newPosts.val().startCount}`;
-
-    let countClick = 0;
-    const countLikePost = () => {
-        countClick += 1;
-        countLiked.innerHTML = countClick;
-
-        const newUpdate = textPost.innerText;
-        const nuevoPost = {
-            uid: `${newPosts.val().uid}`,
-            username: `${newPosts.val().username}`,
-            email: `${newPosts.val().email}`,
-            profile_picture: `${newPosts.val().profile_picture}`,
-            body: newUpdate,
-            key: newPost,
-            startCount: countClick,
-        };
-
-        let updatesUser = {};
-        let updatesPost = {};
-
-        updatesUser[`/posts/${newPosts.key}`] = nuevoPost;
-        firebase.database().ref().update(updatesUser);
-        firebase.database().ref().update(updatesPost);
-    };
-
-    btnLiked.addEventListener('click', () => {
-        countLikePost();
-    });
-
-    //Aqui va los appendchild
-    postPublic.appendChild(allPost);
-    allPost.appendChild(infoPost);
-    allPost.appendChild(contPost);
-    infoPost.appendChild(divPostOne);
-    contPost.appendChild(divPostTwo);
-    divPostOne.appendChild(imageUser);
-    divPostOne.appendChild(nombreUser);
-    divPostTwo.appendChild(textPost); //Antes contenia a ContPost
-    divPostTwo.appendChild(btnLiked);
-    divPostTwo.appendChild(countLiked);
-
-
-};
-
-//Mostrando Post en Profile
-const userPostsProfile = (newUserPosts) => {
-    const newPost = newUserPosts.key;
-
-    let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
-    allPost.setAttribute('class', 'w3-container w3-card w3-white w3-round w3-margin');
-
-    let infoPost = document.createElement('div'); //Div que guarda img y nombre
-    infoPost.setAttribute('class', 'col-sm-3');
-
-    let contPost = document.createElement('div'); //Div que guarda a publicacion
-    contPost.setAttribute('class', 'col-sm-9');
-
-    let divPostOne = document.createElement('div');
-    divPostOne.setAttribute('class', 'well');
-
-    let divPostTwo = document.createElement('div');
-    divPostTwo.setAttribute('class', 'well');
-
-    let imageUser = document.createElement('img'); //Etiqueta img
-    imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
-    imageUser.setAttribute('width', '30');
-    // imageUser.setAttribute('src', userphoto);
-
-    let nombreUser = document.createElement('h4'); //Label de nombre
-    nombreUser.setAttribute('id', 'nombreUser');
-
-    let textPost = document.createElement('textarea'); // txt area de contPost
-    textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
-    textPost.innerHTML = `${newUserPosts.val().body}`; //Contenido del post
-
-    let btnUpdate = document.createElement('input'); //Boton dentro de contPost
-    btnUpdate.setAttribute('id', newPost);
-    btnUpdate.setAttribute('class', 'w3-pink w3-button w3-theme-d1 w3-margin-bottom');
-    btnUpdate.setAttribute('value', 'Editar');
-    btnUpdate.setAttribute('type', 'button');
-
-    let btnDelete = document.createElement('input'); //Boton dentro de contPost
-    btnDelete.setAttribute('id', newPost);
-    btnDelete.setAttribute('value', 'Eliminar');
-    btnDelete.setAttribute('type', 'button');
-    btnDelete.setAttribute('class', 'w3-button w3-theme-d2 w3-margin-bottom');
-
-    // if (username !== null && userphoto !== null) {
-    //     nombreUser.innerHTML = username;
-    //     imageUser.setAttribute('src', userphoto);
-    // }
-    // else {
-    //     nombreUser.innerHTML = usermail;
-    //     imageUser.setAttribute('src', 'img/user.png');
-    // }
-    const deletePost = () => {
-        firebase.database().ref().child(`/posts/${newUserPosts.key}`).remove();
-        firebase.database().ref().child(`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`).remove();
-        if (newPostsUser.key === evt.target.id) {
-            swal({
-                title: "Estas seguro?",
-                text: "Una vez eliminado el post, no se recuperará!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
-                        swal("Eliminaste tu post!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Tu post no se elimino!");
-                    }
-                });
-
-        }
-
-    };
-
-    btnDelete.addEventListener('click', () => {
-        deletePost();
-    });
-
-    const updatePost = () => {
-        const newUpdate = textPost.innerText;
-        const nuevoPost = {
-            uid: currentUser.uid,
-            username: currentUser.displayName,
-            email: currentUser.email,
-            profile_picture: currentUser.photoURL,
-            body: newUpdate,
-            key: newPost,
-            startCount: countClick,
-        };
-
-        if (textPost.disabled === true) {
-            textPost.disabled = false;
-            btnUpdate.setAttribute('value', 'Guardar');
-            btnUpdate.setAttribute('id', postskey);
-        }
-        else {
-            textPost.disabled = true;
-            btnUpdate.setAttribute('value', 'Editar');
-        }
-
-        let updatesUser = {};
-        let updatesPost = {};
-        updatesUser[`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`] = nuevoPost;
-        updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
-
-        firebase.database().ref().update(updatesUser);
-        firebase.database().ref().update(updatesPost);
-    };
-
-    btnUpdate.addEventListener('click', () => {
-        updatePost();
-    });
-
-    //Aqui va los appendchild
-    postPrivate.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
-    allPost.appendChild(infoPost);
-    allPost.appendChild(contPost);
-    infoPost.appendChild(divPostOne);
-    contPost.appendChild(divPostTwo);
-    divPostOne.appendChild(imageUser);
-    divPostOne.appendChild(nombreUser);
-    divPostTwo.appendChild(textPost); //Antes contenia a ContPost
-    divPostTwo.appendChild(btnUpdate);
-    divPostTwo.appendChild(btnDelete);
-};
-
 //Verificando usuario
 const verificationWithFirebase = () => {
     const user = firebase.auth().currentUser;
@@ -433,6 +143,293 @@ const googleWithFirebase = () => {
             console.log(error.email);
             console.log(error.credential);
         });
+};
+
+//Guardar Datos de Usuario de Login en DB
+const writeUserData = (uid, username, email, imageUrl) => {
+    firebase.database().ref('/users/' + uid).set({
+        uid: uid,
+        username: username,
+        email: email,
+        profile_picture: imageUrl
+    })
+};
+
+//Escribir nuevo Post Publico
+const writeNewPost = () => {
+    const currentUser = firebase.auth().currentUser;
+    //Area de Post
+    const contenidoPost = post.value;
+    const newPostKey = firebase.database().ref().child('posts').push().key;
+
+    let postData = {
+        uid: currentUser.uid,
+        username: currentUser.displayName,
+        email: currentUser.email,
+        profile_picture: currentUser.photoURL,
+        body: contenidoPost,
+        key: newPostKey,
+        startCount: 0,
+    };
+
+    let updates = {};
+    updates['/posts/' + newPostKey] = postData;
+    updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+
+    return firebase.database().ref().update(updates);
+};
+
+//Escribir nuevo Post Privado
+const writeNewPostPrivate = () => {
+    const currentUser = firebase.auth().currentUser;
+    //Area de Post
+    const contenidoPost = post.value;
+    const newPostKey = firebase.database().ref().child('posts').push().key;
+
+    let postData = {
+        uid: currentUser.uid,
+        username: currentUser.displayName,
+        email: currentUser.email,
+        profile_picture: currentUser.photoURL,
+        body: contenidoPost,
+        key: newPostKey,
+        startCount: 0,
+    };
+
+    let updates = {};
+
+    updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+    return firebase.database().ref().update(updates);
+}
+
+//Llamando a Firebase con los Posts
+const callPostFirebase = (uid) => {
+    const userPosts = firebase.database().ref('user-posts').child(uid);
+    userPosts.on("child_added", newUserPosts => {
+        //Posts solo usuario - Profile
+        userPostsProfile(newUserPosts);
+    });
+
+    const allPost = firebase.database().ref('posts');
+    allPost.on("child_added", newPosts => {
+        //Posts todos los usuarios - Home
+        allPostsHome(newPosts);
+    });
+};
+
+// //Mostrando Post en Home
+// const allPostsHome = (newPosts) => {
+
+//     //Si no me sale es porque el newPost es postsKey igual que abajo
+//     const newPost = newPosts.key;
+
+//     let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
+//     allPost.setAttribute('class', 'w3-container w3-card w3-white w3-round w3-margin');
+
+//     let infoPost = document.createElement('div'); //Div que guarda img y nombre
+//     infoPost.setAttribute('class', 'col-sm-3');
+
+//     let contPost = document.createElement('div'); //Div que guarda a publicacion
+//     contPost.setAttribute('class', 'col-sm-9');
+
+//     let divPostOne = document.createElement('div');
+//     divPostOne.setAttribute('class', 'well');
+
+//     let divPostTwo = document.createElement('div');
+//     divPostTwo.setAttribute('class', 'well');
+
+//     let imageUser = document.createElement('img'); //Etiqueta img
+//     imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
+//     imageUser.setAttribute('width', '30');
+//     // imageUser.setAttribute('src', userphoto);
+
+//     let nombreUser = document.createElement('h4'); //Label de nombre
+//     nombreUser.setAttribute('id', 'nombreUser');
+
+//     let textPost = document.createElement('textarea'); // txt area de contPost
+//     textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
+//     textPost.innerHTML = `${newPosts.val().body}`; //Contenido del post
+
+//     //Si no me sale es porque el newPost es postsKey igual que arriba
+//     let btnLiked = document.createElement('input');
+//     btnLiked.setAttribute('id', newPost);
+//     btnLiked.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
+//     btnLiked.setAttribute('type', 'button');
+//     btnLiked.setAttribute('value', 'Me gusta ♥');
+
+//     //Igual que arriba
+//     let countLiked = document.createElement('a');
+//     countLiked.setAttribute('id', newPost);
+//     countLiked.setAttribute('class', 'w3-button w3-theme-d1 w3-margin-bottom');
+//     countLiked.innerHTML = `${newPosts.val().startCount}`;
+
+//     let countClick = 0;
+//     const countLikePost = () => {
+//         countClick += 1;
+//         countLiked.innerHTML = countClick;
+
+//         const newUpdate = textPost.innerText;
+//         const nuevoPost = {
+//             uid: `${newPosts.val().uid}`,
+//             username: `${newPosts.val().username}`,
+//             email: `${newPosts.val().email}`,
+//             profile_picture: `${newPosts.val().profile_picture}`,
+//             body: newUpdate,
+//             key: newPost,
+//             startCount: countClick,
+//         };
+
+//         let updatesUser = {};
+//         let updatesPost = {};
+
+//         updatesUser[`/posts/${newPosts.key}`] = nuevoPost;
+//         firebase.database().ref().update(updatesUser);
+//         firebase.database().ref().update(updatesPost);
+//     };
+
+//     btnLiked.addEventListener('click', () => {
+//         countLikePost();
+//     });
+
+//     //Aqui va los appendchild
+//     postPublic.appendChild(allPost);
+//     allPost.appendChild(infoPost);
+//     allPost.appendChild(contPost);
+//     infoPost.appendChild(divPostOne);
+//     contPost.appendChild(divPostTwo);
+//     divPostOne.appendChild(imageUser);
+//     divPostOne.appendChild(nombreUser);
+//     divPostTwo.appendChild(textPost); //Antes contenia a ContPost
+//     divPostTwo.appendChild(btnLiked);
+//     divPostTwo.appendChild(countLiked);
+
+// };
+
+//Mostrando Post en Profile
+const userPostsProfile = (newUserPosts) => {
+    const newPost = newUserPosts.key;
+
+    let allPost = document.createElement('div'); //Div principal que ira dentro de postarea
+    allPost.setAttribute('class', 'w3-container w3-card w3-white w3-round w3-margin');
+
+    let infoPost = document.createElement('div'); //Div que guarda img y nombre
+    infoPost.setAttribute('class', 'col-sm-3');
+
+    let contPost = document.createElement('div'); //Div que guarda a publicacion
+    contPost.setAttribute('class', 'col-sm-9');
+
+    let divPostOne = document.createElement('div');
+    divPostOne.setAttribute('class', 'well');
+
+    let divPostTwo = document.createElement('div');
+    divPostTwo.setAttribute('class', 'well');
+
+    let imageUser = document.createElement('img'); //Etiqueta img
+    imageUser.setAttribute('class', 'w3-left w3-circle w3-margin-right');
+    imageUser.setAttribute('width', '30');
+    // imageUser.setAttribute('src', userphoto);
+
+    let nombreUser = document.createElement('h4'); //Label de nombre
+    nombreUser.setAttribute('id', 'nombreUser');
+
+    let textPost = document.createElement('textarea'); // txt area de contPost
+    textPost.setAttribute('id', newPost); //Dar el valor al ID de textPost
+    textPost.innerHTML = `${newUserPosts.val().body}`; //Contenido del post
+
+    let btnUpdate = document.createElement('input'); //Boton dentro de contPost
+    btnUpdate.setAttribute('id', newPost);
+    btnUpdate.setAttribute('class', 'w3-pink w3-button w3-theme-d1 w3-margin-bottom');
+    btnUpdate.setAttribute('value', 'Editar');
+    btnUpdate.setAttribute('type', 'button');
+
+    let btnDelete = document.createElement('input'); //Boton dentro de contPost
+    btnDelete.setAttribute('id', newPost);
+    btnDelete.setAttribute('value', 'Eliminar');
+    btnDelete.setAttribute('type', 'button');
+    btnDelete.setAttribute('class', 'w3-button w3-theme-d2 w3-margin-bottom');
+
+    // if (username !== null && userphoto !== null) {
+    //     nombreUser.innerHTML = username;
+    //     imageUser.setAttribute('src', userphoto);
+    // }
+    // else {
+    //     nombreUser.innerHTML = usermail;
+    //     imageUser.setAttribute('src', 'img/user.png');
+    // }
+    const deletePost = () => {
+        firebase.database().ref().child(`/posts/${newUserPosts.key}`).remove();
+        firebase.database().ref().child(`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`).remove();
+
+        swal({
+            title: "Estas seguro?",
+            text: "Una vez eliminado el post, no se recuperará!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
+                    swal("Eliminaste tu post!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Tu post no se elimino!");
+                }
+            });
+
+    };
+
+    btnDelete.addEventListener('click', () => {
+        deletePost();
+    });
+
+    const updatePost = () => {
+        const newUpdate = textPost.innerText;
+        const nuevoPost = {
+            uid: currentUser.uid,
+            username: currentUser.displayName,
+            email: currentUser.email,
+            profile_picture: currentUser.photoURL,
+            body: newUpdate,
+            key: newPost,
+            startCount: countClick,
+        };
+
+        if (textPost.disabled === true) {
+            textPost.disabled = false;
+            btnUpdate.setAttribute('value', 'Guardar');
+            btnUpdate.setAttribute('id', postskey);
+        }
+        else {
+            textPost.disabled = true;
+            btnUpdate.setAttribute('value', 'Editar');
+        }
+
+        let updatesUser = {};
+        let updatesPost = {};
+        updatesUser[`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`] = nuevoPost;
+        updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
+
+        firebase.database().ref().update(updatesUser);
+        firebase.database().ref().update(updatesPost);
+    };
+
+    btnUpdate.addEventListener('click', () => {
+        updatePost();
+    });
+
+    //Aqui va los appendchild
+    postPrivate.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
+    allPost.appendChild(infoPost);
+    allPost.appendChild(contPost);
+    infoPost.appendChild(divPostOne);
+    contPost.appendChild(divPostTwo);
+    divPostOne.appendChild(imageUser);
+    divPostOne.appendChild(nombreUser);
+    divPostTwo.appendChild(textPost); //Antes contenia a ContPost
+    divPostTwo.appendChild(btnUpdate);
+    divPostTwo.appendChild(btnDelete);
 };
 
 const cleanTextarea = () => {

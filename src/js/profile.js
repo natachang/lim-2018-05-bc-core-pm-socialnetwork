@@ -1,13 +1,13 @@
 const btnLogout = document.getElementById('btn-logout'),
     btnPublicar = document.getElementById('btn-publicar'),
-    selectOptionPublicate = document.getElementById('select-option'),
-    post = document.getElementById('post'),
-    dataBase = document.getElementById('data-base'),
-    postPrivate = document.getElementById('publication-profile'),
-    postPublic = document.getElementById('publication-home'),
-    nomUser = document.getElementById('user-name'),
-    imgUser = document.getElementById('user-image'),
-    emailUser = document.getElementById('user-email');
+    post = document.getElementById('post'),//text area donde publica
+    dataBase = document.getElementById('data-base'),//div que guarda todo
+    pUser = document.getElementById('user-name'),
+    pImage = document.getElementById('user-image'),
+    pEmail = document.getElementById('user-email'),
+    selectOption = document.getElementById('select-option'),
+    postPrivate = document.getElementById('publication-profile');
+;
 
 btnLogout.addEventListener('click', () => {
     logoutWithFirebase();
@@ -15,14 +15,16 @@ btnLogout.addEventListener('click', () => {
 
 btnPublicar.addEventListener('click', () => {
     const contenidoPost = post.value;
-    const selectOption = selectOptionPublicate.value;
+    const selectOptionPublicate = selectOption.value;
     const blankSpace = contenidoPost.trim();
     if (contenidoPost.length !== 0 && blankSpace !== '') {
-        if (selectOption === 'publico') {
+        if (selectOptionPublicate === 'publico') {
             writeNewPost();
+            cleanTextarea();
         }
-        else if (selectOption === 'privado') {
+        else if (selectOptionPublicate === 'privado') {
             writeNewPostPrivate();
+            cleanTextarea();
         }
     }
     else {
@@ -30,7 +32,6 @@ btnPublicar.addEventListener('click', () => {
     }
 });
 
-btnPublicar.addEventListener('click', cleanTextarea);
 // const reload_page = () => {
 //     window.location.reload();
 // };

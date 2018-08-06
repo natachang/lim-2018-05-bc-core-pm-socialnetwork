@@ -16,33 +16,31 @@
 
 <body>
     <main class="container">
-        <section id="main-login" class="content">
-            <h2>Brainy Play!</h2>
-            <div class="form-inline">
-                <label for="name-register">Nombre</label>
-                <input id="name-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su nombre">
+        <div class="row">
+            <div id="main-login" class="form_bg">
+                <img class="mode-img" src="img/logo.png">
+                    <div class="form-group">
+                        <label for="name-register">Nombre</label>
+                        <input id="name-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email-register">Email</label>
+                        <input id="email-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password-register">Password</label>
+                        <input id="password-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="verified-register">Vuelve escribir tu contraseña</label>
+                        <input id="verified-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Repetir contraseña">
+                    </div>
+                    <div class="align-center">
+                        <button id="btn-back" class="btn btn-warning my-2 my-sm-0 btn-sm">volver a inicio</button>
+                        <button id="btn-signup" class="btn btn-primary my-2 my-sm-0 btn-sm">Registrarse</button>
+                    </div>
             </div>
-            <div class="form-inline">
-                <label for="email-register">Email</label>
-                <input id="email-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su email">
-            </div>
-            <div class="form-inline">
-                <label for="password-register">Password</label>
-                <input id="password-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
-            </div>
-            <div class="form-inline">
-                <label for="verified-register">Vuelve escribir tu contraseña</label>
-                <input id="verified-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
-            </div>
-            <div class="form-inline">
-                <button id="btn-back" class="btn btn-outline-secondary mt-3 btn-sm">regresar</button>
-                <button id="btn-signup" class="btn btn-outline-success my-2 my-sm-0 btn-sm">Registrarse</button>
-            </div>
-            <div class="form-inline">
-                <button id="btn-facebook" class="btn btn-outline-primary mt-3 btn-sm">Facebook</button>
-                <button id="btn-google" class="btn btn-outline-danger mt-3 btn-sm">Google</button>
-            </div>
-        </section>
+        </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

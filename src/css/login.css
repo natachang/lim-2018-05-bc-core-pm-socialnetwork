@@ -1,43 +1,57 @@
-/* Esta propiedad es responsive todo */
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
-
 body {
-    background: url('../img/background.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
-    overflow: hidden;
+    background: #5433FF;
+    background: -webkit-linear-gradient(to right,#337aff, #20BDFF, #A5FECB);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #337aff, #20BDFF, #A5FECB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.logo-index {
-    width: 100px;
-}
-
-.container {
-    width: 100%;
-    margin: 0px;
+.mode-logo {
+    margin: 100px auto 0px;
     padding: 10px;
-    left: 50%;
-    top: 50%;
-    border: 2px solid #CCC;
-    text-align: center;
-}
-
-.form-inline {
-    height: 100px;
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
 
-h2 {
-    text-align: center;
-    margin: 0px;
+.mode-img {
+    width: 130px;
+    margin: 5px auto;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#btn-regfalse{
-    position: absolute;
+.mode-login {
+    margin: 25px auto 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_bg {
+    background-color:#eee;
+    padding: 10px;
+    border-radius: 10px; 
+    border:1px solid #fff;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 350px;
+    height: auto;
+}
+
+.align-center,
+span {
+    font-size: 18px;
+    text-align:center;
 }
 
 [class^="icon-btn"] /*.icon-btn*/ {
@@ -60,3 +74,4 @@ h2 {
 .google-plus {
 	color: #DB5A3C;
 }
+
