@@ -2,9 +2,7 @@ const btnLogin = document.getElementById('btn-login'),
     btnFacebook = document.getElementById('btn-facebook'),
     btnGoogle = document.getElementById('btn-google'),
     emailLog = document.getElementById('email-login'),
-    passwordLog = document.getElementById('password-login'),
-    callLogin = document.getElementById('call-login'),
-    callRegister = document.getElementById('call-register');
+    passwordLog = document.getElementById('password-login');
 
 btnLogin.addEventListener('click', () => {
     if (emailLog.value === '' || passwordLog.value === '') {
