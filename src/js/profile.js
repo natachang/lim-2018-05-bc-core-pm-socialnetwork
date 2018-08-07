@@ -51,7 +51,3 @@ btnPublicar.addEventListener('click', () => {
         alert('Post no escrito');
     }
 });
-
-window.reloadPage = () => {
-    window.location.reload();
-};

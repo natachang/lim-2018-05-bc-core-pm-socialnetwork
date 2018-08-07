@@ -152,6 +152,7 @@ const writeUserData = (uid, username, email, imageUrl) => {
 const writeNewPost = () => {
     const usuario = firebase.auth().currentUser;
     //Area de Post
+    const statePost = selectOption.value;
     const contenidoPost = postContainer.value;
     const newPostKey = firebase.database().ref().child('posts').push().key;
 
@@ -161,14 +162,15 @@ const writeNewPost = () => {
         email: usuario.email,
         profile_picture: usuario.photoURL,
         body: contenidoPost,
+        state: statePost,
         key: newPostKey,
-        startCount: 0,
+        startCount: 0
     };
 
     let updates = {};
+
     updates['/posts/' + newPostKey] = postData;
     updates['/user-posts/' + usuario.uid + '/' + newPostKey] = postData;
-
     return firebase.database().ref().update(updates);
 };
 
@@ -176,6 +178,7 @@ const writeNewPost = () => {
 const writeNewPostPrivate = () => {
     const usuario = firebase.auth().currentUser;
     //Area de Post
+    const statePost = selectOption.value;
     const contenidoPost = postContainer.value;
     const newPostKey = firebase.database().ref().child('posts').push().key;
 
@@ -185,8 +188,9 @@ const writeNewPostPrivate = () => {
         email: usuario.email,
         profile_picture: usuario.photoURL,
         body: contenidoPost,
+        state: statePost,
         key: newPostKey,
-        startCount: 0,
+        startCount: 0
     };
 
     let updates = {};
@@ -262,6 +266,7 @@ const allPostsHome = (newPosts) => {
         countLiked.innerHTML = countClick;
 
         const newUpdate = textPost.innerText;
+        const statePost = selectOption.value;
         const valuePost = newUpdate;
         const nuevoPost = {
             uid: `${newPosts.val().uid}`,
@@ -269,6 +274,7 @@ const allPostsHome = (newPosts) => {
             email: `${newPosts.val().email}`,
             profile_picture: `${newPosts.val().profile_picture}`,
             body: valuePost,
+            state: statePost,
             key: postKey,
             startCount: countClick,
         };
@@ -382,6 +388,7 @@ const userPostProfile = (newUserPosts) => {
 
     const updatePost = () => {
         const usuario = firebase.auth().currentUser;
+        const statePost = selectOption.value;
         const newUpdate = textPost.value;
         const nuevoPost = {
             uid: usuario.uid,
@@ -389,10 +396,10 @@ const userPostProfile = (newUserPosts) => {
             email: usuario.email,
             profile_picture: usuario.photoURL,
             body: newUpdate,
+            state: statePost,
             key: postKey,
             startCount: 0
         };
-
 
         if (textPost.disabled === true) {
             textPost.disabled = false;
@@ -403,56 +410,17 @@ const userPostProfile = (newUserPosts) => {
             btnUpdate.setAttribute('value', 'Editar');
         }
 
-
         let updatesUser = {};
         let updatesPost = {};
         updatesUser[`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`] = nuevoPost;
-        //updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
+
+        if(nuevoPost.state == 'public') {
+            updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
+        }
+        
 
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
-
-        // textPost.disabled = false;
-        // btnUpdate.style.display = 'none';
-
-        // const btnSave = document.createElement('input');
-        // btnSave.setAttribute('id', postKey);
-        // btnSave.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom');
-        // btnSave.setAttribute('value', 'Guardar');
-        // btnSave.setAttribute('type', 'button');
-        // btnSave.setAttribute('style', 'margin: 5px');
-
-        // btnSave.addEventListener('click', () => {
-        //     const user = firebase.auth().currentUser;
-        //     const newUpdate = textPost.innerText;
-        //     const valuePost = newUpdate;
-
-        //     const nuevoPost = {
-        //         uid: `${newUserPosts.val().uid}`,
-        //         username: `${newUserPosts.val().username}`,
-        //         email: `${newUserPosts.val().email}`,
-        //         profile_picture: `${newUserPosts.val().profile_picture}`,
-        //         body: valuePost,
-        //         key: postKey,
-        //         startCount: 0,
-
-        //         uid: user.uid,
-        //         username: user.displayName,
-        //         email: user.email,
-        //         profile_picture: user.photoURL,
-        //         body: valuePost,
-        //         key: newPostKey,
-        //         startCount: 0,
-        //     };
-
-
-
-        //     btnSave.style.display = 'none';
-        //     btnUpdate.style.display = 'block';
-        //     textPost.disabled = true;
-        // });
-
-        // divPostTwo.appendChild(btnSave);
     };
 
 
@@ -485,3 +453,8 @@ const userPostProfile = (newUserPosts) => {
 const cleanTextarea = () => {
     postContainer.value = '';
 };
+
+const reloadPage = () => {
+    window.location.reload();
+};
+
