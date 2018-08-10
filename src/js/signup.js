@@ -1,5 +1,5 @@
 const btnSignup = document.getElementById('btn-signup'),
-    btnBack = document.getElementById('btn-back'),
+    btnback = document.getElementById('btn-back'),
     nameReg = document.getElementById('name-register'),
     emailReg = document.getElementById('email-register'),
     passwordReg = document.getElementById('password-register'),
@@ -18,6 +18,6 @@ btnSignup.addEventListener('click', () => {
     }
 });
 
-btnBack.addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
+btnback.addEventListener('click', () => {
+    location.assign('login.html');
+})

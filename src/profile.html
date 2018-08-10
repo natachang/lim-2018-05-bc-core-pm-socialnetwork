@@ -13,7 +13,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <body class="w3-theme-l5">
-
   <!-- Navbar -->
   <div class="w3-top">
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
@@ -21,48 +20,47 @@
         href="javascript:void(0);" onclick="openNav()">
         <i class="fa fa-bars"></i>
       </a>
-      <a href="home.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-        <i class="fa fa-home w3-margin-right"></i>BP!</a>
+      <a id="btn-home" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+        <img src="img/home.png" title="Inicio" class="w3-margin-right" style="width:30px"></img> BP!
+      </a>
       <!-- <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News">
         <i class="fa fa-globe"></i>
       </a> -->
       <a id="btn-logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
-        <!-- <i class="fa fa-user"></i> -->Cerrar Sesion
+        <img src="img/logout.png" title="Cerrar Sesion" style="width:30px"></img>
       </a>
-
-
-      <a href="profile.html" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
-          <!-- <i class="fa fa-user"></i> -->My Profile
-        </a>
+      <a id="btn-profile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Mi Perfil">
+        <img src="img/user.png" title="Mi Perfil" style="width:30px"></img>
+      </a>
     </div>
   </div>
-
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="profile.html" class="w3-bar-item w3-button w3-padding-large">Mi Perfil</a>
     <a id="btn-logout" class="w3-bar-item w3-button w3-padding-large">Cerrar Sesion</a>
   </div>
-
   <!-- Page Container -->
   <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
     <!-- The Grid -->
     <div class="w3-row">
+
+      <!-- Div Perfil -->
       <!-- Left Column -->
       <div class="w3-col m3">
         <!-- Profile -->
         <div class="w3-card w3-round w3-white">
           <div class="w3-container">
-            <h4 class="w3-center">Mi Perfil</h4>
-            <p class="w3-center">
-              <img id="user-image" class="w3-circle" style="height:70px;width:70px" alt="Avatar">
-            </p>
+            <h4 class="w3-center">Mis Datos</h4>
+            <p id="user-image" class="w3-center"></p>
             <hr>
             <p id="user-name">
-              <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Nombre</p>
+              <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+            </p>
             <p id="user-email">
-              <i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Email</p>
+              <i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>
+            </p>
             <p>Verificado</p>
           </div>
         </div>
@@ -70,31 +68,67 @@
         <!-- End Left Column -->
       </div>
 
-      <!-- Middle Column -->
-      <div class="w3-col m7">
 
+      <!-- Div Publicacion Privada-->
+      <!-- Middle Column -->
+      <div id="profile-private" class="w3-col m7">
         <div class="w3-row-padding">
           <div class="w3-col m12">
+
+            <!-- Ocultar Area de Publicacion -->
             <div class="w3-card w3-round w3-white">
               <div id="data-base" class="w3-container w3-padding">
                 <h6 class="w3-opacity">Publicaciones</h6>
-                <textarea id="post" class="w3-container w3-padding" rows="5" name="Publicacion" placeholder="¿Que desea compartir?"></textarea>
-                <!-- <p contenteditable="true" class="w3-border w3-padding">Status:</p> -->
+                <textarea id="post-container" class="w3-container w3-padding" name="Publicacion" placeholder="¿Que desea compartir?"></textarea>
                 <hr>
+                <select id="select-option" class=" w3-button w3-select w3-left">
+                  <option value="public">Público</option>
+                  <option value="private">Privado</option>
+                </select>
                 <button id="btn-publicar" type="button" class="w3-button w3-theme w3-right">
-                  <i class="fa fa-pencil"></i>  Publicar</button>
+                  <i class="fa fa-pencil"></i> Publicar</button>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+        <!-- Area de Posteo Privado -->
+        <div id="publication-profile">
+        </div>
+        <!-- End Middle Column -->
+      </div>
+
+
+
+      <!-- Div Publicacion Publica-->
+      <!-- Middle Column -->
+      <div id="profile-public" class="w3-col m7" style="display: none">
+        <div class="w3-row-padding">
+          <div class="w3-col m12">
+
+            <!-- Ocultar Area de Publicacion -->
+            <div class="w3-card w3-round w3-white">
+              <div id="data-base" class="w3-container w3-padding">
+                <h6 class="w3-opacity">Ultimas Noticias</h6>
+                <!-- <textarea id="post-container" class="w3-container w3-padding" name="Publicacion" placeholder="¿Que desea compartir?"></textarea>
+                <hr>
+                <select id="select-option" class=" w3-button w3-select w3-left">
+                  <option value="publico">Público</option>
+                  <option value="privado">Privado</option>
+                </select>
+                <button id="btn-publicar" type="button" class="w3-button w3-theme w3-right">
+                  <i class="fa fa-pencil"></i> Publicar</button> -->
               </div>
             </div>
           </div>
         </div>
-        <br>
-
-        <div id="posts-area">
-
+        <!-- Area de Posteo Publico -->
+        <div id="publication-home">
         </div>
-        <br>
+        <!-- End Middle Column -->
+      </div>
 
-        <!-- <div class="w3-container w3-card w3-white w3-round w3-margin">
+      <!-- <div class="w3-container w3-card w3-white w3-round w3-margin">
           <br>
           <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
           <h4>Jane Doe</h4>
@@ -105,14 +139,12 @@
             consequat.
           </p>
           <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom">
-            <i class="fa fa-thumbs-up"></i>  Like</button>
+            <i class="fa fa-thumbs-up"></i>  Like</button>
           <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">
-            <i class="fa fa-comment"></i>  Comment</button>
+            <i class="fa fa-comment"></i>  Comment</button>
         </div> -->
 
-        <!-- End Middle Column -->
-      </div>
-
+      <!-- Div Evento -->
       <!-- Right Column -->
       <div class="w3-col m2">
         <div class="w3-card w3-round w3-white w3-center">
@@ -129,18 +161,11 @@
           </div>
         </div>
         <br>
-
-        <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
-          <p>
-            <i class="fa fa-bug w3-xxlarge"></i>
-          </p>
-        </div>
         <!-- End Right Column -->
       </div>
 
       <!-- End Grid -->
     </div>
-
     <!-- End Page Container -->
   </div>
 
@@ -160,8 +185,7 @@
   <!-- Funcionalidad -->
   <script src="js/app.js"></script>
   <!-- Elementos del dom -->
-  <script src="js/home.js"></script>
-
+  <script src="js/profile.js"></script>
 </body>
 
 </html>
