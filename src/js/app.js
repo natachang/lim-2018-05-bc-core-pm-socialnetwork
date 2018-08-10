@@ -26,6 +26,7 @@ const initApp = () => {
 };
 
 // firebase.database().ref('user-posts').remove();
+<<<<<<< HEAD
 
 //Iniciando Sesion con Firebase
 const loginWithFirebase = (email, password) => {
@@ -125,6 +126,9 @@ const registerWithFirebase = (name, email, password, valpassword) => {
             console.log("Error de firebase > Mensaje >" + error.message);
         });
 };
+=======
+
+>>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
 //Cerrando Sesion con Firebase
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
@@ -336,9 +340,15 @@ const userPostProfile = (newUserPosts) => {
     let uImage = document.createElement('img'); //Etiqueta img
     uImage.setAttribute('class', 'w3-left w3-circle w3-margin-right');
     uImage.setAttribute('width', '30');
+<<<<<<< HEAD
 
     let uName = document.createElement('h4'); //Label de nombre
 
+=======
+
+    let uName = document.createElement('h4'); //Label de nombre
+
+>>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
     let textPost = document.createElement('textarea'); // txt area de contPost
     textPost.setAttribute('id', postKey); //Dar el valor al ID de textPost
     textPost.innerHTML = `${newUserPosts.val().body}`; //Contenido del post
@@ -413,12 +423,19 @@ const userPostProfile = (newUserPosts) => {
         let updatesUser = {};
         let updatesPost = {}; 
         updatesUser[`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`] = nuevoPost;
+<<<<<<< HEAD
 
         if(nuevoPost.state == 'public') {
             updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
         }   
 
+=======
+>>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
 
+        if(nuevoPost.state == 'public') {
+            updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
+        }   
+        
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
     };
@@ -454,6 +471,9 @@ const cleanTextarea = () => {
     postContainer.value = '';
 };
 
+<<<<<<< HEAD
 const reloadPage = () => {
     window.location.reload();
 };
+=======
+>>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
