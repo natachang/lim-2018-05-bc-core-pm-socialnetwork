@@ -4,7 +4,7 @@ const loginWithFirebase = (email, password) => {
         .then(result => {
             const user = firebase.auth().currentUser;
             console.log('Usuario logeado con exito', result);
-            location.assign('profile.html');
+            location.assign('perfil.html');
         })
         .catch(error => {
             errorLogin(error);
@@ -26,7 +26,7 @@ const facebookWithFirebase = () => {
             var credential = result.credential;
             var operationType = result.operationType;
             console.log('Facebook logueado');
-            location.assign('profile.html');
+            location.assign('perfil.html');
         })
         .catch(error => {
             console.log('error de firebase > ' + error.code);
@@ -49,7 +49,7 @@ const googleWithFirebase = () => {
             const user = result.user;
             const token = result.credential.accessToken;
             console.log(user, token);
-            location.assign('profile.html');
+            location.assign('perfil.html');
         })
         .catch((error) => {
             console.log(error.code);
@@ -62,7 +62,7 @@ const googleWithFirebase = () => {
 //Verificando usuario
 const verificationWithFirebase = () => {
     var actionCodeSettings = {
-        url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/profile.html',
+        url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/perfil.html',
         handleCodeInApp: false
     };
 
