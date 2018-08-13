@@ -13,10 +13,6 @@ window.onload = () => {
     });
 };
 
-<<<<<<< HEAD
-// firebase.database().ref('user-posts').remove();
-=======
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
 //Cerrando Sesion con Firebase
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
@@ -35,76 +31,6 @@ const writeUserData = (uid, username, email, imageUrl) => {
         username: username,
         email: email,
         profile_picture: imageUrl
-<<<<<<< HEAD
-    })
-};
-
-//Escribir nuevo Post Publico
-const writeNewPost = () => {
-    const usuario = firebase.auth().currentUser;
-    //Area de Post
-    const statePost = selectOption.value;
-    const contenidoPost = postContainer.value;
-    const newPostKey = firebase.database().ref().child('posts').push().key;
-
-    let postData = {
-        uid: usuario.uid,
-        username: usuario.displayName,
-        email: usuario.email,
-        profile_picture: usuario.photoURL,
-        body: contenidoPost,
-        state: statePost,
-        key: newPostKey,
-        startCount: 0
-    };
-
-    let updates = {};
-
-    updates['/posts/' + newPostKey] = postData;
-    updates['/user-posts/' + usuario.uid + '/' + newPostKey] = postData;
-    return firebase.database().ref().update(updates);
-};
-
-//Escribir nuevo Post Privado
-const writeNewPostPrivate = () => {
-    const usuario = firebase.auth().currentUser;
-    //Area de Post
-    const statePost = selectOption.value;
-    const contenidoPost = postContainer.value;
-    const newPostKey = firebase.database().ref().child('posts').push().key;
-
-    let postData = {
-        uid: usuario.uid,
-        username: usuario.displayName,
-        email: usuario.email,
-        profile_picture: usuario.photoURL,
-        body: contenidoPost,
-        state: statePost,
-        key: newPostKey,
-        startCount: 0
-    };
-
-    let updates = {};
-    updates['/user-posts/' + usuario.uid + '/' + newPostKey] = postData;
- 
-    return firebase.database().ref().update(updates);
-    
-}
-
-//Llamando a Firebase con los Posts
-const callPostFirebase = (uid) => {
-    const userPost = firebase.database().ref('user-posts').child(uid);
-    userPost.on("child_added", newUserPosts => {
-        //Posts solo usuario - Profile
-        userPostProfile(newUserPosts);
-    });
-
-    const allPost = firebase.database().ref('posts');
-    allPost.on("child_added", newPosts => {
-        //Posts todos los usuarios - Home
-        allPostsHome(newPosts);
-=======
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
     });
 };
 
@@ -149,14 +75,7 @@ const printPublicHome = (newPostPublic) => {
     let countLiked = document.createElement('a');
     countLiked.setAttribute('id', postKey);
     countLiked.setAttribute('class', 'w3-pink w3-button w3-margin-bottom');
-<<<<<<< HEAD
-    countLiked.innerHTML = `${newPosts.val().startCount}`;
-
-    let countClick = parseInt(`${newPosts.val().startCount}`);
-    console.log(countClick);
-=======
     countLiked.innerHTML = `${newPostPublic.val().likeCount}`;
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
 
     btnLiked.addEventListener('click', () => {
         let clicks = newPostPublic.val().likeCount + 1;
@@ -223,20 +142,7 @@ const printPrivateProfile = (newPostPrivate) => {
     textPost.innerHTML = `${newPostPrivate.val().body}`;
     textPost.disabled = true;
 
-<<<<<<< HEAD
-
-    let btnUpdate = document.createElement('input'); //Boton dentro de contPost
-    btnUpdate.setAttribute('id', postKey);
-    btnUpdate.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom');
-    btnUpdate.setAttribute('value', 'Editar');
-    btnUpdate.setAttribute('type', 'button');
-    btnUpdate.setAttribute('style', 'margin: 15px');
-
-
-    let btnDelete = document.createElement('input'); //Boton dentro de contPost
-=======
     let btnDelete = document.createElement('input');
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
     btnDelete.setAttribute('id', postKey);
     btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
     btnDelete.setAttribute('value', 'Eliminar');
@@ -271,27 +177,12 @@ const printPrivateProfile = (newPostPrivate) => {
                                 window.location.reload(true);
                             }
                         });
-<<<<<<< HEAD
-
-=======
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
                 }
                 else {
                     swal("Tu post no se elimino!");
                 }
-<<<<<<< HEAD
-
-
-            });
-    };
-
-    btnDelete.addEventListener('click', deletePost);
-
-
-=======
             })
     });
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
 
     btnEdit.addEventListener('click', (e) => {
         textPost.disabled = false;
@@ -335,50 +226,10 @@ const printPrivateProfile = (newPostPrivate) => {
             }
             btnSave.style.display = 'none';
             textPost.disabled = false;
-<<<<<<< HEAD
-            btnUpdate.setAttribute('value', 'Guardar');
-        }
-        else {
-            textPost.disabled = true;
-            btnUpdate.setAttribute('value', 'Editar');
-        }
-
-        textPost.focus();
-
-        let updatesUser = {};
-        let updatesPost = {};
-        updatesUser[`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`] = nuevoPost;
-
-        if (nuevoPost.state == 'public') {
-            updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
-        }
-
-        firebase.database().ref().update(updatesUser);
-        firebase.database().ref().update(updatesPost);
-    };
-
-
-    btnUpdate.addEventListener('click', updatePost);
-
-
-
-    if (`${newUserPosts.val().username}` === 'undefined') {
-        uName.innerHTML = `${newUserPosts.val().email}`;
-        uImage.setAttribute('src', 'img/user.png');
-    }
-    else {
-        uName.innerHTML = `${newUserPosts.val().username}`;
-        uImage.setAttribute('src', `${newUserPosts.val().profile_picture}`);
-    }
-
-    //Aqui va los appendchild
-    publicationProfile.appendChild(allPost); // Post area principal div que tendra a 2 divs dentro.
-=======
         });
         divPostTwo.appendChild(btnSave);
     });
     publicationProfile.appendChild(allPost);
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
     allPost.appendChild(infoPost);
     allPost.appendChild(contPost);
     infoPost.appendChild(divPostOne);
