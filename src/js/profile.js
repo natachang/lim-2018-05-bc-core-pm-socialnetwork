@@ -57,14 +57,14 @@ const reloadPage = () => {
 const userInformation = (user) => {
     //Imprime nombre de usuario
     if (user.displayName === null) {
-      pUser.innerHTML = user.email;
+        pUser.innerHTML = user.email;
     } else {
-      pUser.innerHTML = user.displayName;
+        pUser.innerHTML = user.displayName;
     }
     //Imprime foto en perfil
     if (user.photoURL === null) {
-      pImage.setAttribute('src', "img/people.png");
+        pImage.setAttribute('src', "img/people.png");
     } else {
-      pImage.setAttribute('src', user.photoURL);
+        pImage.setAttribute('src', user.photoURL);
     }
 };

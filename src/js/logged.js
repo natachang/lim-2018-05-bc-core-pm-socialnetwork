@@ -82,16 +82,16 @@ const registerWithFirebase = (name, email, password, valpassword) => {
             verificationWithFirebase();
             // Hasta aqui sale el usuario registrado sin ningun error
             result.updateProfile({ displayName: nameReg.value });
- 
+
             writeUserData(result.uid, result.displayName, result.email, result.photoURL);
             console.log('usuario creado con exito');
- 
+
             firebase.database().ref().child('users/' + writeUserData.uid).push({
                 id: writeUserData.uid,
                 displayName: writeUserData.displayName,
                 email: writeUserData.email
             });
- 
+
             // location.assign('index.html');
         })
         .catch(error => {
@@ -100,4 +100,4 @@ const registerWithFirebase = (name, email, password, valpassword) => {
             console.log("Error de firebase > Codigo >" + error.code);
             console.log("Error de firebase > Mensaje >" + error.message);
         });
- };
+};
