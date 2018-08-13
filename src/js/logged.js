@@ -4,7 +4,7 @@ const loginWithFirebase = (email, password) => {
         .then(result => {
             const user = firebase.auth().currentUser;
             console.log('Usuario logeado con exito', result);
-            location.assign('perfil.html');
+            location.assign('splash.html');
         })
         .catch(error => {
             errorLogin(error);
@@ -26,7 +26,7 @@ const facebookWithFirebase = () => {
             var credential = result.credential;
             var operationType = result.operationType;
             console.log('Facebook logueado');
-            location.assign('perfil.html');
+            location.assign('splash.html');
         })
         .catch(error => {
             console.log('error de firebase > ' + error.code);
@@ -49,7 +49,7 @@ const googleWithFirebase = () => {
             const user = result.user;
             const token = result.credential.accessToken;
             console.log(user, token);
-            location.assign('perfil.html');
+            location.assign('splash.html');
         })
         .catch((error) => {
             console.log(error.code);
@@ -63,7 +63,7 @@ const googleWithFirebase = () => {
 const verificationWithFirebase = () => {
     var actionCodeSettings = {
         url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/perfil.html',
-        handleCodeInApp: false
+        handleCodeInApp: false,
     };
 
     const user = firebase.auth().currentUser;
@@ -81,8 +81,7 @@ const registerWithFirebase = (name, email, password, valpassword) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(result => {
             verificationWithFirebase();
-            // Hasta aqui sale el usuario registrado sin ningun error
-            result.updateProfile({ displayName: nameReg.value,  profile_picture: 'https://www.shareicon.net/data/2016/09/01/822712_user_512x512.png'});
+            result.updateProfile({ displayName: nameReg.value});
 
             writeUserData(result.uid, result.displayName, result.email, result.photoURL);
             console.log('usuario creado con exito');
@@ -91,12 +90,11 @@ const registerWithFirebase = (name, email, password, valpassword) => {
                 id: writeUserData.uid,
                 displayName: writeUserData.displayName,
                 email: writeUserData.email,
-                profile_picture: writeUserData.photoURL,
+                profile_picture: writeUserData.photoURL
             });
         })
         .catch(error => {
             errorRegister(error);
-            //Mostrar error en consola
             console.log("Error de firebase > Codigo >" + error.code);
         });
 };

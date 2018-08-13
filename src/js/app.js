@@ -1,21 +1,23 @@
 window.onload = () => {
-    firebase.auth().onAuthStateChanged(() => {
-        const user = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged((user) => {
         if (user) {
+
             if (user.displayName !== 'null') {
                 pUser.innerHTML = `${user.displayName}`;
                 pImage.innerHTML = `<img src="${user.photoURL}" class="w3-circle" style="height:80px;width:80px"/>`;
-                pEmail.innerHTML = `${user.email}`;
             }
             else {
-                swal('No existe usuario registrado', 'info');
+                pUser.innerHTML = `${user.displayName}`;
             }
+
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-        } else {
-            swal('No existe usuario activo', 'error');
         }
+        else {
+            console.log('Usuario no logeado');
+        }
+        console.log(user);
+        callPublicPost(user.uid);
         callPrivatePost(user.uid);
-        callPublicPost(user.uid)
     });
 };
 
@@ -76,7 +78,7 @@ const printPublicHome = (newPostPublic) => {
     btnLiked.setAttribute('id', postKey);
     btnLiked.setAttribute('class', 'w3-pink w3-button w3-margin-bottom');
     btnLiked.setAttribute('type', 'button');
-    btnLiked.setAttribute('value', 'Me gusta');
+    btnLiked.setAttribute('value', 'Me gusta 🧠');
 
     let countLiked = document.createElement('a');
     countLiked.setAttribute('id', postKey);

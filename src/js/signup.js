@@ -1,5 +1,4 @@
 const btnSignup = document.getElementById('btn-signup'),
-    btnback = document.getElementById('btn-back'),
     nameReg = document.getElementById('name-register'),
     emailReg = document.getElementById('email-register'),
     passwordReg = document.getElementById('password-register'),
@@ -11,8 +10,9 @@ btnSignup.addEventListener('click', () => {
     if (emailReg.value.length === 0) {
         alert('Ingrese bien su correo');
     }
-    else if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
+    else if (passwordReg.value.length >= 6 && passwordReg.value === passwordVer.value) {
         registerWithFirebase(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
+        cleanRegister();
         alert('El email de validacion se ha enviado a tu correo.');
     }
     else {
@@ -30,6 +30,9 @@ const errorRegister = (error) => {
     }
 };
 
-btnback.addEventListener('click', () => {
-    location.assign('login.html');
-});
+const cleanRegister = () => {
+    nameReg.value = '';
+    emailReg.value = '';
+    passwordReg.value = '';
+    passwordVer.value = '';
+};
