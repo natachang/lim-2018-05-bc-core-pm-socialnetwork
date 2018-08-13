@@ -7,7 +7,6 @@ window.onload = () => {
         else {
             console.log('Usuario no logeado');
         }
-        console.log('User > ' + JSON.stringify(user));
         callPublicPost(user.uid);
         callPrivatePost(user.uid);
     });
@@ -16,15 +15,18 @@ window.onload = () => {
 //Cerrando Sesion con Firebase
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
-        .then(() => {
-            location.assign('index.html');
-        })
-        .catch((error) => {
-            console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
-        })
-};
-
+    swal('Usuario finalizo su sesion')
+    .then((willLogout) => {
+    if (willLogout) {
+        console.log('usuario termino sesion');
+        location.assign('index.html');
+    }
+ })
+    .catch((error) => {
+        console.log('Error de firebase > Codigo >' + error.code);
+        console.log('Error de firebase > Mensaje >' + error.message);
+    })
+ };
 //Guardar Datos de Usuario de Login en DB
 const writeUserData = (uid, username, email, imageUrl) => {
     firebase.database().ref('users/' + uid).set({
@@ -68,13 +70,13 @@ const printPublicHome = (newPostPublic) => {
 
     let btnLiked = document.createElement('input');
     btnLiked.setAttribute('id', postKey);
-    btnLiked.setAttribute('class', 'w3-pink w3-button w3-margin-bottom');
+    btnLiked.setAttribute('class', 'w3-blue w3-button w3-left w3-margin-bottom');
     btnLiked.setAttribute('type', 'button');
     btnLiked.setAttribute('value', 'Me gusta 🧠');
 
     let countLiked = document.createElement('a');
     countLiked.setAttribute('id', postKey);
-    countLiked.setAttribute('class', 'w3-pink w3-button w3-margin-bottom');
+    countLiked.setAttribute('class', 'w3-blue w3-button w3-left w3-margin-bottom');
     countLiked.innerHTML = `${newPostPublic.val().likeCount}`;
 
     btnLiked.addEventListener('click', () => {
@@ -108,6 +110,15 @@ const printPublicHome = (newPostPublic) => {
     divPostTwo.appendChild(textPost);
     divPostTwo.appendChild(btnLiked);
     divPostTwo.appendChild(countLiked);
+
+    if (`${newPostPublic.val().username}` == 'undefined') {
+        uName.innerHTML = `${newPostPublic.val().email}`
+        uImage.setAttribute('src', 'img/people.png')
+    }
+    else {
+        uName.innerHTML = `${newPostPublic.val().username}`
+        uImage.setAttribute('src', `${newPostPublic.val().profile_picture}`)
+    }
 };
 
 //Imprimir Post en Profile
@@ -142,19 +153,19 @@ const printPrivateProfile = (newPostPrivate) => {
     textPost.innerHTML = `${newPostPrivate.val().body}`;
     textPost.disabled = true;
 
-    let btnDelete = document.createElement('input');
-    btnDelete.setAttribute('id', postKey);
-    btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
-    btnDelete.setAttribute('value', 'Eliminar');
-    btnDelete.setAttribute('type', 'button');
-    btnDelete.setAttribute('style', 'margin: 10px');
-
     let btnEdit = document.createElement('input');
     btnEdit.setAttribute('id', postKey);
-    btnEdit.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
+    btnEdit.setAttribute('class', 'w3-blue w3-button w3-margin-bottom-right');
     btnEdit.setAttribute('value', 'Editar');
     btnEdit.setAttribute('type', 'button');
     btnEdit.setAttribute('style', 'margin: 10px');
+
+    let btnDelete = document.createElement('input');
+    btnDelete.setAttribute('id', postKey);
+    btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom-right');
+    btnDelete.setAttribute('value', 'Eliminar');
+    btnDelete.setAttribute('type', 'button');
+    btnDelete.setAttribute('style', 'margin: 10px');
 
     btnDelete.addEventListener('click', () => {
         firebase.database().ref().child(`/posts/${newPostPrivate.key}`).remove();
@@ -190,10 +201,10 @@ const printPrivateProfile = (newPostPrivate) => {
         const btnSave = document.createElement('input');
         btnSave.setAttribute('value', 'Guardar');
         btnSave.setAttribute('type', 'button');
-        btnSave.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom');
+        btnSave.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
         btnSave.setAttribute('id', newPostPrivate.key);
         btnSave.setAttribute('style', 'margin: 10px');
-
+        textPost.focus();
         btnSave.addEventListener('click', (e) => {
             if (newPostPrivate.key === e.target.id) {
                 const userPost = firebase.auth().currentUser;
@@ -239,6 +250,16 @@ const printPrivateProfile = (newPostPrivate) => {
     divPostTwo.appendChild(textPost);
     divPostTwo.appendChild(btnEdit);
     divPostTwo.appendChild(btnDelete);
+
+    if (`${newPostPrivate.val().username}` === 'undefined') {
+        uName.innerHTML = `${newPostPrivate.val().email}`;
+        uImage.setAttribute('src', 'img/people.png');
+    }
+
+    else {
+        uName.innerHTML = `${newPostPrivate.val().username}`;
+        uImage.setAttribute('src', `${newPostPrivate.val().profile_picture}`);
+    }
 };
 
 window.callPublicPost = (uid) => {
