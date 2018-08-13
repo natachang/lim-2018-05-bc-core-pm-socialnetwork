@@ -327,10 +327,9 @@ Para este sketch trabajamos con figma
 
 #### Versión web
 
-
 **Sketch de mediana fidelidad de la vista del muro**
 
-![first-view-web-wall](https://user-images.githubusercontent.com/38342062/44040781-b62481f2-9ee1-11e8-9f39-93a168dceca0.png)
+![first-view-web-wall](https://user-images.githubusercontent.com/38342062/44041716-132abff4-9ee4-11e8-9c73-d78c4c7eaa7e.png)
 
 
 ### Benchmarking
