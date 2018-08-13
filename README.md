@@ -48,35 +48,6 @@ issue abarca las mini-tareas necesarias para completar la épica.
 
 **Fuente** : <https://www.eipe.es/3-elementos-que-componen-red-social/>
 
-#### Problemática 
-
-Complementar a la educación tradicional en temas que ésta no nos enseña y actualmente
-son tan necesarios y requeridos no solo a nivel profesional sino también a nivel de 
-relaciones interpersonales,etc.
-
-#### El problema que resuelve
-
-Actualmente la carencia de este tipo de educación nos impide lograr muchas cosas que deseamos o dejamos
-pasar oportunidades porque no estamos mentalmente preparados. Es aquí donde BrainyPlay resuelve esto, el
-estar en constante uso de una red social que aporta el tipo de información para alcanzar una perspectiva 
-de realización máxima hará que no nos limitemos.
-
-#### Objetivos de los usuarios
-
-Comunicarse activamente con otras personas que también están interesadas en conocer más y compartir lo que
-saben sobre los tipos de temas antes mencionados. Esto puede darse a través de diferentes interacciones
-como publicar posts y leer los ya publicados o poder expresar si les gustó una publicación por medio de un 
-me gusta.
-
-#### Nuestra propuesta de valor como solución
-
-Brindar contenido de calidad y fiable respecto a temas como desarrollo personal,
-soft skills(habilidades blandas), educación financiera, metodologías ágiles,etc.
-Además que pueda crearse una comunidad en la que los usuarios interactuen compartiendo
-también contenido de este tipo, organizando eventos presenciales y más. De esta forma
-reuniendo y organizando gran cantidad de información que se encuentra en internet, así
-como los aportes que se den entre los usuarios. 
-
 #### Público objetivo
 
 La aplicación esta orientada a complementar la educación tradicional, por ende dirigida
@@ -88,6 +59,44 @@ financieros, sobre distintas metodologías, etc. Además de no solo ser útil pa
 profesional, pues el beneficio que obtienen a nivel personal se ve reflejado en su desarrollo
 personal. 
 
+#### Problemática 
+
+Complementar a la educación tradicional en temas que ésta no nos enseña y actualmente
+son tan necesarios y requeridos no solo a nivel profesional sino también a nivel de 
+relaciones interpersonales,etc.
+
+#### Nuestra propuesta de valor como solución
+
+Brindar contenido de calidad y fiable respecto a temas como desarrollo personal,
+soft skills(habilidades blandas), educación financiera, metodologías ágiles,etc.
+Además que pueda crearse una comunidad en la que los usuarios interactuen compartiendo
+también contenido de este tipo, organizando eventos presenciales y más. De esta forma
+reuniendo y organizando gran cantidad de información que se encuentra en internet, así
+como los aportes que se den entre los usuarios. 
+
+#### El problema que resuelve
+
+Actualmente la carencia de este tipo de educación nos impide lograr muchas cosas que deseamos o dejamos
+pasar oportunidades porque no hemos complementado nuestros conocimientos en estos aspectos. Es aquí donde 
+esta red social llamada BrainyPlay actúa, el estar en constante uso de una red social que aporta el tipo de
+información para alcanzar una perspectiva de realización máxima hará que no nos limitemos.
+
+#### Objetivos de lxs usuarixs
+
+Comunicarse activamente con otras personas que también están interesadas en conocer más y compartir lo que
+saben sobre los tipos de temas antes mencionados. Esto puede darse a través de diferentes interacciones
+como publicar posts y leer los ya publicados o poder expresar si les gustó una publicación por medio de un 
+me gusta.
+
+#### Principales funcionalidades del producto
+
++ Se puede registrarse con E-mail, google y facebook
++ Al registrarse con E-mail se envía un correo de verificación
++ Se puede iniciar sesión con E-mail, google y facebook
++ Se puede compartir un post público y privado
++ Así como también editar y/o eliminar los post publicados
+
+#### 
 
 ### Proceso de diseño 
 
@@ -337,6 +346,11 @@ Para este sketch trabajamos con figma
 **Algunas de las plataformas que mencionaron los usuarios**
 
 ![benchmarking](https://user-images.githubusercontent.com/38342062/43289820-c093dd34-90f1-11e8-99cb-ae893baf2fd2.PNG)
+
+**Cuadro de Benchmarking**
+
+![benchmark sobre plataformas de educacion](https://user-images.githubusercontent.com/38342062/44049796-b774c9d6-9efa-11e8-9b7b-f707eae53f62.PNG)
+
 
 En general nuestros posibles usuarios respondieron que no conocían una aplicación como la que les 
 mencionamos a rasgos generales en el formulario. 
