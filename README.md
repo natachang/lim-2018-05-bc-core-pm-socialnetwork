@@ -32,17 +32,17 @@ issue abarca las mini-tareas necesarias para completar la épica.
 
 ####  Elementos básicos de una red social
 
-1) Elemento Sociológico
+**1) Elemento Sociológico**
 
   + Rapidez de interconexión
   + Facilidad para iniciar o aumentar las relaciones sociales entre los usuarios
 
-2) Elemento Tecnológico
+**2) Elemento Tecnológico**
 
   + Los avances en las telecomunicaciones han permitido el desarrollo de redes cada vez más completas y complejas
   + Ha hecho que el número de usuarios de este tipo de plataformas sea cada vez más elevado
 
-3) Elemento Jurídico
+**3) Elemento Jurídico**
 
   + Se encarga de legislación en Internet y sus consecuencias en la protección de datos y la privacidad de las personas,  así como la protección de la producción industrial e intelectual.
 
