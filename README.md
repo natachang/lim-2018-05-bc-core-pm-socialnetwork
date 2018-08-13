@@ -305,6 +305,32 @@ Para este sketch trabajamos con figma
 
 ### Wall 
 
+#### Sketch de mediana fidelidad
+
+#### Mobile
+
+Para este sketch trabajamos con figma
+
+**Sketch de mediana fidelidad del muro**
+
+![wall-view-mobile](https://user-images.githubusercontent.com/38342062/44040773-b1c9cf2c-9ee1-11e8-82df-f489ddb4ed4d.png)
+
+
+**Sketch de mediana fidelidad de las opciones del muro**
+
+![wall-options-deployed](https://user-images.githubusercontent.com/38342062/44040774-b3118442-9ee1-11e8-8a3d-af2b96d5e384.png)
+
+**Sketch de mediana fidelidad del perfil**
+
+![profile-view-mobile](https://user-images.githubusercontent.com/38342062/44040776-b4918010-9ee1-11e8-9199-82bbaef2895a.png)
+
+
+#### Versión web
+
+
+**Sketch de mediana fidelidad de la vista del muro**
+
+![first-view-web-wall](https://user-images.githubusercontent.com/38342062/44040781-b62481f2-9ee1-11e8-9f39-93a168dceca0.png)
 
 
 ### Benchmarking
