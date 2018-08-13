@@ -13,10 +13,18 @@ btnSignup.addEventListener('click', () => {
     else if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
         registerWithFirebase(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
         cleanRegister();
-        swal('El email de validacion se ha enviado a tu correo.');
-    }
-    else {
-        alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres.')
+        swal({
+            title: 'El email de validacion se ha enviado a tu correo'
+        })
+            .then((sendEmail) => {
+                if (sendEmail) {
+                    verificationWithFirebase();
+                }
+                else {
+                    alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres.')
+                }
+
+            })
     }
 });
 

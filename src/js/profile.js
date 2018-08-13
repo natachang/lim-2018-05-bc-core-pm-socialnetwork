@@ -67,9 +67,4 @@ const userInformation = (user) => {
     } else {
       pImage.setAttribute('src', user.photoURL);
     }
-<<<<<<< HEAD
-});
-
-=======
 };
->>>>>>> cc2b022db50e2523d40f48c1b3db7ff3bcf4cb4b
