@@ -53,3 +53,18 @@ const cleanTextarea = () => {
 const reloadPage = () => {
     window.location.reload();
 };
+
+const userInformation = (user) => {
+    //Imprime nombre de usuario
+    if (user.displayName === null) {
+      pUser.innerHTML = user.email;
+    } else {
+      pUser.innerHTML = user.displayName;
+    }
+    //Imprime foto en perfil
+    if (user.photoURL === null) {
+      pImage.setAttribute('src', "https://png.icons8.com/ios/1600/user-male-circle-filled.png");
+    } else {
+      pImage.setAttribute('src', user.photoURL);
+    }
+};

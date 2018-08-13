@@ -1,13 +1,7 @@
 window.onload = () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            if (user.displayName !== 'null') {
-                pUser.innerHTML = `${user.displayName}`;
-                pImage.innerHTML = `<img src="${user.photoURL}" class="w3-circle" style="height:80px;width:80px"/>`;
-            }
-            else {
-                pUser.innerHTML = `${user.displayName}`;
-            }
+            userInformation(user);
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         }
         else {
