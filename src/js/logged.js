@@ -89,8 +89,7 @@ const registerWithFirebase = (name, email, password, valpassword) => {
             firebase.database().ref().child('users/' + writeUserData.uid).push({
                 id: writeUserData.uid,
                 displayName: writeUserData.displayName,
-                email: writeUserData.email,
-                profile_picture: writeUserData.photoURL
+                email: writeUserData.email
             });
         })
         .catch(error => {

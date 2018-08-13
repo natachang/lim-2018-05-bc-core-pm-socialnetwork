@@ -1,7 +1,6 @@
 window.onload = () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-
             if (user.displayName !== 'null') {
                 pUser.innerHTML = `${user.displayName}`;
                 pImage.innerHTML = `<img src="${user.photoURL}" class="w3-circle" style="height:80px;width:80px"/>`;
@@ -9,13 +8,12 @@ window.onload = () => {
             else {
                 pUser.innerHTML = `${user.displayName}`;
             }
-
             writeUserData(user.uid, user.displayName, user.email, user.photoURL);
         }
         else {
             console.log('Usuario no logeado');
         }
-        console.log(user);
+        console.log('User > ' + JSON.stringify(user));
         callPublicPost(user.uid);
         callPrivatePost(user.uid);
     });
@@ -84,10 +82,9 @@ const printPublicHome = (newPostPublic) => {
     countLiked.setAttribute('id', postKey);
     countLiked.setAttribute('class', 'w3-pink w3-button w3-margin-bottom');
     countLiked.innerHTML = `${newPostPublic.val().likeCount}`;
-    let clicks = 0;
 
     btnLiked.addEventListener('click', () => {
-        clicks += 1;
+        let clicks = newPostPublic.val().likeCount + 1;
         countLiked.innerHTML = clicks;
 
         const statePost = selectOption.value;
@@ -250,14 +247,14 @@ const printPrivateProfile = (newPostPrivate) => {
     divPostTwo.appendChild(btnDelete);
 };
 
-const callPublicPost = (uid) => {
+window.callPublicPost = (uid) => {
     const userPostPublic = firebase.database().ref('posts');
     userPostPublic.on("child_added", newPostPublic => {
         printPublicHome(newPostPublic);
     });
 };
 
-const callPrivatePost = (uid) => {
+window.callPrivatePost = (uid) => {
     const userPostPrivate = firebase.database().ref('user-posts').child(uid);
     userPostPrivate.on("child_added", newPostPrivate => {
         printPrivateProfile(newPostPrivate);
