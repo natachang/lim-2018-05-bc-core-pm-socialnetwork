@@ -202,7 +202,7 @@ const printPrivateProfile = (newPostPrivate) => {
         btnSave.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom');
         btnSave.setAttribute('id', newPostPrivate.key);
         btnSave.setAttribute('style', 'margin: 10px');
-
+        textPost.focus();
         btnSave.addEventListener('click', (e) => {
             if (newPostPrivate.key === e.target.id) {
                 const userPost = firebase.auth().currentUser;
@@ -218,6 +218,8 @@ const printPrivateProfile = (newPostPrivate) => {
                     key: newPostPrivate.key,
                     likeCount: 0
                 };
+
+
 
                 let updatesUser = {};
                 let updatesPost = {};
