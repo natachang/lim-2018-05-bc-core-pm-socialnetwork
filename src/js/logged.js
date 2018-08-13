@@ -7,8 +7,8 @@ const loginWithFirebase = (email, password) => {
             location.assign('profile.html');
         })
         .catch(error => {
+            errorLogin(error);
             console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
         })
 };
 
@@ -64,7 +64,7 @@ const verificationWithFirebase = () => {
     var actionCodeSettings = {
         url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/profile.html',
         handleCodeInApp: false
-      };
+    };
 
     const user = firebase.auth().currentUser;
     user.sendEmailVerification(actionCodeSettings)
@@ -82,7 +82,7 @@ const registerWithFirebase = (name, email, password, valpassword) => {
         .then(result => {
             verificationWithFirebase();
             // Hasta aqui sale el usuario registrado sin ningun error
-            result.updateProfile({ displayName: nameReg.value });
+            result.updateProfile({ displayName: nameReg.value,  profile_picture: 'https://www.shareicon.net/data/2016/09/01/822712_user_512x512.png'});
 
             writeUserData(result.uid, result.displayName, result.email, result.photoURL);
             console.log('usuario creado con exito');
@@ -90,13 +90,13 @@ const registerWithFirebase = (name, email, password, valpassword) => {
             firebase.database().ref().child('users/' + writeUserData.uid).push({
                 id: writeUserData.uid,
                 displayName: writeUserData.displayName,
-                email: writeUserData.email
+                email: writeUserData.email,
+                profile_picture: writeUserData.photoURL,
             });
-            // location.assign('index.html');
         })
         .catch(error => {
+            errorRegister(error);
             //Mostrar error en consola
             console.log("Error de firebase > Codigo >" + error.code);
-            console.log("Error de firebase > Mensaje >" + error.message);
         });
 };

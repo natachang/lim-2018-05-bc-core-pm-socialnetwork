@@ -149,19 +149,19 @@ const printPrivateProfile = (newPostPrivate) => {
     textPost.innerHTML = `${newPostPrivate.val().body}`;
     textPost.disabled = true;
 
-    let btnEdit = document.createElement('input');
-    btnEdit.setAttribute('id', postKey);
-    btnEdit.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom');
-    btnEdit.setAttribute('value', 'Editar');
-    btnEdit.setAttribute('type', 'button');
-    btnEdit.setAttribute('style', 'margin: 10px');
-
     let btnDelete = document.createElement('input');
     btnDelete.setAttribute('id', postKey);
-    btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom');
+    btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
     btnDelete.setAttribute('style', 'margin: 10px');
+
+    let btnEdit = document.createElement('input');
+    btnEdit.setAttribute('id', postKey);
+    btnEdit.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
+    btnEdit.setAttribute('value', 'Editar');
+    btnEdit.setAttribute('type', 'button');
+    btnEdit.setAttribute('style', 'margin: 10px');
 
     btnDelete.addEventListener('click', () => {
         firebase.database().ref().child(`/posts/${newPostPrivate.key}`).remove();

@@ -3,7 +3,9 @@ const btnSignup = document.getElementById('btn-signup'),
     nameReg = document.getElementById('name-register'),
     emailReg = document.getElementById('email-register'),
     passwordReg = document.getElementById('password-register'),
-    passwordVer = document.getElementById('verified-register');
+    passwordVer = document.getElementById('verified-register'),
+    errorEmail = document.getElementById('error-email'),
+    errorPassword = document.getElementById('error-password');
 
 btnSignup.addEventListener('click', () => {
     if (emailReg.value.length === 0) {
@@ -18,6 +20,16 @@ btnSignup.addEventListener('click', () => {
     }
 });
 
+const errorRegister = (error) => {
+    if (error.code === 'auth/email-already-in-use') {
+        errorEmail.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
+    } else if (error.code === 'auth/invalid-email') {
+        errorEmail.innerText = 'Por favor, agregue un correo válido';
+    } else if (error.code === 'auth/weak-password') {
+        errorPassword.innerText = 'Ingresa una contraseña con más de 6 caracteres';
+    }
+};
+
 btnback.addEventListener('click', () => {
     location.assign('login.html');
-})
+});
