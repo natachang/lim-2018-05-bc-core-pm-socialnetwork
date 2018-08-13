@@ -62,7 +62,7 @@ const googleWithFirebase = () => {
 //Verificando usuario
 const verificationWithFirebase = () => {
     var actionCodeSettings = {
-        url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/perfil.html',
+        url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/index.html',
         handleCodeInApp: false,
     };
 
@@ -81,7 +81,7 @@ const registerWithFirebase = (name, email, password, valpassword) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(result => {
             verificationWithFirebase();
-            result.updateProfile({ displayName: nameReg.value});
+            result.updateProfile({ displayName: nameReg.value });
 
             writeUserData(result.uid, result.displayName, result.email, result.photoURL);
             console.log('usuario creado con exito');
