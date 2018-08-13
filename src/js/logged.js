@@ -61,13 +61,8 @@ const googleWithFirebase = () => {
 
 //Verificando usuario
 const verificationWithFirebase = () => {
-    var actionCodeSettings = {
-        url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/index.html',
-        handleCodeInApp: true,
-    };
-
     const user = firebase.auth().currentUser;
-    user.sendEmailVerification(actionCodeSettings)
+    user.sendEmailVerification()
         .then(() => {
             console.log('>>Enviando correo<<');
         })
