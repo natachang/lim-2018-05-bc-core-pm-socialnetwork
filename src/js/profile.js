@@ -51,3 +51,4 @@ btnPublicar.addEventListener('click', () => {
         alert('Post no escrito');
     }
 });
+

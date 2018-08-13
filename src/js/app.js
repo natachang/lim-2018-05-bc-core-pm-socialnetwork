@@ -26,109 +26,6 @@ const initApp = () => {
 };
 
 // firebase.database().ref('user-posts').remove();
-<<<<<<< HEAD
-
-//Iniciando Sesion con Firebase
-const loginWithFirebase = (email, password) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(result => {
-            const user = firebase.auth().currentUser;
-            console.log('Usuario logeado con exito');
-            location.assign('profile.html');
-        })
-        .catch(error => {
-            console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
-        })
-};
-
-//Iniciando con Facebook
-const facebookWithFirebase = () => {
-    const providerFb = new firebase.auth.FacebookAuthProvider();
-    providerFb.addScope('email');
-    providerFb.addScope('user_friends');
-    providerFb.setCustomParameters({
-        'display': 'popup'
-    });
-    firebase.auth().signInWithPopup(providerFb)
-        .then(result => {
-            var user = result.user;
-            var credential = result.credential;
-            var operationType = result.operationType;
-            console.log('Facebook logueado');
-            location.assign('profile.html');
-        })
-        .catch(error => {
-            console.log('error de firebase > ' + error.code);
-            console.log('error de firebase, mensaje > ' + error.message);
-        });
-};
-
-//Iniciando con Google
-const googleWithFirebase = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    provider.setCustomParameters({
-        'login_hint': 'user@example.com'
-    });
-
-    firebase.auth().signInWithPopup(provider)
-        .then(result => {
-            console.log('Google logueado');
-            const user = result.user;
-            const token = result.credential.accessToken;
-            console.log(user);
-            location.assign('profile.html');
-        })
-        .catch((error) => {
-            console.log(error.code);
-            console.log(error.message);;
-            console.log(error.email);
-            console.log(error.credential);
-        });
-};
-
-//Verificando usuario
-const verificationWithFirebase = () => {
-    const user = firebase.auth().currentUser;
-    user.sendEmailVerification()
-        .then(() => {
-            console.log('>>Enviando correo<<');
-        })
-        .catch(error => {
-            console.log(error);
-        });
-};
-
-//Creando usuario con email y contraseña
-const registerWithFirebase = (name, email, password, valpassword) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(result => {
-            verificationWithFirebase();
-            // Hasta aqui sale el usuario registrado sin ningun error
-            result.updateProfile({ displayName: nameReg.value });
-
-            writeUserData(result.uid, result.displayName, result.email, result.photoURL);
-            console.log('usuario creado con exito');
-
-            firebase.database().ref().child('users/' + writeUserData.uid).push({
-                id: writeUserData.uid,
-                displayName: writeUserData.displayName,
-                email: writeUserData.email
-            });
-
-            // location.assign('index.html');
-        })
-        .catch(error => {
-            //Mostrar error en consola
-            console.log("Error de firebase > Codigo >" + error.code);
-            console.log("Error de firebase > Mensaje >" + error.message);
-        });
-};
-=======
-
->>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
 //Cerrando Sesion con Firebase
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
@@ -264,6 +161,7 @@ const allPostsHome = (newPosts) => {
     countLiked.innerHTML = `${newPosts.val().startCount}`;
 
     let countClick = parseInt(`${newPosts.val().startCount}`);
+    console.log(countClick);
 
     const countLikePost = () => {
         countClick += 1;
@@ -340,15 +238,9 @@ const userPostProfile = (newUserPosts) => {
     let uImage = document.createElement('img'); //Etiqueta img
     uImage.setAttribute('class', 'w3-left w3-circle w3-margin-right');
     uImage.setAttribute('width', '30');
-<<<<<<< HEAD
 
     let uName = document.createElement('h4'); //Label de nombre
 
-=======
-
-    let uName = document.createElement('h4'); //Label de nombre
-
->>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
     let textPost = document.createElement('textarea'); // txt area de contPost
     textPost.setAttribute('id', postKey); //Dar el valor al ID de textPost
     textPost.innerHTML = `${newUserPosts.val().body}`; //Contenido del post
@@ -361,6 +253,7 @@ const userPostProfile = (newUserPosts) => {
     btnUpdate.setAttribute('value', 'Editar');
     btnUpdate.setAttribute('type', 'button');
     btnUpdate.setAttribute('style', 'margin: 15px');
+
 
     let btnDelete = document.createElement('input'); //Boton dentro de contPost
     btnDelete.setAttribute('id', postKey);
@@ -385,16 +278,25 @@ const userPostProfile = (newUserPosts) => {
                     while (allPost.firstChild) allPost.removeChild(allPost.firstChild);
                     swal("Eliminaste tu post!", {
                         icon: "success",
-                    });
-                } else {
+                    })
+                        .then((reloadPage) => {
+                            if (reloadPage) {
+                                window.location.reload(true);
+                            }
+                        });
+
+                }
+                else {
                     swal("Tu post no se elimino!");
                 }
+
+
             });
     };
 
-    btnDelete.addEventListener('click', () => {
-        deletePost();
-    });
+    btnDelete.addEventListener('click', deletePost);
+
+
 
     const updatePost = () => {
         const usuario = firebase.auth().currentUser;
@@ -420,30 +322,24 @@ const userPostProfile = (newUserPosts) => {
             btnUpdate.setAttribute('value', 'Editar');
         }
 
+        textPost.focus();
+
         let updatesUser = {};
-        let updatesPost = {}; 
+        let updatesPost = {};
         updatesUser[`/user-posts/${newUserPosts.val().uid}/${newUserPosts.key}`] = nuevoPost;
-<<<<<<< HEAD
 
-        if(nuevoPost.state == 'public') {
+        if (nuevoPost.state == 'public') {
             updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
-        }   
+        }
 
-=======
->>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
-
-        if(nuevoPost.state == 'public') {
-            updatesPost[`/posts/${newUserPosts.key}`] = nuevoPost;
-        }   
-        
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
     };
 
 
-    btnUpdate.addEventListener('click', () => {
-        updatePost();
-    });
+    btnUpdate.addEventListener('click', updatePost);
+
+
 
     if (`${newUserPosts.val().username}` === 'undefined') {
         uName.innerHTML = `${newUserPosts.val().email}`;
@@ -471,9 +367,3 @@ const cleanTextarea = () => {
     postContainer.value = '';
 };
 
-<<<<<<< HEAD
-const reloadPage = () => {
-    window.location.reload();
-};
-=======
->>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
