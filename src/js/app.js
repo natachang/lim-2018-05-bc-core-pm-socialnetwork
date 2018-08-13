@@ -7,7 +7,6 @@ window.onload = () => {
         else {
             console.log('Usuario no logeado');
         }
-        console.log('User > ' + JSON.stringify(user));
         callPublicPost(user.uid);
         callPrivatePost(user.uid);
     });
