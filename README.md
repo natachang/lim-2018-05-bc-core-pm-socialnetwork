@@ -354,6 +354,10 @@ pobres".
 
 #### Conclusiones del testeo con usuarios 
 
++ Cambiar el nombre del botón que dirige hacia la vista de inicio
++ Las secciones entre perfil y el inicio son confusas. El diferenciar entre ambas vistas
++ En el botón que regresa al inicio agregar el ícono de la red social para identificar mejor que significa
++ Para diferenciar más la red social agregarle un slogan que comunique de que se trata
 
 ### Conclusiones generales
 
