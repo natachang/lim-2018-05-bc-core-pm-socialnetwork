@@ -4,11 +4,11 @@ const loginWithFirebase = (email, password) => {
         .then(result => {
             const user = firebase.auth().currentUser;
             console.log('Usuario logeado con exito', result);
-            location.assign('profile.html');
+            location.assign('splash.html');
         })
         .catch(error => {
+            errorLogin(error);
             console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
         })
 };
 
@@ -26,7 +26,7 @@ const facebookWithFirebase = () => {
             var credential = result.credential;
             var operationType = result.operationType;
             console.log('Facebook logueado');
-            location.assign('profile.html');
+            location.assign('splash.html');
         })
         .catch(error => {
             console.log('error de firebase > ' + error.code);
@@ -48,8 +48,8 @@ const googleWithFirebase = () => {
             console.log('Google logueado');
             const user = result.user;
             const token = result.credential.accessToken;
-            console.log(user);
-            location.assign('profile.html');
+            console.log(user, token);
+            location.assign('splash.html');
         })
         .catch((error) => {
             console.log(error.code);
@@ -61,8 +61,13 @@ const googleWithFirebase = () => {
 
 //Verificando usuario
 const verificationWithFirebase = () => {
+    var actionCodeSettings = {
+        url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/index.html',
+        handleCodeInApp: false,
+    };
+
     const user = firebase.auth().currentUser;
-    user.sendEmailVerification()
+    user.sendEmailVerification(actionCodeSettings)
         .then(() => {
             console.log('>>Enviando correo<<');
         })
@@ -71,28 +76,28 @@ const verificationWithFirebase = () => {
         });
 };
 
-//Creando usuario con email y contraseña
 const registerWithFirebase = (name, email, password, valpassword) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(result => {
             verificationWithFirebase();
             // Hasta aqui sale el usuario registrado sin ningun error
             result.updateProfile({ displayName: nameReg.value });
-
+ 
             writeUserData(result.uid, result.displayName, result.email, result.photoURL);
             console.log('usuario creado con exito');
-
+ 
             firebase.database().ref().child('users/' + writeUserData.uid).push({
                 id: writeUserData.uid,
                 displayName: writeUserData.displayName,
                 email: writeUserData.email
             });
-
+ 
             // location.assign('index.html');
         })
         .catch(error => {
+            errorRegister(error);
             //Mostrar error en consola
             console.log("Error de firebase > Codigo >" + error.code);
             console.log("Error de firebase > Mensaje >" + error.message);
         });
-};
+ };

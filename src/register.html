@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <title>BRAINY PLAY!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/icon.ico" />
+    <link rel="bookmark" href="img/icon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
@@ -18,27 +20,31 @@
     <main class="container">
         <div class="row">
             <div id="main-login" class="form_bg">
-                <img class="mode-img" src="img/logo.png">
-                    <div class="form-group">
-                        <label for="name-register">Nombre</label>
-                        <input id="name-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="email-register">Email</label>
-                        <input id="email-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password-register">Password</label>
-                        <input id="password-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
-                    </div>
-                    <div class="form-group">
-                        <label for="verified-register">Vuelve escribir tu contraseña</label>
-                        <input id="verified-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Repetir contraseña">
-                    </div>
-                    <div class="align-center">
-                        <button id="btn-back" class="btn btn-warning my-2 my-sm-0 btn-sm">volver a inicio</button>
-                        <button id="btn-signup" class="btn btn-primary my-2 my-sm-0 btn-sm">Registrarse</button>
-                    </div>
+                <a href="index.html">
+                    <img class="mode-img" src="img/logo.png">
+                </a>
+                <div class="form-group">
+                    <label for="name-register">Nombre</label>
+                    <input id="name-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su nombre">
+                    <p id="error-name" style="color: red"></p>
+                </div>
+                <div class="form-group">
+                    <label for="email-register">Email</label>
+                    <input id="email-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su email">
+                    <p id="error-email" style="color: red"></p>
+                </div>
+                <div class="form-group">
+                    <label for="spassword-register">Password</label>
+                    <input id="password-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
+                    <p id="error-email" style="color: red"></p>
+                </div>
+                <div class="form-group">
+                    <label for="verified-register">Vuelve escribir tu contraseña</label>
+                    <input id="verified-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Repetir contraseña">
+                </div>
+                <div class="align-center">
+                    <button id="btn-signup" class="btn btn-primary my-2 my-sm-0 btn-sm">Registrarse</button>
+                </div>
             </div>
         </div>
     </main>
