@@ -15,15 +15,18 @@ window.onload = () => {
 //Cerrando Sesion con Firebase
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
-        .then(() => {
-            location.assign('index.html');
-        })
-        .catch((error) => {
-            console.log('Error de firebase > Codigo >' + error.code);
-            console.log('Error de firebase > Mensaje >' + error.message);
-        })
-};
-
+    swal('Usuario finalizo su sesion')
+    .then((willLogout) => {
+    if (willLogout) {
+        console.log('usuario termino sesion');
+        location.assign('index.html');
+    }
+ })
+    .catch((error) => {
+        console.log('Error de firebase > Codigo >' + error.code);
+        console.log('Error de firebase > Mensaje >' + error.message);
+    })
+ };
 //Guardar Datos de Usuario de Login en DB
 const writeUserData = (uid, username, email, imageUrl) => {
     firebase.database().ref('users/' + uid).set({
