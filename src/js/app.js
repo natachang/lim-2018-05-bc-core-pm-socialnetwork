@@ -17,7 +17,7 @@ window.onload = () => {
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
         .then(() => {
-            location.assign('index.html');
+            console.log('usuario termino sesion');
         })
         .catch((error) => {
             console.log('Error de firebase > Codigo >' + error.code);
@@ -252,12 +252,12 @@ const printPrivateProfile = (newPostPrivate) => {
     if (`${newPostPrivate.val().username}` === 'undefined') {
         uName.innerHTML = `${newPostPrivate.val().email}`;
         uImage.setAttribute('src', 'img/people.png');
-      }
-    
-      else {
+    }
+
+    else {
         uName.innerHTML = `${newPostPrivate.val().username}`;
         uImage.setAttribute('src', `${newPostPrivate.val().profile_picture}`);
-      }
+    }
 };
 
 window.callPublicPost = (uid) => {
