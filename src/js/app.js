@@ -108,6 +108,15 @@ const printPublicHome = (newPostPublic) => {
     divPostTwo.appendChild(textPost);
     divPostTwo.appendChild(btnLiked);
     divPostTwo.appendChild(countLiked);
+
+    if (`${newPostPublic.val().username}` == 'undefined') {
+        uName.innerHTML = `${newPostPublic.val().email}`
+        uImage.setAttribute('src', 'img/people.png')
+    }
+    else {
+        uName.innerHTML = `${newPostPublic.val().username}`
+        image.setAttribute('src', `${newPostPublic.val().profile_picture}`)
+    }
 };
 
 //Imprimir Post en Profile
@@ -239,6 +248,16 @@ const printPrivateProfile = (newPostPrivate) => {
     divPostTwo.appendChild(textPost);
     divPostTwo.appendChild(btnEdit);
     divPostTwo.appendChild(btnDelete);
+
+    if (`${newPostPrivate.val().username}` === 'undefined') {
+        uName.innerHTML = `${newPostPrivate.val().email}`;
+        uImage.setAttribute('src', 'img/people.png');
+      }
+    
+      else {
+        uName.innerHTML = `${newPostPrivate.val().username}`;
+        uImage.setAttribute('src', `${newPostPrivate.val().profile_picture}`);
+      }
 };
 
 window.callPublicPost = (uid) => {
