@@ -16,7 +16,7 @@ window.onload = () => {
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
         .then(() => {
-            console.log('usuario termino sesion');
+            location.assign('index.html');
         })
         .catch((error) => {
             console.log('Error de firebase > Codigo >' + error.code);
@@ -67,13 +67,13 @@ const printPublicHome = (newPostPublic) => {
 
     let btnLiked = document.createElement('input');
     btnLiked.setAttribute('id', postKey);
-    btnLiked.setAttribute('class', 'w3-pink w3-button w3-margin-bottom');
+    btnLiked.setAttribute('class', 'w3-blue w3-button w3-left w3-margin-bottom');
     btnLiked.setAttribute('type', 'button');
     btnLiked.setAttribute('value', 'Me gusta 🧠');
 
     let countLiked = document.createElement('a');
     countLiked.setAttribute('id', postKey);
-    countLiked.setAttribute('class', 'w3-pink w3-button w3-margin-bottom');
+    countLiked.setAttribute('class', 'w3-blue w3-button w3-left w3-margin-bottom');
     countLiked.innerHTML = `${newPostPublic.val().likeCount}`;
 
     btnLiked.addEventListener('click', () => {
@@ -114,7 +114,7 @@ const printPublicHome = (newPostPublic) => {
     }
     else {
         uName.innerHTML = `${newPostPublic.val().username}`
-        image.setAttribute('src', `${newPostPublic.val().profile_picture}`)
+        uImage.setAttribute('src', `${newPostPublic.val().profile_picture}`)
     }
 };
 
@@ -150,19 +150,19 @@ const printPrivateProfile = (newPostPrivate) => {
     textPost.innerHTML = `${newPostPrivate.val().body}`;
     textPost.disabled = true;
 
-    let btnDelete = document.createElement('input');
-    btnDelete.setAttribute('id', postKey);
-    btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
-    btnDelete.setAttribute('value', 'Eliminar');
-    btnDelete.setAttribute('type', 'button');
-    btnDelete.setAttribute('style', 'margin: 10px');
-
     let btnEdit = document.createElement('input');
     btnEdit.setAttribute('id', postKey);
-    btnEdit.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
+    btnEdit.setAttribute('class', 'w3-blue w3-button w3-margin-bottom-right');
     btnEdit.setAttribute('value', 'Editar');
     btnEdit.setAttribute('type', 'button');
     btnEdit.setAttribute('style', 'margin: 10px');
+
+    let btnDelete = document.createElement('input');
+    btnDelete.setAttribute('id', postKey);
+    btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom-right');
+    btnDelete.setAttribute('value', 'Eliminar');
+    btnDelete.setAttribute('type', 'button');
+    btnDelete.setAttribute('style', 'margin: 10px');
 
     btnDelete.addEventListener('click', () => {
         firebase.database().ref().child(`/posts/${newPostPrivate.key}`).remove();
@@ -198,10 +198,10 @@ const printPrivateProfile = (newPostPrivate) => {
         const btnSave = document.createElement('input');
         btnSave.setAttribute('value', 'Guardar');
         btnSave.setAttribute('type', 'button');
-        btnSave.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom');
+        btnSave.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
         btnSave.setAttribute('id', newPostPrivate.key);
         btnSave.setAttribute('style', 'margin: 10px');
-
+        textPost.focus();
         btnSave.addEventListener('click', (e) => {
             if (newPostPrivate.key === e.target.id) {
                 const userPost = firebase.auth().currentUser;

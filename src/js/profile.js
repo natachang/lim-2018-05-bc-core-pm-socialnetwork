@@ -29,7 +29,6 @@ btnProfile.addEventListener('click', () => {
 });
 
 btnLogout.addEventListener('click', () => {
-    swal('Usuario finalizo su sesion', 'info');
     logoutWithFirebase();
 });
 
