@@ -30,6 +30,35 @@ issue abarca las mini-tareas necesarias para completar la épica.
 
 ### Definición del producto
 
+####  Elementos básicos de una red social
+
+**1) Elemento Sociológico**
+
+  + Rapidez de interconexión
+  + Facilidad para iniciar o aumentar las relaciones sociales entre los usuarios
+
+**2) Elemento Tecnológico**
+
+  + Los avances en las telecomunicaciones han permitido el desarrollo de redes cada vez más completas y complejas
+  + Ha hecho que el número de usuarios de este tipo de plataformas sea cada vez más elevado
+
+**3) Elemento Jurídico**
+
+  + Se encarga de legislación en Internet y sus consecuencias en la protección de datos y la privacidad de las personas,  así como la protección de la producción industrial e intelectual.
+
+**Fuente** : <https://www.eipe.es/3-elementos-que-componen-red-social/>
+
+#### Público objetivo
+
+La aplicación esta orientada a complementar la educación tradicional, por ende dirigida
+a personas de distintas edades. Ya que actualmente la temática de la aplicación es
+super requerida por todas las personas, sea cual sea su rubro. Esto se debe a que la 
+app funciona como un complemento a lo que las personas ya saben o se encuentran aprendiendo.
+Con esto generan un valor agregado, al adquirir conocimientos técnicos, socioemocionales,
+financieros, sobre distintas metodologías, etc. Además de no solo ser útil para el mundo
+profesional, pues el beneficio que obtienen a nivel personal se ve reflejado en su desarrollo
+personal. 
+
 #### Problemática 
 
 Complementar a la educación tradicional en temas que ésta no nos enseña y actualmente
@@ -45,17 +74,29 @@ también contenido de este tipo, organizando eventos presenciales y más. De est
 reuniendo y organizando gran cantidad de información que se encuentra en internet, así
 como los aportes que se den entre los usuarios. 
 
-#### Público objetivo
+#### El problema que resuelve
 
-La aplicación esta orientada a complementar la educación tradicional, por ende dirigida
-a personas de distintas edades. Ya que actualmente la temática de la aplicación es
-super requerida por todas las personas, sea cual sea su rubro. Esto se debe a que la 
-app funciona como un complemento a lo que las personas ya saben o se encuentran aprendiendo.
-Con esto generan un valor agregado, al adquirir conocimientos técnicos, socioemocionales,
-financieros, sobre distintas metodologías, etc. Además de no solo ser útil para el mundo
-profesional, pues el beneficio que obtienen a nivel personal se ve reflejado en su desarrollo
-personal. 
+Actualmente la carencia de este tipo de educación nos impide lograr muchas cosas que deseamos o dejamos
+pasar oportunidades porque no hemos complementado nuestros conocimientos en estos aspectos. Es aquí donde 
+esta red social llamada BrainyPlay actúa, el estar en constante uso de una red social que aporta el tipo de
+información para alcanzar una perspectiva de realización máxima hará que no nos limitemos.
 
+#### Objetivos de lxs usuarixs
+
+Comunicarse activamente con otras personas que también están interesadas en conocer más y compartir lo que
+saben sobre los tipos de temas antes mencionados. Esto puede darse a través de diferentes interacciones
+como publicar posts y leer los ya publicados o poder expresar si les gustó una publicación por medio de un 
+me gusta.
+
+#### Principales funcionalidades del producto
+
++ Se puede registrarse con E-mail, google y facebook
++ Al registrarse con E-mail se envía un correo de verificación
++ Se puede iniciar sesión con E-mail, google y facebook
++ Se puede compartir un post público y privado
++ Así como también editar y/o eliminar los post publicados
+
+#### 
 
 ### Proceso de diseño 
 
@@ -147,6 +188,7 @@ Decidimos crear flujogramas de como funciona el registro y logeo de la aplicaci�
 Primero hicimos los sketch de baja fidelidad, empezando por la vista mobile de acuerdo a las estadísticas
 obtenidas en el formulario previo.
 
+### LOGIN
 
 ### Mobile
 
@@ -170,7 +212,35 @@ obtenidas en el formulario previo.
 
 ![login-view-web](https://user-images.githubusercontent.com/38342062/43287226-fa124dc8-90e9-11e8-9857-cd89bf4cdcff.JPG)
 
+### WALL
+
+### Mobile
+
+**sketch de baja fidelidad de las 3 vistas**
+
+![vistas-mobile-wall](https://user-images.githubusercontent.com/38342062/44039296-69788bbc-9ede-11e8-8247-2ac3b9566730.jpg)
+
+### Versión web
+
+**sketch de baja fidelidad del muro**
+
+![wall-view-mobile](https://user-images.githubusercontent.com/38342062/44039280-631f03e0-9ede-11e8-9998-a5723548da94.jpg)
+
+**Sketch de baja fidelidad de las opciones del muro**
+
+![wall-options-deployed-view-mobile](https://user-images.githubusercontent.com/38342062/44039310-7287045e-9ede-11e8-9199-d167e13d1d79.jpg)
+
+
+**Sketch de baja fidelidad del perfil**
+
+![profile-view-mobile](https://user-images.githubusercontent.com/38342062/44039750-543ce21a-9edf-11e8-8e1d-d7a4746f2a0d.jpg)
+
+
 ### 4) Prototipado
+
+### LOGIN 
+
+#### Sketch de mediana fidelidad
 
 #### Mobile
 
@@ -206,13 +276,81 @@ Para este sketch trabajamos con figma
 
 ![login-view-web](https://user-images.githubusercontent.com/38342062/43289206-e2f4fb6c-90ef-11e8-9f5d-e05d4b1b2430.png)
 
-[Link al prototipo de alta fidelidad](https://www.figma.com/file/FEpfeD3WW0CpGTcI1BiF3m/Social-Network-High-Fidelity-Login-Register)
+### Sketch de alta fidelidad
+
+#### Mobile
+
+Para este sketch trabajamos con figma
+
+**Sketch de alta fidelidad de la primera vista**
+
+![first-view-mobile](https://user-images.githubusercontent.com/38342062/43744430-a4a6954c-999f-11e8-8501-aa4a47ee4262.png)
+
+
+**Sketch de alta fidelidad de la vista de registro**
+
+![sign-up-view-mobile](https://user-images.githubusercontent.com/38342062/43744436-a9f158ac-999f-11e8-96f5-dd83ab5c56d4.png)
+
+**Sketch de alta fidelidad de la vista de logeo**
+
+![login-view-mobile](https://user-images.githubusercontent.com/38342062/43744441-ac566b96-999f-11e8-94ef-66c52ef2e07f.png)
+
+
+#### Versión web
+
+
+**Sketch de alta fidelidad de la primera vista**
+
+![first-view-web](https://user-images.githubusercontent.com/38342062/43744444-afacb9ee-999f-11e8-8aef-e67a5fcfb9eb.png)
+
+
+**Sketch de alta fidelidad de la vista de registro**
+
+![sign-up-view-web](https://user-images.githubusercontent.com/38342062/43744451-b576b96a-999f-11e8-9fa6-c376792561a5.png)
+
+**Sketch de alta fidelidad de la vista de logeo**
+
+![login-view-web](https://user-images.githubusercontent.com/38342062/43744455-bc69ec6a-999f-11e8-83d7-005f1d68dafa.png)
+
+### Wall 
+
+#### Sketch de mediana fidelidad
+
+#### Mobile
+
+Para este sketch trabajamos con figma
+
+**Sketch de mediana fidelidad del muro**
+
+![wall-view-mobile](https://user-images.githubusercontent.com/38342062/44040773-b1c9cf2c-9ee1-11e8-82df-f489ddb4ed4d.png)
+
+
+**Sketch de mediana fidelidad de las opciones del muro**
+
+![wall-options-deployed](https://user-images.githubusercontent.com/38342062/44040774-b3118442-9ee1-11e8-8a3d-af2b96d5e384.png)
+
+**Sketch de mediana fidelidad del perfil**
+
+![profile-view-mobile](https://user-images.githubusercontent.com/38342062/44040776-b4918010-9ee1-11e8-9199-82bbaef2895a.png)
+
+
+#### Versión web
+
+**Sketch de mediana fidelidad de la vista del muro**
+
+![first-view-web-wall](https://user-images.githubusercontent.com/38342062/44041716-132abff4-9ee4-11e8-9c73-d78c4c7eaa7e.png)
+
 
 ### Benchmarking
 
 **Algunas de las plataformas que mencionaron los usuarios**
 
 ![benchmarking](https://user-images.githubusercontent.com/38342062/43289820-c093dd34-90f1-11e8-99cb-ae893baf2fd2.PNG)
+
+**Cuadro de Benchmarking**
+
+![benchmark sobre plataformas de educacion](https://user-images.githubusercontent.com/38342062/44049796-b774c9d6-9efa-11e8-9b7b-f707eae53f62.PNG)
+
 
 En general nuestros posibles usuarios respondieron que no conocían una aplicación como la que les 
 mencionamos a rasgos generales en el formulario. 
@@ -227,6 +365,13 @@ plataformas mencionadas distan más de nuestra propuesta valor, mostrándonos qu
 hacia que exista algo así, pues retomando el caso de Academia.edu, también se encontraron comentarios como
 "Alguien debería empezar una propuesta" o "Pedirle a Mark Zuckerberg que cree un 'facebook' gratis para académicos
 pobres".
+
+#### Conclusiones del testeo con usuarios 
+
++ Cambiar el nombre del botón que dirige hacia la vista de inicio
++ Las secciones entre perfil y el inicio son confusas. El diferenciar entre ambas vistas
++ En el botón que regresa al inicio agregar el ícono de la red social para identificar mejor que significa
++ Para diferenciar más la red social agregarle un slogan que comunique de que se trata
 
 ### Conclusiones generales
 
