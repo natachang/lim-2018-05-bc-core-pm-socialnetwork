@@ -30,11 +30,43 @@ issue abarca las mini-tareas necesarias para completar la épica.
 
 ### Definición del producto
 
+####  Elementos básicos de una red social
+
+1) Elemento Sociológico
+
+  + Rapidez de interconexión
+  + Facilidad para iniciar o aumentar las relaciones sociales entre los usuarios
+
+2) Elemento Tecnológico
+
+  + Los avances en las telecomunicaciones han permitido el desarrollo de redes cada vez más completas y complejas
+  + Ha hecho que el número de usuarios de este tipo de plataformas sea cada vez más elevado
+
+3) Elemento Jurídico
+
+  + Se encarga de legislación en Internet y sus consecuencias en la protección de datos y la privacidad de las personas,  así como la protección de la producción industrial e intelectual.
+
+**Fuente** : <https://www.eipe.es/3-elementos-que-componen-red-social/>
+
 #### Problemática 
 
 Complementar a la educación tradicional en temas que ésta no nos enseña y actualmente
 son tan necesarios y requeridos no solo a nivel profesional sino también a nivel de 
 relaciones interpersonales,etc.
+
+#### El problema que resuelve
+
+Actualmente la carencia de este tipo de educación nos impide lograr muchas cosas que deseamos o dejamos
+pasar oportunidades porque no estamos mentalmente preparados. Es aquí donde BrainyPlay resuelve esto, el
+estar en constante uso de una red social que aporta el tipo de información para alcanzar una perspectiva 
+de realización máxima hará que no nos limitemos.
+
+#### Objetivos de los usuarios
+
+Comunicarse activamente con otras personas que también están interesadas en conocer más y compartir lo que
+saben sobre los tipos de temas antes mencionados. Esto puede darse a través de diferentes interacciones
+como publicar posts y leer los ya publicados o poder expresar si les gustó una publicación por medio de un 
+me gusta.
 
 #### Nuestra propuesta de valor como solución
 
@@ -147,6 +179,7 @@ Decidimos crear flujogramas de como funciona el registro y logeo de la aplicaci�
 Primero hicimos los sketch de baja fidelidad, empezando por la vista mobile de acuerdo a las estadísticas
 obtenidas en el formulario previo.
 
+### LOGIN
 
 ### Mobile
 
@@ -169,6 +202,30 @@ obtenidas en el formulario previo.
 **Sketch de baja fidelidad de la vista de logeo**
 
 ![login-view-web](https://user-images.githubusercontent.com/38342062/43287226-fa124dc8-90e9-11e8-9857-cd89bf4cdcff.JPG)
+
+### WALL
+
+### Mobile
+
+**sketch de baja fidelidad de las 3 vistas**
+
+![vistas-mobile-wall](https://user-images.githubusercontent.com/38342062/44039296-69788bbc-9ede-11e8-8247-2ac3b9566730.jpg)
+
+### Versión web
+
+**sketch de baja fidelidad del muro**
+
+![wall-view-mobile](https://user-images.githubusercontent.com/38342062/44039280-631f03e0-9ede-11e8-9998-a5723548da94.jpg)
+
+**Sketch de baja fidelidad de las opciones del muro**
+
+![wall-options-deployed-view-mobile](https://user-images.githubusercontent.com/38342062/44039310-7287045e-9ede-11e8-9199-d167e13d1d79.jpg)
+
+
+**Sketch de baja fidelidad del perfil**
+
+![profile-view-mobile](https://user-images.githubusercontent.com/38342062/44039750-543ce21a-9edf-11e8-8e1d-d7a4746f2a0d.jpg)
+
 
 ### 4) Prototipado
 
@@ -246,6 +303,9 @@ Para este sketch trabajamos con figma
 
 ![login-view-web](https://user-images.githubusercontent.com/38342062/43744455-bc69ec6a-999f-11e8-83d7-005f1d68dafa.png)
 
+### Wall 
+
+
 
 ### Benchmarking
 
@@ -266,6 +326,9 @@ plataformas mencionadas distan más de nuestra propuesta valor, mostrándonos qu
 hacia que exista algo así, pues retomando el caso de Academia.edu, también se encontraron comentarios como
 "Alguien debería empezar una propuesta" o "Pedirle a Mark Zuckerberg que cree un 'facebook' gratis para académicos
 pobres".
+
+#### Conclusiones del testeo con usuarios 
+
 
 ### Conclusiones generales
 

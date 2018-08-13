@@ -95,9 +95,10 @@ const writeNewPostPrivate = () => {
     };
 
     let updates = {};
-
     updates['/user-posts/' + usuario.uid + '/' + newPostKey] = postData;
+ 
     return firebase.database().ref().update(updates);
+    
 }
 
 //Llamando a Firebase con los Posts
