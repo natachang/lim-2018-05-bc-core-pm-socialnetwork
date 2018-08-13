@@ -63,7 +63,7 @@ const userInformation = (user) => {
     }
     //Imprime foto en perfil
     if (user.photoURL === null) {
-      pImage.setAttribute('src', "https://png.icons8.com/ios/1600/user-male-circle-filled.png");
+      pImage.setAttribute('src', "img/people.png");
     } else {
       pImage.setAttribute('src', user.photoURL);
     }
