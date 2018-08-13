@@ -48,7 +48,7 @@ const googleWithFirebase = () => {
             console.log('Google logueado');
             const user = result.user;
             const token = result.credential.accessToken;
-            console.log(user);
+            console.log(user, token);
             location.assign('profile.html');
         })
         .catch((error) => {
@@ -61,8 +61,13 @@ const googleWithFirebase = () => {
 
 //Verificando usuario
 const verificationWithFirebase = () => {
+    var actionCodeSettings = {
+        url: 'https://jslyne.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/profile.html',
+        handleCodeInApp: false
+      };
+
     const user = firebase.auth().currentUser;
-    user.sendEmailVerification()
+    user.sendEmailVerification(actionCodeSettings)
         .then(() => {
             console.log('>>Enviando correo<<');
         })
@@ -87,7 +92,6 @@ const registerWithFirebase = (name, email, password, valpassword) => {
                 displayName: writeUserData.displayName,
                 email: writeUserData.email
             });
-
             // location.assign('index.html');
         })
         .catch(error => {

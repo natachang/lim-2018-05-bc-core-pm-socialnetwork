@@ -1,10 +1,12 @@
 const btnHome = document.getElementById('btn-home'),
     btnProfile = document.getElementById('btn-profile'),
+    btnDatos = document.getElementById('btn-datos'),
+    btnSocial = document.getElementById('btn-social'),
     btnLogout = document.getElementById('btn-logout'),
     profilePrivate = document.getElementById('profile-private'),
     profilePublic = document.getElementById('profile-public'),
     btnPublicar = document.getElementById('btn-publicar'),
-    postContainer = document.getElementById('post-container'),//text area donde publica
+    postContainer = document.getElementById('post-container'),
     pUser = document.getElementById('user-name'),
     pImage = document.getElementById('user-image'),
     pEmail = document.getElementById('user-email'),
@@ -13,41 +15,41 @@ const btnHome = document.getElementById('btn-home'),
     publicationHome = document.getElementById('publication-home');
 
 btnHome.addEventListener('click', () => {
+    btnDatos.style.display = 'none';
+    btnSocial.style.display = 'block';
     profilePrivate.style.display = 'none';
     profilePublic.style.display = 'block';
 });
 
 btnProfile.addEventListener('click', () => {
-    profilePrivate.style.display = 'block';
+    btnSocial.style.display = 'none';
     profilePublic.style.display = 'none';
+    btnDatos.style.display = 'block';
+    profilePrivate.style.display = 'block';
 });
 
 btnLogout.addEventListener('click', () => {
+    swal('Usuario finalizo su sesion', 'info');
     logoutWithFirebase();
 });
 
 btnPublicar.addEventListener('click', () => {
     const contenidoPost = postContainer.value;
-    const selectOptionPublicate = selectOption.value;
     const valuePrivacy = contenidoPost.trim();
 
     if (contenidoPost.length !== 0 && valuePrivacy !== '') {
-        if (selectOptionPublicate == 'public') {
-            console.log('publico post');
-            writeNewPost();
-            cleanTextarea();
-        }
-        else if (selectOptionPublicate == 'private') {
-            console.log('privado post');
-            writeNewPostPrivate();
-            cleanTextarea();
-        }
-        else {
-            console.log('post no definido')
-            writeNewPost();
-        }
+        writePost();
+        cleanTextarea();
     }
     else {
-        alert('Post no escrito');
-    }
+        swal('Porfavor ingresa una publicacion', 'info');
+    };
 });
+
+const cleanTextarea = () => {
+    postContainer.value = '';
+};
+
+const reloadPage = () => {
+    window.location.reload();
+};
