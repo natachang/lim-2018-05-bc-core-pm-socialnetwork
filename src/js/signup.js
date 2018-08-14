@@ -25,17 +25,7 @@ const validateRegister = (name, email, password, valpassword) => {
     else if (!validateEmail) {
         errorEmail.innerHTML = '<p>El correo es inválido</p>';
         return false;
-    }    else if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
-        registerWithFirebase(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
-        cleanRegister();
-
-        alert ('El email de validacion se ha enviado a tu correo');
-
-        alert('El email de validacion se ha enviado a tu correo.');
     }
-    else {
-        alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres')
-
     else if (!validatePassword) {
         errorPassword.innerHTML = '<p>La contraseña debe tener más de 8 dígitos</p>';
         return false;
