@@ -256,8 +256,6 @@ const printPrivateProfile = (newPostPrivate) => {
                     likeCount: 0,
                 };
 
-
-
                 let updatesUser = {};
                 let updatesPost = {};
                 if (statePost === 'public') {
