@@ -16,7 +16,7 @@ btnSignup.addEventListener('click', () => {
         alert('El email de validacion se ha enviado a tu correo.');
     }
     else {
-        alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres.')
+        alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres')
     }
 });
 
