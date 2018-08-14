@@ -100,6 +100,7 @@ const printPublicHome = (newPostPublic) => {
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
     });
+    
     publicationHome.appendChild(allPost);
     allPost.appendChild(infoPost);
     allPost.appendChild(contPost);
@@ -153,19 +154,53 @@ const printPrivateProfile = (newPostPrivate) => {
     textPost.innerHTML = `${newPostPrivate.val().body}`;
     textPost.disabled = true;
 
+    let btnLiked = document.createElement('input');
+    btnLiked.setAttribute('id', postKey);
+    btnLiked.setAttribute('class', 'w3-blue w3-button w3-margin-bottom-right');
+    btnLiked.setAttribute('type', 'button');
+    btnLiked.setAttribute('value', 'Me gusta 🧠');
+
+    let countLiked = document.createElement('a');
+    countLiked.setAttribute('id', postKey);
+    countLiked.setAttribute('class', 'w3-blue w3-button w3-margin-bottom-right');
+    countLiked.innerHTML = `${newPostPrivate.val().likeCount}`;
+
     let btnEdit = document.createElement('input');
     btnEdit.setAttribute('id', postKey);
-    btnEdit.setAttribute('class', 'w3-blue w3-button w3-margin-bottom-right');
+    btnEdit.setAttribute('class', 'w3-blue w3-button');
     btnEdit.setAttribute('value', 'Editar');
     btnEdit.setAttribute('type', 'button');
-    btnEdit.setAttribute('style', 'margin: 10px');
+    btnEdit.setAttribute('style', 'margin-left: 25px;');
 
     let btnDelete = document.createElement('input');
     btnDelete.setAttribute('id', postKey);
-    btnDelete.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom-right');
+    btnDelete.setAttribute('class', 'w3-blue w3-button');
     btnDelete.setAttribute('value', 'Eliminar');
     btnDelete.setAttribute('type', 'button');
     btnDelete.setAttribute('style', 'margin: 10px');
+
+    btnLiked.addEventListener('click', () => {
+        let clicks = newPostPrivate.val().likeCount + 1;
+        countLiked.innerHTML = clicks;
+
+        const statePost = selectOption.value;
+        const nuevoPost = {
+            uid: `${newPostPrivate.val().uid}`,
+            username: `${newPostPrivate.val().username}`,
+            email: `${newPostPrivate.val().email}`,
+            profile_picture: `${newPostPrivate.val().profile_picture}`,
+            body: `${newPostPrivate.val().body}`,
+            state: statePost,
+            key: postKey,
+            likeCount: clicks,
+        };
+        let updatesUser = {};
+        let updatesPost = {};
+        updatesPost[`/posts/${newPostPrivate.key}`] = nuevoPost;
+        updatesUser[`/user-posts/${newPostPrivate.key}`] = nuevoPost;
+        firebase.database().ref().update(updatesUser);
+        firebase.database().ref().update(updatesPost);
+    });
 
     btnDelete.addEventListener('click', () => {
         firebase.database().ref().child(`/posts/${newPostPrivate.key}`).remove();
@@ -197,13 +232,13 @@ const printPrivateProfile = (newPostPrivate) => {
 
     btnEdit.addEventListener('click', (e) => {
         textPost.disabled = false;
-        btnEdit.style.display = 'none';
+        btnEdit.style.display = 'hidden';
         const btnSave = document.createElement('input');
         btnSave.setAttribute('value', 'Guardar');
         btnSave.setAttribute('type', 'button');
-        btnSave.setAttribute('class', 'w3-blue w3-button  w3-margin-bottom w3-right');
+        btnSave.setAttribute('class', 'w3-blue w3-button');
         btnSave.setAttribute('id', newPostPrivate.key);
-        btnSave.setAttribute('style', 'margin: 10px');
+        btnSave.setAttribute('style', 'margin-left: 5px;');
         textPost.focus();
         btnSave.addEventListener('click', (e) => {
             if (newPostPrivate.key === e.target.id) {
@@ -218,7 +253,7 @@ const printPrivateProfile = (newPostPrivate) => {
                     body: newUpdatePost,
                     state: statePost,
                     key: newPostPrivate.key,
-                    likeCount: 0
+                    likeCount: 0,
                 };
 
                 let updatesUser = {};
@@ -235,9 +270,11 @@ const printPrivateProfile = (newPostPrivate) => {
                 return firebase.database().ref().update(updatesUser),
                     reloadPage();
             }
-            btnSave.style.display = 'none';
+            btnSave.style.display = 'hidden';
             textPost.disabled = false;
         });
+
+
         divPostTwo.appendChild(btnSave);
     });
     publicationProfile.appendChild(allPost);
@@ -248,6 +285,8 @@ const printPrivateProfile = (newPostPrivate) => {
     divPostOne.appendChild(uImage);
     divPostOne.appendChild(uName);
     divPostTwo.appendChild(textPost);
+    divPostTwo.appendChild(btnLiked);
+    divPostTwo.appendChild(countLiked);
     divPostTwo.appendChild(btnEdit);
     divPostTwo.appendChild(btnDelete);
 
