@@ -16,18 +16,6 @@ window.onload = () => {
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
     swal('Usuario finalizo su sesion')
-<<<<<<< HEAD
-    .then((willLogout) => {
-    if (willLogout) {
-        console.log('usuario termino sesion');
-        location.assign('index.html');
-    }
-})
-    .catch((error) => {
-        console.log('Error de firebase > Codigo >' + error.code);
-        console.log('Error de firebase > Mensaje >' + error.message);
-    })
-=======
         .then((willLogout) => {
             if (willLogout) {
                 console.log('usuario termino sesion');
@@ -38,7 +26,6 @@ const logoutWithFirebase = () => {
             console.log('Error de firebase > Codigo >' + error.code);
             console.log('Error de firebase > Mensaje >' + error.message);
         })
->>>>>>> d0c879d45eb5d8c17b44a2902887a641251196c7
 };
 //Guardar Datos de Usuario de Login en DB
 const writeUserData = (uid, username, email, imageUrl) => {
@@ -251,11 +238,7 @@ const printPrivateProfile = (newPostPrivate) => {
         btnSave.setAttribute('type', 'button');
         btnSave.setAttribute('class', 'w3-blue w3-button');
         btnSave.setAttribute('id', newPostPrivate.key);
-<<<<<<< HEAD
-        btnSave.setAttribute('style', 'margin: 10px');
-=======
         btnSave.setAttribute('style', 'margin-left: 5px;');
->>>>>>> d0c879d45eb5d8c17b44a2902887a641251196c7
         textPost.focus();
         btnSave.addEventListener('click', (e) => {
             if (newPostPrivate.key === e.target.id) {

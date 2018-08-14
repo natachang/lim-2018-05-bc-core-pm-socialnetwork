@@ -25,20 +25,17 @@ const validateRegister = (name, email, password, valpassword) => {
     else if (!validateEmail) {
         errorEmail.innerHTML = '<p>El correo es inválido</p>';
         return false;
-    }
-<<<<<<< HEAD
-    else if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
+    }    else if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
         registerWithFirebase(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
         cleanRegister();
-<<<<<<< HEAD
+
         alert ('El email de validacion se ha enviado a tu correo');
-=======
+
         alert('El email de validacion se ha enviado a tu correo.');
->>>>>>> 89aaa2b67ea081918695e7eb5957ea1e3c36480b
     }
     else {
         alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres')
-=======
+
     else if (!validatePassword) {
         errorPassword.innerHTML = '<p>La contraseña debe tener más de 8 dígitos</p>';
         return false;
@@ -46,7 +43,6 @@ const validateRegister = (name, email, password, valpassword) => {
     else if (!validatePassword !== !validateVerificar) {
         errorVerificar.innerHTML = '<p>Las contraseñas deben ser iguales</p>';
         return false;
->>>>>>> d0c879d45eb5d8c17b44a2902887a641251196c7
     }
 };
 
