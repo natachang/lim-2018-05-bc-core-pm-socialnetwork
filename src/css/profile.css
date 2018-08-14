@@ -2,12 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
 html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5 {
+body {
     font-family: 'Raleway', sans-serif;
 };
 
@@ -28,7 +23,7 @@ default {
     box-sizing: border-box;
 }
 
-img{
+.w3-circle{
     width: 35px;
     margin-left: auto;
     margin-right: auto;

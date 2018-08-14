@@ -63,7 +63,9 @@ const userInformation = (user) => {
     //Imprime foto en perfil
     if (user.photoURL === null) {
         pImage.setAttribute('src', "img/people.png");
+        pImage.setAttribute('class', "w3-circle");
     } else {
         pImage.setAttribute('src', user.photoURL);
+        pImage.setAttribute('class', "w3-circle");
     }
 };
