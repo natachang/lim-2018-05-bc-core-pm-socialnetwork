@@ -75,23 +75,18 @@ const registerWithFirebase = (name, email, password, valpassword) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(result => {
             verificationWithFirebase();
-            // Hasta aqui sale el usuario registrado sin ningun error
             result.updateProfile({ displayName: nameReg.value });
 
             writeUserData(result.uid, result.displayName, result.email, result.photoURL);
-            console.log('usuario creado con exito');
-
             firebase.database().ref().child('users/' + writeUserData.uid).push({
                 id: writeUserData.uid,
                 displayName: writeUserData.displayName,
                 email: writeUserData.email
             });
-
-            // location.assign('index.html');
+            // location.assign('login.html');
         })
         .catch(error => {
             errorRegister(error);
-            //Mostrar error en consola
             console.log("Error de firebase > Codigo >" + error.code);
             console.log("Error de firebase > Mensaje >" + error.message);
         });

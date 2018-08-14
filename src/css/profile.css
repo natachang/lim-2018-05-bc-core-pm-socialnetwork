@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
 html,
 body,
 h1,
@@ -5,7 +8,7 @@ h2,
 h3,
 h4,
 h5 {
-    font-family: "Open Sans", sans-serif
+    font-family: 'Raleway', sans-serif;
 };
 
 #data-base {

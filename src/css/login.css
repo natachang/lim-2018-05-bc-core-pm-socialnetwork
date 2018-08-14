@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Philosopher:400,700');
+
+html,
 body {
     background: #5433FF;
-    background: -webkit-linear-gradient(to right,#337aff, #20BDFF, #A5FECB);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #337aff, #20BDFF, #A5FECB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right,#337aff, #20BDFF, #A5FECB);
+    background: linear-gradient(to right, #337aff, #20BDFF, #A5FECB);
+    font-family: 'Philosopher', sans-serif;
 }
 
 .mode-logo {
@@ -105,4 +109,16 @@ span {
 	color: #DB5A3C;
 }
 
+<<<<<<< HEAD
 >>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
+=======
+.error-text {
+    color: red;
+}
+
+.text-logo {
+    color: white;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 30px;
+}
+>>>>>>> 2c64fb2507dfa38f08f6d08be0c599c916861b8e

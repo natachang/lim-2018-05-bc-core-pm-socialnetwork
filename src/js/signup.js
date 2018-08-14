@@ -3,36 +3,46 @@ const btnSignup = document.getElementById('btn-signup'),
     emailReg = document.getElementById('email-register'),
     passwordReg = document.getElementById('password-register'),
     passwordVer = document.getElementById('verified-register'),
+    errorName = document.getElementById('error-name'),
     errorEmail = document.getElementById('error-email'),
     errorPassword = document.getElementById('error-password'),
-    errorName = document.getElementById('error-name'),
-    iconVerificationName = document.getElementById('icon-verification-name'),
-    iconVerificationEmail = document.getElementById('icon-verification-email');
+    errorVerificar = document.getElementById('error-verificar');
 
-btnSignup.addEventListener('click', (error, email) => {
+const validateRegister = (name, email, password, valpassword) => {
+    const validateName = window.validateName(name),
+        validateEmail = window.validateEmail(email),
+        validatePassword = window.validatePassword(password),
+        validateVerificar = window.validateVerificar(valpassword);
 
-    if (nameReg.value.length === 0) {
-        errorName.innerHTML = 'Ingresa un nombre por favor';
+    if (validateEmail && validateName && validatePassword === validateVerificar) {
+        registerWithFirebase(name, email, password, valpassword)
+        return true;
     }
-    else if (nameReg.value.length !== 0) {
-        iconVerificationName.innerHTML = '✅';
-        errorName.innerHTML = '';
+    else if (!validateName) {
+        errorName.innerHTML = '<p>Ingresa bien tu nombre.</p>';
+        return false;
     }
-    if (emailReg.value.length === 0 || error.code === 'auth/invalid-email') {
-        errorEmail.innerHTML = 'Ingrese bien su correo';
+    else if (!validateEmail) {
+        errorEmail.innerHTML = '<p>El correo es inválido</p>';
+        return false;
     }
-    else if (emailReg.value.length !== 0 && /^([a-zA-Z0-9._-]{3,})+@([a-zA-Z0-9.-]{5,})+\.([a-zA-Z]{2,})+$/.test(email)) {
-        iconVerificationEmail.innerHTML = '✅';
-        errorEmail.innerHTML = '';
+    else if (!validatePassword) {
+        errorPassword.innerHTML = '<p>La contraseña debe tener más de 8 dígitos</p>';
+        return false;
     }
-    if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
-        registerWithFirebase(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
-        cleanRegister();
-        alert('El email de validacion se ha enviado a tu correo');
+    else if (!validatePassword !== !validateVerificar) {
+        errorVerificar.innerHTML = '<p>Las contraseñas deben ser iguales</p>';
+        return false;
     }
-    else {
-        errorPassword.innerHTML = 'Las contraseñas no coinciden. Deben ser mas de 8 caracteres';
-    }
+};
+
+btnSignup.addEventListener('click', () => {
+    errorName.innerHTML = '';
+    errorEmail.innerHTML = '';
+    errorPassword.innerHTML = '';
+    errorVerificar.innerHTML = '';
+
+    validateRegister(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
 });
 
 const errorRegister = (error) => {
@@ -41,7 +51,7 @@ const errorRegister = (error) => {
     } else if (error.code === 'auth/invalid-email') {
         errorEmail.innerText = 'Por favor, agregue un correo válido';
     } else if (error.code === 'auth/weak-password') {
-        errorPassword.innerText = 'Ingresa una contraseña con más de 6 caracteres';
+        errorPassword.innerText = 'Ingresa una contraseña con más de 8 caracteres';
     }
 };
 
