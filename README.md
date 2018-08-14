@@ -51,13 +51,16 @@ issue abarca las mini-tareas necesarias para completar la épica.
 #### Público objetivo
 
 La aplicación esta orientada a complementar la educación tradicional, por ende dirigida
-a personas de distintas edades. Ya que actualmente la temática de la aplicación es
-super requerida por todas las personas, sea cual sea su rubro. Esto se debe a que la 
-app funciona como un complemento a lo que las personas ya saben o se encuentran aprendiendo.
-Con esto generan un valor agregado, al adquirir conocimientos técnicos, socioemocionales,
-financieros, sobre distintas metodologías, etc. Además de no solo ser útil para el mundo
+a personas de distintas edades. Pero específicamente para personas que se encuentran estudiando
+ya que la aplicación funciona como un complemento. Con esto generan un valor agregado, al adquirir conocimientos 
+técnicos, socioemocionales, financieros, sobre distintas metodologías, etc. Además de no solo ser útil para el mundo
 profesional, pues el beneficio que obtienen a nivel personal se ve reflejado en su desarrollo
 personal. 
+
+#### Descubrimiento de las necesidades del usuario
+
+Observando a lo largo del tiempo en muchas áreas la ausencia de éstas habilidades, además de comprobar
+esta hipótesis con las respuestas de las personas, a tráves de un formulario.
 
 #### Problemática 
 
@@ -96,7 +99,16 @@ me gusta.
 + Se puede compartir un post público y privado
 + Así como también editar y/o eliminar los post publicados
 
-#### 
+#### Verificación de que el producto resuelve el problema de los usuarixs
+
+Validamos la verificación por medio de entrevistas posteriores al testeo del producto, al concluir a tráves
+de las respuestas que era un producto de gran interés y ayuda, además de considerarlo necesario para la educación.
+
+#### Asegurar el uso del producto
+
++ Esta disponible en versión mobile respondiendo al dispositivo de uso de los usuarios
++ Manteniendo una constante comunicación con los usuarixs con el objetivo de mantener el producto en constante mejora(feedback constante)
++ Promocionar la app a tráves de canales publicitarios y otras redes sociales.
 
 ### Proceso de diseño 
 
@@ -340,6 +352,30 @@ Para este sketch trabajamos con figma
 
 ![first-view-web-wall](https://user-images.githubusercontent.com/38342062/44041716-132abff4-9ee4-11e8-9c73-d78c4c7eaa7e.png)
 
+### Sketch de alta fidelidad
+
+#### Mobile
+
+Para este sketch trabajamos con figma
+
+**Sketch de alta fidelidad del muro**
+
+![wall-view-mobile-hf](https://user-images.githubusercontent.com/38342062/44096234-6c33f900-9fa0-11e8-98e4-9891d14b85ee.png)
+
+
+**Sketch de alta fidelidad de las opciones del muro**
+
+![wall-options-deployed-hf](https://user-images.githubusercontent.com/38342062/44096236-6e968104-9fa0-11e8-9fb7-419cb93fd0f1.png)
+
+**Sketch de alta fidelidad del perfil**
+
+![profile-view-mobile-hf](https://user-images.githubusercontent.com/38342062/44096238-70c8ee6c-9fa0-11e8-862c-6c199a75b646.png)
+
+#### Versión web
+
+**Sketch de alta fidelidad de la vista del muro**
+
+![first-view-web-wall-hf](https://user-images.githubusercontent.com/38342062/44096239-7271ece6-9fa0-11e8-9f59-27d479b0de8b.png)
 
 ### Benchmarking
 
@@ -366,7 +402,13 @@ hacia que exista algo así, pues retomando el caso de Academia.edu, también se 
 "Alguien debería empezar una propuesta" o "Pedirle a Mark Zuckerberg que cree un 'facebook' gratis para académicos
 pobres".
 
-#### Conclusiones del testeo con usuarios 
+#### Conclusiones del testeo con usuarios (Prototipo de alta fidelidad)
+
++ Que los nombres de las categorías sean más específicas
++ El mensaje en la opción de plantear una nueva idea no logra entenderse claramente
++ El ícono de 'BP' no indica claramrente que al hacer click se dirige a inicio
+
+#### Conclusiones del testeo con usuarios (HTML)
 
 + Cambiar el nombre del botón que dirige hacia la vista de inicio
 + Las secciones entre perfil y el inicio son confusas. El diferenciar entre ambas vistas

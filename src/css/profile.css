@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+html,
+body {
+    font-family: 'Raleway', sans-serif;
+};
+
+#data-base {
+    width: auto;
+}
+
+textarea,
+default {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+    border:0; 
+   -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.w3-circle{
+    width: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

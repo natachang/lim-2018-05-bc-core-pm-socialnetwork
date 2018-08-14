@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Philosopher:400,700');
+
+html,
 body {
     background: #5433FF;
-    background: -webkit-linear-gradient(to right,#337aff, #20BDFF, #A5FECB);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #337aff, #20BDFF, #A5FECB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right,#337aff, #20BDFF, #A5FECB);
+    background: linear-gradient(to right, #337aff, #20BDFF, #A5FECB);
+    font-family: 'Philosopher', sans-serif;
 }
 
 .mode-logo {
@@ -46,36 +50,6 @@ body {
     left: 0;
     width: 350px;
     height: auto;
-<<<<<<< HEAD
-}
-
-.align-center,
-span {
-    font-size: 18px;
-    text-align:center;
-}
-
-[class^="icon-btn"] /*.icon-btn*/ {
-	height: 75px;
-	width: 75px;
-	border: 0;
-	color: #fff;
-	cursor: pointer;
-	font-size: 40px;
-	line-height: 75px;
-	transition: ease-in-out .3s;
-	border-radius: 50px;
-	margin-left: 10px;
-	background-color: #fff;
-}
-
-.facebook {
-	color: #3B5998;
-}
-.google-plus {
-	color: #DB5A3C;
-}
-=======
 }
 
 .align-center,
@@ -105,4 +79,12 @@ span {
 	color: #DB5A3C;
 }
 
->>>>>>> f313cf522c76d3303d6826d5bc72340fd72a7d71
+.error-text {
+    color: red;
+}
+
+.text-logo {
+    color: white;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 30px;
+}

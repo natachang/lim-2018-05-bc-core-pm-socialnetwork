@@ -5,13 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="img/icon.ico" />
 <link rel="bookmark" href="img/icon.ico" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/profile.css" />
+<!-- w3schools -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-cyan.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
 <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+<!-- sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <body class="w3-theme-l5">
@@ -22,10 +24,10 @@
         href="javascript:void(0);" onclick="openNav()">
         <i class="fa fa-bars"></i>
       </a>
-      <a id="btn-home" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+      <a id="btn-home" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" title="Home">
         <i class="fa fa-home w3-margin-right"></i> BP!
       </a>
-      <a id="btn-logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
+      <a id="btn-logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Cerrar Sesion">
         <i class="fa fa-arrow-circle-right"></i>
       </a>
       <a id="btn-profile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Mi Perfil">
@@ -51,14 +53,17 @@
         <div id="btn-datos" class="w3-card w3-round w3-white">
           <div class="w3-container">
             <h4 class="w3-center">Mis Datos 📝 </h4>
+<<<<<<< HEAD
             <p id="user-image" class="w3-center w3-card"></p>
+=======
+            <img id="user-image" width="100px" class="w3-center">
+>>>>>>> d0c879d45eb5d8c17b44a2902887a641251196c7
             <hr>
             <p id="user-name"></p>
-            <p>Verificado: ✅ </p>
+            <p>Verificado ✅ </p>
           </div>
           <br>
         </div>
-
 
         <!-- Accordion -->
         <div id="btn-social" class="w3-card w3-round" style="display: none;">
@@ -107,7 +112,7 @@
             <!-- Ocultar Area de Publicacion -->
             <div class="w3-card w3-round w3-white">
               <div id="data-base" class="w3-container w3-padding">
-                <h6 class="w3-opacity w3-center">⭐ Publicaciones ⭐</h6>
+                <h6 class="w3-center">⭐ Publicaciones ⭐</h6>
                 <textarea id="post-container" class="w3-container w3-padding" name="Publicacion" placeholder="¿Que desea compartir?"></textarea>
                 <br>
                 <button id="btn-publicar" type="button" class="w3-button w3-theme w3-right">
@@ -127,8 +132,6 @@
         <!-- End Middle Column -->
       </div>
 
-
-
       <!-- Div Publicacion Publica-->
       <!-- Middle Column -->
       <div id="profile-public" class="w3-col m7" style="display: none">
@@ -138,7 +141,7 @@
             <!-- Ocultar Area de Publicacion -->
             <div class="w3-card w3-round w3-white">
               <div id="data-base" class="w3-container w3-padding">
-                <h6 class="w3-opacity w3-center"> 📰 Ultimas Noticias 📰</h6>
+                <h6 class=" w3-center"> 📰 Ultimas Noticias 📰</h6>
               </div>
             </div>
           </div>
