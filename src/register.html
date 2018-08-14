@@ -8,12 +8,17 @@
     <link rel="shortcut icon" href="img/icon.ico" />
     <link rel="bookmark" href="img/icon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
+    <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+    <!-- sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -26,33 +31,35 @@
                 <div class="form-group">
                     <label for="name-register">Nombre</label>
                     <input id="name-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su nombre">
-                    <p id="error-name" style="color: red"></p>
+                    <div id="error-name" class="error-text">
+                    </div>
+                    <div class="form-group">
+                        <label for="email-register">Email</label>
+                        <input id="email-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su email">
+                        <div id="error-email" class="error-text">
+                        </div>
+                        <div class="form-group">
+                            <label for="spassword-register">Contraseña</label>
+                            <input id="password-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
+                            <div id="error-password" class="error-text"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="verified-register">Vuelve escribir tu contraseña</label>
+                            <input id="verified-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Repetir contraseña">
+                            <div id="error-verificar" class="error-text"></div>
+                        </div>
+                        <div class="align-center">
+                            <button id="btn-signup" class="btn btn-primary my-2 my-sm-0 btn-sm">Registrarse</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email-register">Email</label>
-                    <input id="email-register" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su email">
-                    <p id="error-email" style="color: red"></p>
-                </div>
-                <div class="form-group">
-                    <label for="spassword-register">Password</label>
-                    <input id="password-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
-                    <p id="error-email" style="color: red"></p>
-                </div>
-                <div class="form-group">
-                    <label for="verified-register">Vuelve escribir tu contraseña</label>
-                    <input id="verified-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Repetir contraseña">
-                </div>
-                <div class="align-center">
-                    <button id="btn-signup" class="btn btn-primary my-2 my-sm-0 btn-sm">Registrarse</button>
-                </div>
-            </div>
-        </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!-- Firebase -->
     <script src="js/firebase.js"></script>
     <!-- Funcionalidad -->
+    <script src="js/validate.js"></script>
     <script src="js/logged.js"></script>
     <!-- Elementos del dom -->
     <script src="js/signup.js"></script>

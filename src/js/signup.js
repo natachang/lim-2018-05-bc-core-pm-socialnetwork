@@ -3,21 +3,46 @@ const btnSignup = document.getElementById('btn-signup'),
     emailReg = document.getElementById('email-register'),
     passwordReg = document.getElementById('password-register'),
     passwordVer = document.getElementById('verified-register'),
+    errorName = document.getElementById('error-name'),
     errorEmail = document.getElementById('error-email'),
-    errorPassword = document.getElementById('error-password');
+    errorPassword = document.getElementById('error-password'),
+    errorVerificar = document.getElementById('error-verificar');
+
+const validateRegister = (name, email, password, valpassword) => {
+    const validateName = window.validateName(name),
+        validateEmail = window.validateEmail(email),
+        validatePassword = window.validatePassword(password),
+        validateVerificar = window.validateVerificar(valpassword);
+
+    if (validateEmail && validateName && validatePassword === validateVerificar) {
+        registerWithFirebase(name, email, password, valpassword)
+        return true;
+    }
+    else if (!validateName) {
+        errorName.innerHTML = '<p>Ingresa bien tu nombre.</p>';
+        return false;
+    }
+    else if (!validateEmail) {
+        errorEmail.innerHTML = '<p>El correo es inválido</p>';
+        return false;
+    }
+    else if (!validatePassword) {
+        errorPassword.innerHTML = '<p>La contraseña debe tener más de 8 dígitos</p>';
+        return false;
+    }
+    else if (!validatePassword !== !validateVerificar) {
+        errorVerificar.innerHTML = '<p>Las contraseñas deben ser iguales</p>';
+        return false;
+    }
+};
 
 btnSignup.addEventListener('click', () => {
-    if (emailReg.value.length === 0) {
-        alert('Ingrese bien su correo');
-    }
-    else if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
-        registerWithFirebase(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
-        cleanRegister();
-        alert('El email de validacion se ha enviado a tu correo.');
-    }
-    else {
-        alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres.')
-    }
+    errorName.innerHTML = '';
+    errorEmail.innerHTML = '';
+    errorPassword.innerHTML = '';
+    errorVerificar.innerHTML = '';
+
+    validateRegister(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
 });
 
 const errorRegister = (error) => {
@@ -26,7 +51,7 @@ const errorRegister = (error) => {
     } else if (error.code === 'auth/invalid-email') {
         errorEmail.innerText = 'Por favor, agregue un correo válido';
     } else if (error.code === 'auth/weak-password') {
-        errorPassword.innerText = 'Ingresa una contraseña con más de 6 caracteres';
+        errorPassword.innerText = 'Ingresa una contraseña con más de 8 caracteres';
     }
 };
 

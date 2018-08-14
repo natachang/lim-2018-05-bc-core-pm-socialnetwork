@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="img/icon.ico" />
     <link rel="bookmark" href="img/icon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
+    <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Firebase -->
@@ -28,12 +29,14 @@
                     <img class="mode-img" src="img/logo.png">
                 </a>
                 <div class="form-group">
+                    <label for="email-login">Email</label>
                     <input id="email-login" class="form-control form-control-sm mr-sm-2" type="email" placeholder="Ingrese su email">
-                    <p id="error-email" style="color: red"></p>
+                    <div id="error-email" class="error-text"></div>
                 </div>
                 <div class="form-group">
+                    <label for="password-login">contraseña</label>
                     <input id="password-login" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
-                    <p id="error-password" style="color: red"></p>
+                    <div id="error-password" class="error-text"></div>
                 </div>
                 <div class="align-center">
                     <button id="btn-login" class="btn btn-primary my-2 my-sm-0 btn-sm">Iniciar sesion</button>
@@ -67,6 +70,7 @@
     <!-- Firebase -->
     <script src="js/firebase.js"></script>
     <!-- Funcionalidad -->
+    <script src="js/validate.js"></script>
     <script src="js/logged.js"></script>
     <!-- Elementos del dom -->
     <script src="js/signin.js"></script>
