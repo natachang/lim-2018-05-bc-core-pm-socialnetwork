@@ -16,17 +16,17 @@ window.onload = () => {
 const logoutWithFirebase = () => {
     firebase.auth().signOut()
     swal('Usuario finalizo su sesion')
-    .then((willLogout) => {
-    if (willLogout) {
-        console.log('usuario termino sesion');
-        location.assign('index.html');
-    }
- })
-    .catch((error) => {
-        console.log('Error de firebase > Codigo >' + error.code);
-        console.log('Error de firebase > Mensaje >' + error.message);
-    })
- };
+        .then((willLogout) => {
+            if (willLogout) {
+                console.log('usuario termino sesion');
+                location.assign('index.html');
+            }
+        })
+        .catch((error) => {
+            console.log('Error de firebase > Codigo >' + error.code);
+            console.log('Error de firebase > Mensaje >' + error.message);
+        })
+};
 //Guardar Datos de Usuario de Login en DB
 const writeUserData = (uid, username, email, imageUrl) => {
     firebase.database().ref('users/' + uid).set({
@@ -240,6 +240,40 @@ const printPrivateProfile = (newPostPrivate) => {
         });
         divPostTwo.appendChild(btnSave);
     });
+    let btnLiked = document.createElement('input');
+    btnLiked.setAttribute('id', postKey);
+    btnLiked.setAttribute('class', 'w3-blue w3-button w3-left w3-margin-bottom');
+    btnLiked.setAttribute('type', 'button');
+    btnLiked.setAttribute('value', 'Me gusta 🧠');
+
+    let countLiked = document.createElement('a');
+    countLiked.setAttribute('id', postKey);
+    countLiked.setAttribute('class', 'w3-blue w3-button w3-left w3-margin-bottom');
+    countLiked.innerHTML = `${newPostPrivate.val().likeCount}`;
+
+    btnLiked.addEventListener('click', () => {
+        let clicks = newPostPrivate.val().likeCount + 1;
+        countLiked.innerHTML = clicks;
+
+        //const statePost = selectOption.value;
+        const nuevoPost = {
+            uid: `${newPostPrivate.val().uid}`,
+            username: `${newPostPrivate.val().username}`,
+            email: `${newPostPrivate.val().email}`,
+            profile_picture: `${newPostPrivate.val().profile_picture}`,
+            body: `${newPostPrivate.val().body}`,
+            //state: statePost,
+            key: postKey,
+            likeCount: clicks,
+        };
+        let updatesUser = {};
+        let updatesPost = {};
+        updatesPost[`/posts/${newPostPrivate.key}`] = nuevoPost;
+        updatesUser[`/user-posts/${newPostPrivate.key}`] = nuevoPost;
+        firebase.database().ref().update(updatesUser);
+        firebase.database().ref().update(updatesPost);
+
+    });
     publicationProfile.appendChild(allPost);
     allPost.appendChild(infoPost);
     allPost.appendChild(contPost);
@@ -250,6 +284,8 @@ const printPrivateProfile = (newPostPrivate) => {
     divPostTwo.appendChild(textPost);
     divPostTwo.appendChild(btnEdit);
     divPostTwo.appendChild(btnDelete);
+    divPostTwo.appendChild(btnLiked);
+    divPostTwo.appendChild(countLiked);
 
     if (`${newPostPrivate.val().username}` === 'undefined') {
         uName.innerHTML = `${newPostPrivate.val().email}`;

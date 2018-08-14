@@ -402,7 +402,7 @@ hacia que exista algo así, pues retomando el caso de Academia.edu, también se 
 "Alguien debería empezar una propuesta" o "Pedirle a Mark Zuckerberg que cree un 'facebook' gratis para académicos
 pobres".
 
-#### Conclusiones del testeo con usuarios (Alta fidelidad)
+#### Conclusiones del testeo con usuarios (Prototipo de alta fidelidad)
 
 + Que los nombres de las categorías sean más específicas
 + El mensaje en la opción de plantear una nueva idea no logra entenderse claramente

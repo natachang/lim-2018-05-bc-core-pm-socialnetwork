@@ -4,19 +4,34 @@ const btnSignup = document.getElementById('btn-signup'),
     passwordReg = document.getElementById('password-register'),
     passwordVer = document.getElementById('verified-register'),
     errorEmail = document.getElementById('error-email'),
-    errorPassword = document.getElementById('error-password');
+    errorPassword = document.getElementById('error-password'),
+    errorName = document.getElementById('error-name'),
+    iconVerificationName = document.getElementById('icon-verification-name'),
+    iconVerificationEmail = document.getElementById('icon-verification-email');
 
-btnSignup.addEventListener('click', () => {
-    if (emailReg.value.length === 0) {
-        alert('Ingrese bien su correo');
+btnSignup.addEventListener('click', (error, email) => {
+
+    if (nameReg.value.length === 0) {
+        errorName.innerHTML = 'Ingresa un nombre por favor';
     }
-    else if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
+    else if (nameReg.value.length !== 0) {
+        iconVerificationName.innerHTML = '✅';
+        errorName.innerHTML = '';
+    }
+    if (emailReg.value.length === 0 || error.code === 'auth/invalid-email') {
+        errorEmail.innerHTML = 'Ingrese bien su correo';
+    }
+    else if (emailReg.value.length !== 0 && /^([a-zA-Z0-9._-]{3,})+@([a-zA-Z0-9.-]{5,})+\.([a-zA-Z]{2,})+$/.test(email)) {
+        iconVerificationEmail.innerHTML = '✅';
+        errorEmail.innerHTML = '';
+    }
+    if (passwordReg.value.length >= 8 && passwordReg.value === passwordVer.value) {
         registerWithFirebase(nameReg.value, emailReg.value, passwordReg.value, passwordVer.value);
         cleanRegister();
-        alert('El email de validacion se ha enviado a tu correo.');
+        alert('El email de validacion se ha enviado a tu correo');
     }
     else {
-        alert('Las contraseñas no coinciden. Deben ser mas de 8 caracteres')
+        errorPassword.innerHTML = 'Las contraseñas no coinciden. Deben ser mas de 8 caracteres';
     }
 });
 
