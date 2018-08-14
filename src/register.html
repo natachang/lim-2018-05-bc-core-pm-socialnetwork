@@ -6,7 +6,7 @@
     <title>BRAINY PLAY!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/icon.ico" />
-    <link rel="bookmark" href="img/icon.ico" />
+    <link href="img/icon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
@@ -26,7 +26,7 @@
         <div class="row">
             <div id="main-login" class="form_bg">
                 <a href="index.html">
-                    <img class="mode-img" src="img/logo.png">
+                    <img class="mode-img" src="img/logo.png" alt="Logo">
                 </a>
                 <div class="form-group">
                     <label for="name-register">Nombre</label>
@@ -39,7 +39,7 @@
                         <div id="error-email" class="error-text">
                         </div>
                         <div class="form-group">
-                            <label for="spassword-register">Contraseña</label>
+                            <label for="password-register">Contraseña</label>
                             <input id="password-register" class="form-control form-control-sm mr-sm-2" type="password" placeholder="Ingrese su contraseña">
                             <div id="error-password" class="error-text"></div>
                         </div>
@@ -53,7 +53,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </main>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!-- Firebase -->
